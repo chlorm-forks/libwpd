@@ -58,4 +58,5 @@ librevenge::RVNGString WP6Listener::getFontNameForPID(const int prefixID) const
 		return fontDescriptorPacket->getFontName();
 	return librevenge::RVNGString();
 }
+
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

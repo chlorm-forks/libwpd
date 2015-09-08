@@ -109,7 +109,8 @@ public:
 	                   const signed short horizontalOffset, const unsigned char leftColumn, const unsigned char rightColumn,
 	                   const unsigned char verticalPositioningFlags, const signed short verticalOffset, const unsigned char widthFlags, const unsigned short width,
 	                   const unsigned char heightFlags, const unsigned short height, const unsigned char boxContentType, const unsigned short nativeWidth,
-	                   const unsigned short nativeHeight) = 0;
+	                   const unsigned short nativeHeight,
+	                   const librevenge::RVNGString &linkTarget) = 0;
 	virtual void boxOff() = 0;
 	virtual void insertGraphicsData(const unsigned short packetId) = 0;
 	virtual void insertTextBox(const WP6SubDocument *subDocument) = 0;

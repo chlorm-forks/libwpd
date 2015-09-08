@@ -39,6 +39,7 @@
 #include "WP6TableStylePacket.h"
 #include "WP6GraphicsFilenamePacket.h"
 #include "WP6GraphicsCachedFileDataPacket.h"
+#include "WP6HyperlinkPacket.h"
 #include "libwpd_internal.h"
 
 WP6PrefixDataPacket::WP6PrefixDataPacket(librevenge::RVNGInputStream * /* input */, WPXEncryption * /* encryption */) :
@@ -56,6 +57,10 @@ WP6PrefixDataPacket *WP6PrefixDataPacket::constructPrefixDataPacket(librevenge::
 		case WP6_INDEX_HEADER_INITIAL_FONT:
 			tmpPacket = new WP6DefaultInitialFontPacket(input, encryption, prefixIndice->getID(),
 			                                            prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			break;
+		case WP6_INDEX_HEADER_HYPERLINK:
+			tmpPacket = new WP6HyperlinkPacket(input, encryption, prefixIndice->getID(),
+			                                   prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 			break;
 		case WP6_INDEX_HEADER_GENERAL_WORDPERFECT_TEXT:
 			tmpPacket = new WP6GeneralTextPacket(input, encryption, prefixIndice->getID(),

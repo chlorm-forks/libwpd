@@ -136,6 +136,8 @@ _WP6ContentParsingState::_WP6ContentParsingState(WPXTableList tableList, unsigne
 
 	m_isFrameOpened(false),
 
+	m_isLinkOpened(false),
+
 	m_leaderCharacter('.'),
 	m_leaderNumSpaces(0),
 
@@ -1444,7 +1446,8 @@ void WP6ContentListener::endTable()
 void WP6ContentListener::boxOn(const unsigned char /* anchoringType */, const unsigned char generalPositioningFlags, const unsigned char horizontalPositioningFlags,
                                const signed short horizontalOffset, const unsigned char /* leftColumn */, const unsigned char /* rightColumn */, const unsigned char verticalPositioningFlags,
                                const signed short verticalOffset, const unsigned char widthFlags, const unsigned short width, const unsigned char heightFlags, const unsigned short height,
-                               const unsigned char boxContentType, const unsigned short nativeWidth, const unsigned short nativeHeight)
+                               const unsigned char boxContentType, const unsigned short nativeWidth, const unsigned short nativeHeight,
+                               const librevenge::RVNGString &linkTarget)
 {
 	if (isUndoOn() || (m_ps->m_isTableOpened && !m_ps->m_isTableCellOpened))
 		return;
@@ -1453,6 +1456,18 @@ void WP6ContentListener::boxOn(const unsigned char /* anchoringType */, const un
 		_openSpan();
 	else
 		_flushText();
+
+	if (!linkTarget.empty())
+	{
+		librevenge::RVNGPropertyList propList;
+
+		propList.insert("librevenge:type", "link");
+		propList.insert("librevenge:link-source", "frame");
+		propList.insert("xlink:href", linkTarget);
+
+		m_documentInterface->openLink(propList);
+		m_parseState->m_isLinkOpened = true;
+	}
 
 	librevenge::RVNGPropertyList propList;
 
@@ -1675,10 +1690,18 @@ void WP6ContentListener::boxOn(const unsigned char /* anchoringType */, const un
 
 void WP6ContentListener::boxOff()
 {
-	if (!isUndoOn() && m_parseState->m_isFrameOpened)
+	if (!isUndoOn())
 	{
-		m_documentInterface->closeFrame();
-		m_parseState->m_isFrameOpened = false;
+		if (m_parseState->m_isFrameOpened)
+		{
+			m_documentInterface->closeFrame();
+			m_parseState->m_isFrameOpened = false;
+		}
+		if (m_parseState->m_isLinkOpened)
+		{
+			m_documentInterface->closeLink();
+			m_parseState->m_isLinkOpened = false;
+		}
 	}
 }
 
@@ -1966,4 +1989,5 @@ void WP6ContentListener::undoChange(const unsigned char undoType, const unsigned
 	else if (undoType == WP6_UNDO_GROUP_INVALID_TEXT_END)
 		setUndoOn(false);
 }
+
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

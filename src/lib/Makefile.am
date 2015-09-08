@@ -161,6 +161,7 @@ libwpd_@WPD_MAJOR_VERSION@_@WPD_MINOR_VERSION@_la_SOURCES = \
 	WP61Header.cpp \
 	WP6HeaderFooterGroup.cpp \
 	WP6HighlightGroup.cpp \
+	WP6HyperlinkPacket.cpp \
 	WP6Listener.cpp \
 	WP6NumberingMethodGroup.cpp \
 	WP6Parser.cpp \
@@ -328,6 +329,7 @@ libwpd_@WPD_MAJOR_VERSION@_@WPD_MINOR_VERSION@_la_SOURCES = \
 	WP61Header.h \
 	WP6HeaderFooterGroup.h \
 	WP6HighlightGroup.h \
+	WP6HyperlinkPacket.h \
 	WP6Listener.h \
 	WP6NumberingMethodGroup.h \
 	WP6OutlineStylePacket.h \

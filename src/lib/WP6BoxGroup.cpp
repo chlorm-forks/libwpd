@@ -32,6 +32,7 @@
 #include "WP6GraphicsFilenamePacket.h"
 #include "WP6GeneralTextPacket.h"
 #include "WP6GraphicsBoxStylePacket.h"
+#include "WP6HyperlinkPacket.h"
 
 WP6BoxGroup::WP6BoxGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP6VariableLengthGroup(),
@@ -325,6 +326,21 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 			}
 	}
 
+	// Get the box hyperlink
+	librevenge::RVNGString linkTarget;
+	for (int i=0; i<getNumPrefixIDs(); i++)
+	{
+		if (tmpContentType == 0x03)
+		{
+			const WP6HyperlinkPacket *const hlPacket = dynamic_cast<const WP6HyperlinkPacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i]));
+			if (hlPacket)
+			{
+				linkTarget = hlPacket->getTarget();
+				break;
+			}
+		}
+	}
+
 	// Get the box anchoring
 	unsigned char tmpAnchoringType = 0;
 	switch (getSubGroup())
@@ -383,7 +399,8 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 
 	// Send the box information to the listener and start box
 	listener->boxOn(tmpAnchoringType, tmpGeneralPositioningFlags, m_horizontalPositioningFlags, m_horizontalOffset, m_leftColumn, m_rightColumn,
-	                m_verticalPositioningFlags, m_verticalOffset, m_widthFlags, m_width, m_heightFlags, m_height, tmpContentType, m_nativeWidth, m_nativeHeight);
+	                m_verticalPositioningFlags, m_verticalOffset, m_widthFlags, m_width, m_heightFlags, m_height, tmpContentType, m_nativeWidth, m_nativeHeight,
+	                linkTarget);
 
 	// Send the content according to its kind
 	if (tmpContentType == 0x03)

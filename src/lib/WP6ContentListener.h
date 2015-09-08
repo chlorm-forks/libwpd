@@ -117,6 +117,8 @@ struct _WP6ContentParsingState
 
 	bool m_isFrameOpened;
 
+	bool m_isLinkOpened;
+
 	unsigned m_leaderCharacter;
 	unsigned char m_leaderNumSpaces;
 	std::vector<WPXTabStop> m_tempTabStops;
@@ -249,7 +251,8 @@ public:
 	           const signed short horizontalOffset, const unsigned char leftColumn, const unsigned char rightColumn,
 	           const unsigned char verticalPositioningFlags, const signed short verticalOffset, const unsigned char widthFlags, const unsigned short width,
 	           const unsigned char heightFlags, const unsigned short height, const unsigned char boxContentType, const unsigned short nativeWidth,
-	           const unsigned short nativeHeight);
+	           const unsigned short nativeHeight,
+	           const librevenge::RVNGString &linkTarget);
 	void boxOff();
 	void insertGraphicsData(const unsigned short packetId);
 	void insertTextBox(const WP6SubDocument *subDocument);
