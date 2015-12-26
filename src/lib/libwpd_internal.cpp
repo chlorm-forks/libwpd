@@ -25,9 +25,25 @@
  */
 #include "libwpd_internal.h"
 #include <librevenge-stream/librevenge-stream.h>
+#include <cstdarg>
 #include <ctype.h>
 #include <locale.h>
 #include <string>
+
+#ifdef DEBUG
+namespace libwpd
+{
+
+void debugPrint(const char *format, ...)
+{
+	va_list args;
+	va_start(args, format);
+	vfprintf(stderr, format, args);
+	va_end(args);
+}
+
+}
+#endif
 
 namespace
 {

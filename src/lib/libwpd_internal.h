@@ -52,8 +52,19 @@
 
 #define DELETEP(m) if (m) { delete m; m = 0; }
 
+#if defined(__clang__) || defined(__GNUC__)
+#define WPD_ATTRIBUTE_PRINTF(fmt, arg) __attribute__((format(printf, fmt, arg)))
+#else
+#define WPD_ATTRIBUTE_PRINTF(fmt, arg)
+#endif
+
 #ifdef DEBUG
-#define WPD_DEBUG_MSG(M) printf M
+namespace libwpd
+{
+void debugPrint(const char *format, ...) WPD_ATTRIBUTE_PRINTF(1, 2);
+}
+
+#define WPD_DEBUG_MSG(M) libwpd::debugPrint M
 #else
 #define WPD_DEBUG_MSG(M)
 #endif
