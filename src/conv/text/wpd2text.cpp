@@ -45,13 +45,17 @@ namespace
 
 int printUsage()
 {
-	printf("Usage: wpd2text [OPTION] <WordPerfect Document>\n");
+	printf("`wpd2text' converts WordPerfect documents to plain text.\n");
+	printf("\n");
+	printf("Usage: wpd2text [OPTION] FILE\n");
 	printf("\n");
 	printf("Options:\n");
-	printf("--info                Display document metadata instead of the text\n");
-	printf("--help                Shows this help message\n");
-	printf("--password <password> Try to decrypt password protected document\n");
-	printf("--version             Output wpd2text version\n");
+	printf("\t--info                display document metadata instead of the text\n");
+	printf("\t--help                show this help message\n");
+	printf("\t--password PASSWORD   try to decrypt password protected document\n");
+	printf("\t--version             print version and exit\n");
+	printf("\n");
+	printf("Report bugs to <https://sourceforge.net/p/libwpd/tickets/> or <https://bugs.documentfoundation.org/>.\n");
 	return -1;
 }
 

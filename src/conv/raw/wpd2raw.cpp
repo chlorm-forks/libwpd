@@ -45,13 +45,17 @@ namespace
 
 int printUsage()
 {
-	printf("Usage: wpd2raw [OPTION] <WordPerfect Document>\n");
+	printf("`wpd2raw' is used to test libwpd.\n");
+	printf("\n");
+	printf("Usage: wpd2raw [OPTION] FILE\n");
 	printf("\n");
 	printf("Options:\n");
-	printf("--callgraph           Display the call graph nesting level\n");
-	printf("--help                Shows this help message\n");
-	printf("--password <password> Try to decrypt password protected document\n");
-	printf("--version             Output wpd2raw version \n");
+	printf("\t--callgraph           display the call graph nesting level\n");
+	printf("\t--help                show this help message\n");
+	printf("\t--password PASSWORD	try to decrypt password protected document\n");
+	printf("\t--version             print version and exit\n");
+	printf("\n");
+	printf("Report bugs to <https://sourceforge.net/p/libwpd/tickets/> or <https://bugs.documentfoundation.org/>.\n");
 	return -1;
 }
 
