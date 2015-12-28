@@ -1,4 +1,15 @@
 CHANGES:
+0.10.0 - 0.10.1
+- Fix crash when NULL is passed as input stream.
+- Use symbol visibility on Linux. The library only exports public functions
+  now.
+- Avoid infinite loop. (libwpd#3)
+- Remove bashism. (libwpd#5)
+- Fix various crashes and hangs when reading broken files found with the
+  help of american-fuzzy-lop.
+- Make --help output of all command line tools more help2man-friendly.
+- Miscellaneous fixes and cleanups.
+
 0.9.9 - 0.10.0
 - Switch to librevenge
 - Miscellaneous fixes and cleanups
