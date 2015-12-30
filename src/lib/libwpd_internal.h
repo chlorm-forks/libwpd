@@ -27,12 +27,8 @@
 #ifndef LIBWPD_INTERNAL_H
 #define LIBWPD_INTERNAL_H
 
-#include <stdio.h>
-#include <string>
-#include <algorithm>
 #include <librevenge/librevenge.h>
 #include <librevenge-stream/librevenge-stream.h>
-#include <libwpd/libwpd.h>
 #include "WPXEncryption.h"
 
 /* Various functions/defines that need not/should not be exported externally */

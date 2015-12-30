@@ -26,6 +26,7 @@
 #include "libwpd_internal.h"
 #include <librevenge-stream/librevenge-stream.h>
 #include <cstdarg>
+#include <cstdio>
 #include <ctype.h>
 #include <locale.h>
 #include <string>
@@ -38,7 +39,7 @@ void debugPrint(const char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
-	vfprintf(stderr, format, args);
+	std::vfprintf(stderr, format, args);
 	va_end(args);
 }
 
