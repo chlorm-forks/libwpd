@@ -33,11 +33,10 @@
 #include "WPXContentListener.h"
 #include <libwpd/libwpd.h>
 
-typedef struct _WP42ContentParsingState WP42ContentParsingState;
-struct _WP42ContentParsingState
+struct WP42ContentParsingState
 {
-	_WP42ContentParsingState();
-	~_WP42ContentParsingState();
+	WP42ContentParsingState();
+	~WP42ContentParsingState();
 	librevenge::RVNGString m_textBuffer;
 };
 

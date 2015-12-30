@@ -38,11 +38,9 @@
 #include <vector>
 #include <stdio.h>
 
-typedef struct _WPXTableCell WPXTableCell;
-
-struct _WPXTableCell
+struct WPXTableCell
 {
-	_WPXTableCell(unsigned char colSpan, unsigned char rowSpan, unsigned char borderBits);
+	WPXTableCell(unsigned char colSpan, unsigned char rowSpan, unsigned char borderBits);
 	unsigned char m_colSpan;
 	unsigned char m_rowSpan;
 	unsigned char m_borderBits;

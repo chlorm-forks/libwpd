@@ -32,7 +32,7 @@
 
 // #define WP1_NUM_TEXT_COLUMS_PER_INCH 12
 
-_WP1ContentParsingState::_WP1ContentParsingState() :
+WP1ContentParsingState::WP1ContentParsingState() :
 	m_textBuffer(),
 	m_numDeferredTabs(0),
 	m_footNoteNumber(0),
@@ -40,7 +40,7 @@ _WP1ContentParsingState::_WP1ContentParsingState() :
 {
 }
 
-_WP1ContentParsingState::~_WP1ContentParsingState()
+WP1ContentParsingState::~WP1ContentParsingState()
 {
 }
 

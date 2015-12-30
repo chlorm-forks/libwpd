@@ -34,7 +34,7 @@
 
 using namespace libwpd;
 
-_WP3ContentParsingState::_WP3ContentParsingState():
+WP3ContentParsingState::WP3ContentParsingState():
 	m_colSpan(1),
 	m_rowSpan(1),
 	m_textBuffer(),
@@ -44,7 +44,7 @@ _WP3ContentParsingState::_WP3ContentParsingState():
 {
 }
 
-_WP3ContentParsingState::~_WP3ContentParsingState()
+WP3ContentParsingState::~WP3ContentParsingState()
 {
 	DELETEP(m_cellFillColor);
 }

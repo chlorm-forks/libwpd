@@ -35,21 +35,19 @@
 #include <list>
 #include <set>
 
-typedef struct _WPXTableDefinition WPXTableDefinition;
-struct _WPXTableDefinition
+struct WPXTableDefinition
 {
-	_WPXTableDefinition() : m_positionBits(0), m_leftOffset(0.0), m_columns(), m_columnsProperties() {}
+	WPXTableDefinition() : m_positionBits(0), m_leftOffset(0.0), m_columns(), m_columnsProperties() {}
 	unsigned char m_positionBits;
 	double m_leftOffset;
 	std::vector < WPXColumnDefinition > m_columns;
 	std::vector < WPXColumnProperties > m_columnsProperties;
 };
 
-typedef struct _WPXContentParsingState WPXContentParsingState;
-struct _WPXContentParsingState
+struct WPXContentParsingState
 {
-	_WPXContentParsingState();
-	~_WPXContentParsingState();
+	WPXContentParsingState();
+	~WPXContentParsingState();
 
 	unsigned m_textAttributeBits;
 	double m_fontSize;
@@ -140,8 +138,8 @@ struct _WPXContentParsingState
 	WPXSubDocumentType m_subDocumentType;
 
 private:
-	_WPXContentParsingState(const _WPXContentParsingState &);
-	_WPXContentParsingState &operator=(const _WPXContentParsingState &);
+	WPXContentParsingState(const WPXContentParsingState &);
+	WPXContentParsingState &operator=(const WPXContentParsingState &);
 };
 
 class WPXContentListener : public WPXListener

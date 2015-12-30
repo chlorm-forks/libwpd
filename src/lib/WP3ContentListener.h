@@ -31,11 +31,10 @@
 #include "WPXContentListener.h"
 #include "WP3SubDocument.h"
 
-typedef struct _WP3ContentParsingState WP3ContentParsingState;
-struct _WP3ContentParsingState
+struct WP3ContentParsingState
 {
-	_WP3ContentParsingState();
-	~_WP3ContentParsingState();
+	WP3ContentParsingState();
+	~WP3ContentParsingState();
 	unsigned short m_colSpan;
 	unsigned short m_rowSpan;
 	librevenge::RVNGString m_textBuffer;
@@ -44,8 +43,8 @@ struct _WP3ContentParsingState
 
 	WPXTableList m_tableList;
 private:
-	_WP3ContentParsingState(const _WP3ContentParsingState &);
-	_WP3ContentParsingState &operator=(const _WP3ContentParsingState &);
+	WP3ContentParsingState(const WP3ContentParsingState &);
+	WP3ContentParsingState &operator=(const WP3ContentParsingState &);
 };
 
 class WP3ContentListener : public WP3Listener, protected WPXContentListener

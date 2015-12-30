@@ -102,7 +102,7 @@ void WP6OutlineDefinition::_updateNumberingMethods(const unsigned char *numberin
 
 }
 
-_WP6ContentParsingState::_WP6ContentParsingState(WPXTableList tableList, unsigned nextTableIndice) :
+WP6ContentParsingState::WP6ContentParsingState(WPXTableList tableList, unsigned nextTableIndice) :
 	m_bodyText(),
 	m_textBeforeNumber(),
 	m_textBeforeDisplayReference(),
@@ -149,7 +149,7 @@ _WP6ContentParsingState::_WP6ContentParsingState(WPXTableList tableList, unsigne
 {
 }
 
-_WP6ContentParsingState::~_WP6ContentParsingState()
+WP6ContentParsingState::~WP6ContentParsingState()
 {
 	// FIXME: erase current fontname
 }

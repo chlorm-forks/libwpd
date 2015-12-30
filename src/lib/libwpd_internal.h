@@ -170,40 +170,36 @@ const unsigned char WPX_TABLE_CELL_BOTTOM_BORDER_OFF = 0x08;
 #define WPX_TOP 0x03
 #define WPX_BOTTOM 0x04
 
-typedef struct _RGBSColor RGBSColor;
-struct _RGBSColor
+struct RGBSColor
 {
-	_RGBSColor(unsigned char r, unsigned char g, unsigned char b, unsigned char s);
-	_RGBSColor(unsigned short red, unsigned short green, unsigned short blue); // Construct
+	RGBSColor(unsigned char r, unsigned char g, unsigned char b, unsigned char s);
+	RGBSColor(unsigned short red, unsigned short green, unsigned short blue); // Construct
 	// RBBSColor from double precision RGB color used by WP3.x for Mac
-	_RGBSColor(); // initializes all values to 0
+	RGBSColor(); // initializes all values to 0
 	unsigned char m_r;
 	unsigned char m_g;
 	unsigned char m_b;
 	unsigned char m_s;
 };
 
-typedef struct _WPXColumnDefinition WPXColumnDefinition;
-struct _WPXColumnDefinition
+struct WPXColumnDefinition
 {
-	_WPXColumnDefinition(); // initializes all values to 0
+	WPXColumnDefinition(); // initializes all values to 0
 	double m_width;
 	double m_leftGutter;
 	double m_rightGutter;
 };
 
-typedef struct _WPXColumnProperties WPXColumnProperties;
-struct _WPXColumnProperties
+struct WPXColumnProperties
 {
-	_WPXColumnProperties();
+	WPXColumnProperties();
 	unsigned m_attributes;
 	unsigned char m_alignment;
 };
 
-typedef struct _WPXTabStop WPXTabStop;
-struct _WPXTabStop
+struct WPXTabStop
 {
-	_WPXTabStop();
+	WPXTabStop();
 	double m_position;
 	WPXTabAlignment m_alignment;
 	unsigned m_leaderCharacter;

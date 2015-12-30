@@ -28,7 +28,7 @@
 #include "WPXTable.h"
 #include "libwpd_internal.h"
 
-_WPXTableCell::_WPXTableCell(unsigned char colSpan, unsigned char rowSpan, unsigned char borderBits) :
+WPXTableCell::WPXTableCell(unsigned char colSpan, unsigned char rowSpan, unsigned char borderBits) :
 	m_colSpan(colSpan),
 	m_rowSpan(rowSpan),
 	m_borderBits(borderBits)

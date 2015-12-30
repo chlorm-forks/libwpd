@@ -30,8 +30,7 @@
 #include "WP6FileStructure.h"
 #include "libwpd_internal.h"
 
-struct _RGBSColor;
-typedef struct _RGBSColor RGBSColor;
+struct RGBSColor;
 
 class WP6FillStylePacket : public WP6PrefixDataPacket
 {

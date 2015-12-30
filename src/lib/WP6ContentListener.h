@@ -80,11 +80,10 @@ private:
 	std::vector<WP6StyleState> m_stateSequence;
 };
 
-typedef struct _WP6ContentParsingState WP6ContentParsingState;
-struct _WP6ContentParsingState
+struct WP6ContentParsingState
 {
-	_WP6ContentParsingState(WPXTableList tableList, unsigned nextTableIndice = 0);
-	~_WP6ContentParsingState();
+	WP6ContentParsingState(WPXTableList tableList, unsigned nextTableIndice = 0);
+	~WP6ContentParsingState();
 	librevenge::RVNGString m_bodyText;
 	librevenge::RVNGString m_textBeforeNumber;
 	librevenge::RVNGString m_textBeforeDisplayReference;
@@ -127,11 +126,11 @@ struct _WP6ContentParsingState
 	WPXNumberingType m_currentPageNumberingType;
 
 private:
-	_WP6ContentParsingState(const _WP6ContentParsingState &);
-	_WP6ContentParsingState &operator=(const _WP6ContentParsingState &);
+	WP6ContentParsingState(const WP6ContentParsingState &);
+	WP6ContentParsingState &operator=(const WP6ContentParsingState &);
 };
 
-struct _WP6ListLevel
+struct WP6ListLevel
 {
 	int m_level;
 	bool m_isListElementOpenAtLevel;

@@ -33,17 +33,16 @@
 
 class WP1SubDocument;
 
-typedef struct _WP1ContentParsingState WP1ContentParsingState;
-struct _WP1ContentParsingState
+struct WP1ContentParsingState
 {
-	_WP1ContentParsingState();
-	~_WP1ContentParsingState();
+	WP1ContentParsingState();
+	~WP1ContentParsingState();
 	librevenge::RVNGString m_textBuffer;
 	int m_numDeferredTabs;
 	int m_footNoteNumber, m_endNoteNumber;
 private:
-	_WP1ContentParsingState(const _WP1ContentParsingState &);
-	_WP1ContentParsingState &operator=(const _WP1ContentParsingState &);
+	WP1ContentParsingState(const WP1ContentParsingState &);
+	WP1ContentParsingState &operator=(const WP1ContentParsingState &);
 };
 
 class WP1ContentListener : public WP1Listener, protected WPXContentListener

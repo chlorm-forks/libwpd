@@ -188,11 +188,11 @@ librevenge::RVNGString readCString(librevenge::RVNGInputStream *input, WPXEncryp
 	return tmpString;
 }
 
-typedef struct _WPXComplexMap
+struct WPXComplexMap
 {
 	unsigned short charToMap;
 	unsigned unicodeChars[6];
-} WPXComplexMap;
+};
 
 
 // the ascii map appears stupid, but we need the const 32-bit data for now
@@ -1179,7 +1179,7 @@ double wpuToFontPointSize(const unsigned short wpuNumber)
 	return (double)rint((double)((((double)wpuNumber)/100.0)*2.0));
 }
 
-_RGBSColor::_RGBSColor(unsigned char r, unsigned char g, unsigned char b, unsigned char s)
+RGBSColor::RGBSColor(unsigned char r, unsigned char g, unsigned char b, unsigned char s)
 	:	m_r(r),
 	  m_g(g),
 	  m_b(b),
@@ -1187,7 +1187,7 @@ _RGBSColor::_RGBSColor(unsigned char r, unsigned char g, unsigned char b, unsign
 {
 }
 
-_RGBSColor::_RGBSColor()
+RGBSColor::RGBSColor()
 	:	m_r(0),
 	  m_g(0),
 	  m_b(0),
@@ -1195,7 +1195,7 @@ _RGBSColor::_RGBSColor()
 {
 }
 
-_RGBSColor::_RGBSColor(unsigned short red, unsigned short green, unsigned short blue)
+RGBSColor::RGBSColor(unsigned short red, unsigned short green, unsigned short blue)
 	:	m_r((unsigned char)((red >> 8) & 0xFF)),
 	  m_g((unsigned char)((green >> 8) & 0xFF)),
 	  m_b((unsigned char)((blue >> 8) & 0xFF)),
@@ -1203,7 +1203,7 @@ _RGBSColor::_RGBSColor(unsigned short red, unsigned short green, unsigned short 
 {
 }
 
-_WPXTabStop::_WPXTabStop()
+WPXTabStop::WPXTabStop()
 	:	m_position(0.0),
 	  m_alignment(LEFT),
 	  m_leaderCharacter('\0'),
@@ -1211,14 +1211,14 @@ _WPXTabStop::_WPXTabStop()
 {
 }
 
-_WPXColumnDefinition::_WPXColumnDefinition()
+WPXColumnDefinition::WPXColumnDefinition()
 	:	m_width(0.0),
 	  m_leftGutter(0.0),
 	  m_rightGutter(0.0)
 {
 }
 
-_WPXColumnProperties::_WPXColumnProperties()
+WPXColumnProperties::WPXColumnProperties()
 	:	m_attributes(0x00000000),
 	  m_alignment(0x00)
 {

@@ -28,7 +28,7 @@
 #include "libwpd_internal.h"
 #include <limits>
 
-_WPXContentParsingState::_WPXContentParsingState() :
+WPXContentParsingState::WPXContentParsingState() :
 	m_textAttributeBits(0),
 	m_fontSize(12.0/*WP6_DEFAULT_FONT_SIZE*/), // FIXME ME!!!!!!!!!!!!!!!!!!! HELP WP6_DEFAULT_FONT_SIZE
 	m_fontName(new librevenge::RVNGString(/*WP6_DEFAULT_FONT_NAME*/"Times New Roman")), // EN PAS DEFAULT FONT AAN VOOR WP5/6/etc
@@ -119,7 +119,7 @@ _WPXContentParsingState::_WPXContentParsingState() :
 {
 }
 
-_WPXContentParsingState::~_WPXContentParsingState()
+WPXContentParsingState::~WPXContentParsingState()
 {
 	DELETEP(m_fontName);
 	DELETEP(m_fontColor);

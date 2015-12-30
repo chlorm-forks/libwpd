@@ -31,12 +31,12 @@
 
 #define WP42_NUM_TEXT_COLUMS_PER_INCH 12
 
-_WP42ContentParsingState::_WP42ContentParsingState() :
+WP42ContentParsingState::WP42ContentParsingState() :
 	m_textBuffer()
 {
 }
 
-_WP42ContentParsingState::~_WP42ContentParsingState()
+WP42ContentParsingState::~WP42ContentParsingState()
 {
 }
 

@@ -31,7 +31,7 @@
 #include "libwpd_internal.h"
 #include "WP5SubDocument.h"
 
-_WP5ContentParsingState::_WP5ContentParsingState() :
+WP5ContentParsingState::WP5ContentParsingState() :
 	m_textBuffer(),
 	m_noteReference(),
 	m_tableList(),
@@ -39,7 +39,7 @@ _WP5ContentParsingState::_WP5ContentParsingState() :
 {
 }
 
-_WP5ContentParsingState::~_WP5ContentParsingState()
+WP5ContentParsingState::~WP5ContentParsingState()
 {
 }
 

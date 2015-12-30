@@ -34,11 +34,10 @@
 #include "libwpd_internal.h"
 #include <vector>
 
-typedef struct _WP5ContentParsingState WP5ContentParsingState;
-struct _WP5ContentParsingState
+struct WP5ContentParsingState
 {
-	_WP5ContentParsingState();
-	~_WP5ContentParsingState();
+	WP5ContentParsingState();
+	~WP5ContentParsingState();
 	librevenge::RVNGString m_textBuffer;
 	librevenge::RVNGString m_noteReference;
 
