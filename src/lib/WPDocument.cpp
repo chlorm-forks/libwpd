@@ -24,6 +24,8 @@
  * Corel Corporation or Corel Corporation Limited."
  */
 
+#include <algorithm>
+
 #include <librevenge/librevenge.h>
 #include "WPXHeader.h"
 #include "WPXParser.h"
@@ -135,7 +137,7 @@ WPDAPI WPDConfidence WPDocument::isFileFormatSupported(librevenge::RVNGInputStre
 		else
 			confidence = WP1Heuristics::isWP1FileFormat(input, 0);
 		if (confidence != WPD_CONFIDENCE_EXCELLENT && confidence != WPD_CONFIDENCE_SUPPORTED_ENCRYPTION)
-			confidence = LIBWPD_MAX(confidence, WP42Heuristics::isWP42FileFormat(input, 0));
+			confidence = (std::max)(confidence, WP42Heuristics::isWP42FileFormat(input, 0));
 
 
 		// dispose of the reference to the ole input stream, if we allocated one
@@ -221,7 +223,7 @@ WPDAPI WPDPasswordMatch WPDocument::verifyPassword(librevenge::RVNGInputStream *
 		else
 			passwordMatch = WP1Heuristics::verifyPassword(input, password);
 		if (passwordMatch == WPD_PASSWORD_MATCH_NONE)
-			passwordMatch = LIBWPD_MAX(passwordMatch, WP42Heuristics::verifyPassword(input, password));
+			passwordMatch = (std::max)(passwordMatch, WP42Heuristics::verifyPassword(input, password));
 
 
 		// dispose of the reference to the ole input stream, if we allocated one

@@ -37,15 +37,6 @@
 
 /* Various functions/defines that need not/should not be exported externally */
 
-#ifdef _MSC_VER
-#include <minmax.h>
-#define LIBWPD_MIN min
-#define LIBWPD_MAX max
-#else
-#define LIBWPD_MIN std::min
-#define LIBWPD_MAX std::max
-#endif
-
 #define DELETEP(m) if (m) { delete m; m = 0; }
 
 #if defined(__clang__) || defined(__GNUC__)
