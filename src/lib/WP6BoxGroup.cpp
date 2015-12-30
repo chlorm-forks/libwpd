@@ -77,12 +77,13 @@ void WP6BoxGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryptio
 		if (tmpOverrideFlags & WP6_BOX_GROUP_BOX_COUNTER_DATA_BIT)
 		{
 			long tmpEndOfData = readU16(input, encryption) + input->tell();
+			WPD_DEBUG_MSG(("WP6BoxGroup: parsing Box counter data -- override flags: 0x%x\n", tmpOverrideFlags));
 #ifdef DEBUG
-			tmpOverrideFlags = readU16(input, encryption);
+			const unsigned short tmpOverrideFlags2 = readU16(input, encryption);
+			WPD_DEBUG_MSG(("WP6BoxGroup: parsing Box counter data -- override flags 2: 0x%x\n", tmpOverrideFlags2));
 #else
 			readU16(input, encryption);
 #endif
-			WPD_DEBUG_MSG(("WP6BoxGroup: parsing Box counter data -- override flags: 0x%x\n", tmpOverrideFlags));
 			input->seek(tmpEndOfData, librevenge::RVNG_SEEK_SET);
 		}
 		if (tmpOverrideFlags & WP6_BOX_GROUP_BOX_POSITIONING_DATA_BIT)
