@@ -112,9 +112,7 @@ WP6CharacterGroup_FontFaceChangeSubGroup::WP6CharacterGroup_FontFaceChangeSubGro
 
 WP6CharacterGroup_FontFaceChangeSubGroup::~WP6CharacterGroup_FontFaceChangeSubGroup()
 {
-	if (m_packet)
-		delete m_packet;
-	m_packet = NULL;
+	DELETEP(m_packet);
 }
 
 void WP6CharacterGroup_FontFaceChangeSubGroup::parse(WP6Listener *listener, const unsigned char /* numPrefixIDs */, unsigned short const *prefixIDs) const

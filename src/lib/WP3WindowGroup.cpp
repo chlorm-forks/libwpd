@@ -41,8 +41,8 @@ WP3WindowGroup::WP3WindowGroup(librevenge::RVNGInputStream *input, WPXEncryption
 	m_horizontalOffset(0.0),
 	m_verticalOffset(0.0),
 	m_resourceID(0),
-	m_subDocument(NULL),
-	m_caption(NULL)
+	m_subDocument(0),
+	m_caption(0)
 {
 	_read(input, encryption);
 }
