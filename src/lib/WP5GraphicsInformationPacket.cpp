@@ -47,7 +47,7 @@ WP5GraphicsInformationPacket::~WP5GraphicsInformationPacket()
 	for (std::vector<librevenge::RVNGBinaryData *>::iterator iter2 = m_images.begin(); iter2 != m_images.end(); ++iter2)
 	{
 		if ((*iter2))
-			delete(*iter2);
+			delete (*iter2);
 		(*iter2) = 0;
 	}
 }

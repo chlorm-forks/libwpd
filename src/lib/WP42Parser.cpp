@@ -202,7 +202,7 @@ void WP42Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 		for (std::vector<WP42SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
 		{
 			if (*iterSubDoc)
-				delete(*iterSubDoc);
+				delete (*iterSubDoc);
 		}
 	}
 	catch (FileException)
@@ -212,7 +212,7 @@ void WP42Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 		for (std::vector<WP42SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
 		{
 			if (*iterSubDoc)
-				delete(*iterSubDoc);
+				delete (*iterSubDoc);
 		}
 
 		throw FileException();
@@ -240,14 +240,14 @@ void WP42Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfa
 		listener.endSubDocument();
 		for (std::vector<WP42SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
 			if (*iterSubDoc)
-				delete(*iterSubDoc);
+				delete (*iterSubDoc);
 	}
 	catch (FileException)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
 		for (std::vector<WP42SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
 			if (*iterSubDoc)
-				delete(*iterSubDoc);
+				delete (*iterSubDoc);
 		throw FileException();
 	}
 }

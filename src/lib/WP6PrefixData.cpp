@@ -63,7 +63,7 @@ WP6PrefixData::WP6PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 	}
 
 	for (i=1; i<numPrefixIndices; i++)
-		delete(prefixIndiceArray[(i-1)]);
+		delete (prefixIndiceArray[(i-1)]);
 
 	delete[] prefixIndiceArray;
 
@@ -74,7 +74,7 @@ WP6PrefixData::~WP6PrefixData()
 	DPH::iterator pos;
 	for (pos = m_prefixDataPacketHash.begin(); pos!=m_prefixDataPacketHash.end(); ++pos)
 	{
-		delete(pos->second);
+		delete (pos->second);
 	}
 }
 

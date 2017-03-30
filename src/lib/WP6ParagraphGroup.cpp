@@ -41,7 +41,7 @@ WP6ParagraphGroup::WP6ParagraphGroup(librevenge::RVNGInputStream *input, WPXEncr
 WP6ParagraphGroup::~WP6ParagraphGroup()
 {
 	if (m_subGroupData)
-		delete(m_subGroupData);
+		delete (m_subGroupData);
 }
 
 void WP6ParagraphGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)

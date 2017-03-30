@@ -51,7 +51,7 @@ WP6StyleGroup::WP6StyleGroup(librevenge::RVNGInputStream *input, WPXEncryption *
 WP6StyleGroup::~WP6StyleGroup()
 {
 	if (m_subGroupData)
-		delete(m_subGroupData);
+		delete (m_subGroupData);
 
 }
 

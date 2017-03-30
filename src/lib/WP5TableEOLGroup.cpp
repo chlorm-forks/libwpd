@@ -90,7 +90,7 @@ void WP5TableEOLGroup::parse(WP5Listener *listener)
 		if (!m_spannedFromAbove)
 		{
 			RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
-			listener->insertCell(m_colSpan, m_rowSpan, 0x00, 0, 0, &tmpCellBorderColor ,
+			listener->insertCell(m_colSpan, m_rowSpan, 0x00, 0, 0, &tmpCellBorderColor,
 			                     TOP, m_useCellAttributes, m_cellAttributes);
 		}
 		break;

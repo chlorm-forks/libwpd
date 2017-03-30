@@ -43,7 +43,7 @@ WPXTable::~WPXTable()
 	{
 		for (VTCIter iter2 = (*iter1).begin(); iter2 != (*iter1).end(); ++iter2)
 		{
-			delete(*iter2);
+			delete (*iter2);
 		}
 	}
 }
@@ -196,7 +196,7 @@ void WPXTableList::release()
 		if (--(*m_refCount) == 0)
 		{
 			for (std::vector<WPXTable *>::iterator iter = (*m_tableList).begin(); iter != (*m_tableList).end(); ++iter)
-				delete(*iter);
+				delete (*iter);
 			delete m_tableList;
 			delete m_refCount;
 		}
