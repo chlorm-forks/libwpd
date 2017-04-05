@@ -25,6 +25,7 @@
  */
 
 #include <algorithm>
+#include <memory>
 
 #include <librevenge/librevenge.h>
 #include "WPXHeader.h"
@@ -299,7 +300,7 @@ WPDAPI WPDResult WPDocument::parse(librevenge::RVNGInputStream *input, libreveng
 
 	try
 	{
-		WPXEncryption *encryption = 0;
+		std::unique_ptr<WPXEncryption> encryption;
 		WPXHeader *header = WPXHeader::constructHeader(document, 0);
 
 		if (header)
@@ -312,8 +313,8 @@ WPDAPI WPDResult WPDocument::parse(librevenge::RVNGInputStream *input, libreveng
 				case 0x00: // WP5
 					WPD_DEBUG_MSG(("WordPerfect: Using the WP5 parser.\n"));
 					if (password)
-						encryption = new WPXEncryption(password, 16);
-					parser = new WP5Parser(document, header, encryption);
+						encryption.reset(new WPXEncryption(password, 16));
+					parser = new WP5Parser(document, header, encryption.get());
 					parser->parse(textInterface);
 					break;
 				case 0x02: // WP6
@@ -323,7 +324,7 @@ WPDAPI WPDResult WPDocument::parse(librevenge::RVNGInputStream *input, libreveng
 						delete header;
 						throw UnsupportedEncryptionException();
 					}
-					parser = new WP6Parser(document, header, encryption);
+					parser = new WP6Parser(document, header, encryption.get());
 					parser->parse(textInterface);
 					break;
 				default:
@@ -340,8 +341,8 @@ WPDAPI WPDResult WPDocument::parse(librevenge::RVNGInputStream *input, libreveng
 				case 0x04: // WP Mac 3.5e
 					WPD_DEBUG_MSG(("WordPerfect: Using the WP3 parser.\n"));
 					if (password)
-						encryption = new WPXEncryption(password, header->getDocumentOffset());
-					parser = new WP3Parser(document, header, encryption);
+						encryption.reset(new WPXEncryption(password, header->getDocumentOffset()));
+					parser = new WP3Parser(document, header, encryption.get());
 					parser->parse(textInterface);
 					break;
 				default:
@@ -369,8 +370,8 @@ WPDAPI WPDResult WPDocument::parse(librevenge::RVNGInputStream *input, libreveng
 				WPD_DEBUG_MSG(("WordPerfect: Mostly likely the file format is WP Mac 1.x.\n\n"));
 				WPD_DEBUG_MSG(("WordPerfect: Using the WP Mac 1.x parser.\n\n"));
 				if (password)
-					encryption = new WPXEncryption(password, 6);
-				parser = new WP1Parser(document, encryption);
+					encryption.reset(new WPXEncryption(password, 6));
+				parser = new WP1Parser(document, encryption.get());
 				parser->parse(textInterface);
 				DELETEP(parser);
 			}
@@ -380,10 +381,10 @@ WPDAPI WPDResult WPDocument::parse(librevenge::RVNGInputStream *input, libreveng
 				WPD_DEBUG_MSG(("WordPerfect: Using the WP4.2 parser.\n\n"));
 				if (password)
 				{
-					encryption = new WPXEncryption(password, 6);
+					encryption.reset(new WPXEncryption(password, 6));
 					input->seek(6, librevenge::RVNG_SEEK_SET);
 				}
-				parser = new WP42Parser(document, encryption);
+				parser = new WP42Parser(document, encryption.get());
 				parser->parse(textInterface);
 				DELETEP(parser);
 			}
