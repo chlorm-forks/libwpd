@@ -24,6 +24,8 @@
  * Corel Corporation or Corel Corporation Limited."
  */
 
+#include <memory>
+
 #include "WP6StylesListener.h"
 #include "WP6ContentListener.h"
 #include "WP6Parser.h"
@@ -142,12 +144,9 @@ void WP6Parser::parseDocument(librevenge::RVNGInputStream *input, WPXEncryption 
 		}
 		else
 		{
-			WP6Part *part = WP6Part::constructPart(input, encryption, readVal);
+			std::unique_ptr<WP6Part> part(WP6Part::constructPart(input, encryption, readVal));
 			if (part)
-			{
 				part->parse(listener);
-				DELETEP(part);
-			}
 		}
 	}
 }
