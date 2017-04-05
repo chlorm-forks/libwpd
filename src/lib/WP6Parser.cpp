@@ -59,7 +59,6 @@ WP6PrefixData *WP6Parser::getPrefixData(librevenge::RVNGInputStream *input, WPXE
 		WPD_DEBUG_MSG(("WordPerfect: Prefix Data most likely corrupted.\n"));
 		// TODO: Try to check packet after packet so that we try to recover at least the begining if the corruption is not at
 		//       the begining.
-		DELETEP(prefixData);
 		throw FileException();
 	}
 	catch (...)
@@ -67,7 +66,6 @@ WP6PrefixData *WP6Parser::getPrefixData(librevenge::RVNGInputStream *input, WPXE
 		WPD_DEBUG_MSG(("WordPerfect: Prefix Data most likely corrupted. Trying to ignore.\n"));
 		// TODO: Try to check packet after packet so that we try to recover at least the begining if the corruption is not at
 		//       the begining.
-		DELETEP(prefixData);
 		return 0;
 	}
 }
