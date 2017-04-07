@@ -26,6 +26,9 @@
  */
 
 #include "WP42Parser.h"
+
+#include <memory>
+
 #include "WP42Part.h"
 #include "WPXHeader.h"
 #include "libwpd_internal.h"
@@ -151,12 +154,9 @@ void WP42Parser::parseDocument(librevenge::RVNGInputStream *input, WPXEncryption
 		}
 		else if (readVal >= (unsigned char)0xC0 && readVal <= (unsigned char)0xFE)
 		{
-			WP42Part *part = WP42Part::constructPart(input, encryption, readVal);
+			std::unique_ptr<WP42Part> part(WP42Part::constructPart(input, encryption, readVal));
 			if (part)
-			{
 				part->parse(listener);
-				DELETEP(part);
-			}
 		}
 		// ignore the rest since they are not documented and at least 0xFF is a special character that
 		// marks end of variable length part in variable length multi-byte functions
