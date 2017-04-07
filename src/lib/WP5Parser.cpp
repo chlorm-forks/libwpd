@@ -26,6 +26,9 @@
  */
 
 #include "WP5Parser.h"
+
+#include <memory>
+
 #include "WPXHeader.h"
 #include "WP5Part.h"
 #include "WP5ContentListener.h"
@@ -115,12 +118,9 @@ void WP5Parser::parseDocument(librevenge::RVNGInputStream *input, WPXEncryption 
 		}
 		else
 		{
-			WP5Part *part = WP5Part::constructPart(input, encryption, readVal);
+			std::unique_ptr<WP5Part> part(WP5Part::constructPart(input, encryption, readVal));
 			if (part)
-			{
 				part->parse(listener);
-				DELETEP(part);
-			}
 		}
 	}
 }

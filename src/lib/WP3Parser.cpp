@@ -25,6 +25,9 @@
  */
 
 #include "WP3Parser.h"
+
+#include <memory>
+
 #include "WPXHeader.h"
 #include "WP3Part.h"
 #include "WP3ContentListener.h"
@@ -101,12 +104,9 @@ void WP3Parser::parseDocument(librevenge::RVNGInputStream *input, WPXEncryption 
 		}
 		else
 		{
-			WP3Part *part = WP3Part::constructPart(input, encryption, readVal);
+			std::unique_ptr<WP3Part> part(WP3Part::constructPart(input, encryption, readVal));
 			if (part)
-			{
 				part->parse(listener);
-				DELETEP(part);
-			}
 		}
 	}
 }

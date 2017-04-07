@@ -26,6 +26,9 @@
  */
 
 #include "WP1Parser.h"
+
+#include <memory>
+
 #include "WP1Part.h"
 #include "libwpd_internal.h"
 #include "WP1FileStructure.h"
@@ -173,12 +176,9 @@ void WP1Parser::parseDocument(librevenge::RVNGInputStream *input, WPXEncryption 
 		}
 		else if (readVal >= (unsigned char)0xC0 && readVal <= (unsigned char)0xFE)
 		{
-			WP1Part *part = WP1Part::constructPart(input, encryption, readVal);
+			std::unique_ptr<WP1Part> part(WP1Part::constructPart(input, encryption, readVal));
 			if (part)
-			{
 				part->parse(listener);
-				DELETEP(part);
-			}
 		}
 		// ignore the rest since they are not documented and at least 0xFF is a special character that
 		// marks end of variable length part in variable length multi-byte functions
