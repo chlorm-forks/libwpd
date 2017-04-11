@@ -45,8 +45,8 @@ WP6EOLGroup::WP6EOLGroup(librevenge::RVNGInputStream *input, WPXEncryption *encr
 	m_cellJustification(0),
 	m_cellVerticalAlign(TOP),
 
-	m_cellFgColor(0),
-	m_cellBgColor(0),
+	m_cellFgColor(),
+	m_cellBgColor(),
 	m_cellBorderColor(new RGBSColor(0x00,0x00,0x00,0x64)),
 
 	m_cellBorders(0x00),
@@ -61,9 +61,6 @@ WP6EOLGroup::WP6EOLGroup(librevenge::RVNGInputStream *input, WPXEncryption *encr
 
 WP6EOLGroup::~WP6EOLGroup()
 {
-	DELETEP(m_cellFgColor);
-	DELETEP(m_cellBgColor);
-	DELETEP(m_cellBorderColor);
 }
 
 void WP6EOLGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -185,8 +182,8 @@ void WP6EOLGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryptio
 			bB = readU8(input, encryption);
 			bS = readU8(input, encryption);
 
-			m_cellFgColor = new RGBSColor(fR,fG,fB,fS);
-			m_cellBgColor = new RGBSColor(bR,bG,bB,bS);
+			m_cellFgColor.reset(new RGBSColor(fR,fG,fB,fS));
+			m_cellBgColor.reset(new RGBSColor(bR,bG,bB,bS));
 			WPD_DEBUG_MSG(("WordPerfect: EOL Group Embedded FG Color (%i, %i, %i, %i) BG Color (%i, %i, %i, %i)\n",
 			               m_cellFgColor->m_r, m_cellFgColor->m_g, m_cellFgColor->m_b, m_cellFgColor->m_s,
 			               m_cellBgColor->m_r, m_cellBgColor->m_g, m_cellBgColor->m_b, m_cellBgColor->m_s));
@@ -248,9 +245,9 @@ void WP6EOLGroup::parse(WP6Listener *listener)
 	WPD_DEBUG_MSG(("WordPerfect: handling an EOL group\n"));
 
 	// first off, grab any prefix information which may be useful
-	const RGBSColor *cellFgColor = m_cellFgColor;
-	const RGBSColor *cellBgColor = m_cellBgColor;
-	const RGBSColor *cellBorderColor = m_cellBorderColor;
+	const RGBSColor *cellFgColor = m_cellFgColor.get();
+	const RGBSColor *cellBgColor = m_cellBgColor.get();
+	const RGBSColor *cellBorderColor = m_cellBorderColor.get();
 
 	if (!cellFgColor && !cellBgColor)
 	{

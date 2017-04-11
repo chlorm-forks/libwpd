@@ -27,6 +27,8 @@
 #ifndef WP6EOLGROUP_H
 #define WP6EOLGROUP_H
 
+#include <memory>
+
 #include "WP6VariableLengthGroup.h"
 
 class WP6EOLGroup : public WP6VariableLengthGroup
@@ -50,9 +52,9 @@ private:
 	WPXVerticalAlignment m_cellVerticalAlign;
 
 	// cell forground and background color
-	RGBSColor *m_cellFgColor;
-	RGBSColor *m_cellBgColor;
-	RGBSColor *m_cellBorderColor;
+	std::unique_ptr<RGBSColor> m_cellFgColor;
+	std::unique_ptr<RGBSColor> m_cellBgColor;
+	std::unique_ptr<RGBSColor> m_cellBorderColor;
 
 	unsigned char m_cellBorders;
 	bool m_isHeaderRow;
