@@ -29,6 +29,7 @@
 #include <cstdio>
 #include <ctype.h>
 #include <locale.h>
+#include <limits>
 #include <string>
 
 #ifdef DEBUG
@@ -1287,12 +1288,23 @@ int _extractDisplayReferenceNumberFromBuf(const librevenge::RVNGString &buf, con
 	else if (listType == ARABIC)
 	{
 		int currentSum = 0;
+		bool succeed = false;
 		librevenge::RVNGString::Iter i(buf);
+		// try to extract a number, skipping any non-digit chars
 		for (i.rewind(); i.next();)
 		{
-			currentSum *= 10;
-			currentSum+=(*(i())-48);
+			const char c = *i();
+			if (isdigit(c))
+			{
+				if (std::numeric_limits<int>::max() / 10 < currentSum)
+					break; // the number is too big to parse
+				currentSum *= 10;
+				currentSum += c - 48;
+				succeed = true;
+			}
 		}
+		if (!succeed)
+			throw ParseException();
 		return currentSum;
 	}
 
