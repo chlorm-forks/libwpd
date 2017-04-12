@@ -1281,6 +1281,8 @@ int _extractDisplayReferenceNumberFromBuf(const librevenge::RVNGString &buf, con
 		if (buf.len()==0)
 			throw ParseException();
 		char c = buf.cstr()[0];
+		if (!isalpha(c))
+			throw ParseException();
 		if (listType==LOWERCASE)
 			c = (char)toupper(c);
 		return (c - 64);
