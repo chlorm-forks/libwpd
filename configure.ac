@@ -49,7 +49,7 @@ AC_SUBST(LT_CURRENT)
 AC_SUBST(LT_REVISION, [libwpd_version_micro])
 AC_SUBST(LT_AGE)
 
-AX_CXX_COMPILE_STDCXX_11([noext])
+AX_CXX_COMPILE_STDCXX_11
 
 # ==========================
 # Platform check for windows
