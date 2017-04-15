@@ -35,7 +35,7 @@
 
 #define DELETEP(m) if (m) { delete m; m = 0; }
 
-#if defined(__clang__) || defined(__GNUC__)
+#if defined(HAVE_FUNC_ATTRIBUTE_FORMAT)
 #define WPD_ATTRIBUTE_PRINTF(fmt, arg) __attribute__((format(printf, fmt, arg)))
 #else
 #define WPD_ATTRIBUTE_PRINTF(fmt, arg)
