@@ -29,8 +29,9 @@
 #include <cstdio>
 #include <ctype.h>
 #include <locale.h>
-#include <limits>
 #include <string>
+
+#include <boost/spirit/include/qi.hpp>
 
 #ifdef DEBUG
 namespace libwpd
@@ -1290,22 +1291,11 @@ int _extractDisplayReferenceNumberFromBuf(const librevenge::RVNGString &buf, con
 	else if (listType == ARABIC)
 	{
 		int currentSum = 0;
-		bool succeed = false;
-		librevenge::RVNGString::Iter i(buf);
-		// try to extract a number, skipping any non-digit chars
-		for (i.rewind(); i.next();)
-		{
-			const char c = *i();
-			if (isdigit(c))
-			{
-				if (std::numeric_limits<int>::max() / 10 < currentSum)
-					break; // the number is too big to parse
-				currentSum *= 10;
-				currentSum += c - 48;
-				succeed = true;
-			}
-		}
-		if (!succeed)
+		const char *first = buf.cstr();
+		const char *const last = first + buf.size();
+		namespace qi = boost::spirit::qi;
+		const bool succeed = qi::parse(first, last, qi::int_, currentSum);
+		if (!succeed || first != last)
 			throw ParseException();
 		return currentSum;
 	}

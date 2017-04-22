@@ -232,6 +232,21 @@ PKG_CHECK_MODULES([REVENGE],[
 AC_SUBST([REVENGE_CFLAGS])
 AC_SUBST([REVENGE_LIBS])
 
+# ==================
+# Find boost headers
+# ==================
+saved_CPPFLAGS="${CPPFLAGS}"
+CPPFLAGS="${BOOST_CFLAGS} ${CPPFLAGS}"
+AC_CHECK_HEADERS([dnl
+        boost/spirit/include/qi.hpp \
+    ],
+    [],
+    [AC_MSG_ERROR([Required boost headers not found.])],
+    []
+)
+CPPFLAGS="${saved_CPPFLAGS}"
+AC_SUBST([BOOST_CFLAGS])
+
 # =====
 # Tools
 # =====
