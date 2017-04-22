@@ -2,7 +2,7 @@ libwpd is a library for import of WordPerfect documents. It is used by,
 for example, AbiWord and LibreOffice.
 
 libwpd requires boost, librevenge and doxygen (optional) to build. Most
-up to date code is available from Git repository at sourceforge.net
+up-to-date code is available from Git repository at sourceforge.net
 (http://sourceforge.net/p/libwpd/code/). See
 http://sourceforge.net/p/libwpd/ for more information.
 
