@@ -38,7 +38,7 @@ WP3ContentParsingState::WP3ContentParsingState():
 	m_colSpan(1),
 	m_rowSpan(1),
 	m_textBuffer(),
-	m_cellFillColor(0),
+	m_cellFillColor(),
 	m_noteReference(),
 	m_tableList()
 {
@@ -46,7 +46,6 @@ WP3ContentParsingState::WP3ContentParsingState():
 
 WP3ContentParsingState::~WP3ContentParsingState()
 {
-	DELETEP(m_cellFillColor);
 }
 
 WP3ContentListener::WP3ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP3SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
@@ -253,8 +252,8 @@ void WP3ContentListener::insertCell()
 
 		RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
 		_openTableCell((unsigned char)m_parseState->m_colSpan, (unsigned char)m_parseState->m_rowSpan, 0x00000000,
-		               m_parseState->m_cellFillColor, 0, &tmpCellBorderColor, TOP);
-		DELETEP(m_parseState->m_cellFillColor);
+		               m_parseState->m_cellFillColor.get(), 0, &tmpCellBorderColor, TOP);
+		m_parseState->m_cellFillColor.reset();
 
 		m_ps->m_isCellWithoutParagraph = true;
 		m_ps->m_cellAttributeBits = 0x00000000;
@@ -294,11 +293,7 @@ void WP3ContentListener::setTableCellSpan(const unsigned short colSpan, const un
 void WP3ContentListener::setTableCellFillColor(const RGBSColor *cellFillColor)
 {
 	if (!isUndoOn())
-	{
-		if (m_parseState->m_cellFillColor)
-			DELETEP(m_parseState->m_cellFillColor);
-		m_parseState->m_cellFillColor = new RGBSColor(*cellFillColor);
-	}
+		m_parseState->m_cellFillColor.reset(new RGBSColor(*cellFillColor));
 }
 
 void WP3ContentListener::endTable()

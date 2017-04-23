@@ -27,6 +27,8 @@
 #ifndef WP3CONTENTLISTENER_H
 #define WP3CONTENTLISTENER_H
 
+#include <memory>
+
 #include "WP3Listener.h"
 #include "WPXContentListener.h"
 #include "WP3SubDocument.h"
@@ -38,7 +40,7 @@ struct WP3ContentParsingState
 	unsigned short m_colSpan;
 	unsigned short m_rowSpan;
 	librevenge::RVNGString m_textBuffer;
-	RGBSColor *m_cellFillColor;
+	std::unique_ptr<RGBSColor> m_cellFillColor;
 	librevenge::RVNGString m_noteReference;
 
 	WPXTableList m_tableList;
