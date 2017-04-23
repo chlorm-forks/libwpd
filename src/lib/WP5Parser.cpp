@@ -50,17 +50,7 @@ WP5Parser::~WP5Parser()
 
 WP5PrefixData *WP5Parser::getPrefixData(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
 {
-	WP5PrefixData *prefixData = 0;
-	try
-	{
-		prefixData = new WP5PrefixData(input, encryption);
-		return prefixData;
-	}
-	catch (FileException)
-	{
-		DELETEP(prefixData);
-		throw FileException();
-	}
+	return new WP5PrefixData(input, encryption);
 }
 
 void WP5Parser::parse(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP5Listener *listener)
