@@ -181,63 +181,48 @@ void WP6Parser::parsePackets(WP6PrefixData *prefixData, int type, WP6Listener *l
 // information to a low-level listener
 void WP6Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 {
-	WP6PrefixData *prefixData = 0;
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
 
 	librevenge::RVNGInputStream *input = getInput();
 	WPXEncryption *encryption = getEncryption();
 
-	try
+	std::unique_ptr<WP6PrefixData> prefixData(getPrefixData(input, encryption));
+
+	// do a "first-pass" parse of the document
+	// gather table border information, page properties (per-page)
+	WP6StylesListener stylesListener(pageList, tableList);
+	stylesListener.setPrefixData(prefixData.get());
+	parse(input, encryption, &stylesListener);
+
+	// postprocess the pageList == remove duplicate page spans due to the page breaks
+	std::list<WPXPageSpan>::iterator previousPage = pageList.begin();
+	for (std::list<WPXPageSpan>::iterator Iter=pageList.begin(); Iter != pageList.end(); /* Iter++ */)
 	{
-		prefixData = getPrefixData(input, encryption);
-
-		// do a "first-pass" parse of the document
-		// gather table border information, page properties (per-page)
-		WP6StylesListener stylesListener(pageList, tableList);
-		stylesListener.setPrefixData(prefixData);
-		parse(input, encryption, &stylesListener);
-
-		// postprocess the pageList == remove duplicate page spans due to the page breaks
-		std::list<WPXPageSpan>::iterator previousPage = pageList.begin();
-		for (std::list<WPXPageSpan>::iterator Iter=pageList.begin(); Iter != pageList.end(); /* Iter++ */)
+		if ((Iter != previousPage) && ((*previousPage)==(*Iter)))
 		{
-			if ((Iter != previousPage) && ((*previousPage)==(*Iter)))
-			{
-				(*previousPage).setPageSpan((*previousPage).getPageSpan() + (*Iter).getPageSpan());
-				Iter = pageList.erase(Iter);
-			}
-			else
-			{
-				previousPage = Iter;
-				++Iter;
-			}
+			(*previousPage).setPageSpan((*previousPage).getPageSpan() + (*Iter).getPageSpan());
+			Iter = pageList.erase(Iter);
 		}
-
-		// second pass: here is where we actually send the messages to the target app
-		// that are necessary to emit the body of the target document
-		WP6ContentListener listener(pageList, tableList, documentInterface);
-		listener.setPrefixData(prefixData);
-
-		// get the relevant initial prefix packets out of storage and tell them to parse
-		// themselves
-		parsePacket(prefixData, WP6_INDEX_HEADER_EXTENDED_DOCUMENT_SUMMARY, &listener);
-		parsePacket(prefixData, WP6_INDEX_HEADER_INITIAL_FONT, &listener);
-		parsePackets(prefixData, WP6_INDEX_HEADER_OUTLINE_STYLE, &listener);
-
-		parse(input, encryption, &listener);
-
-		// cleanup section: free the used resources
-		delete prefixData;
+		else
+		{
+			previousPage = Iter;
+			++Iter;
+		}
 	}
-	catch (FileException)
-	{
-		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
 
-		delete prefixData;
+	// second pass: here is where we actually send the messages to the target app
+	// that are necessary to emit the body of the target document
+	WP6ContentListener listener(pageList, tableList, documentInterface);
+	listener.setPrefixData(prefixData.get());
 
-		throw FileException();
-	}
+	// get the relevant initial prefix packets out of storage and tell them to parse
+	// themselves
+	parsePacket(prefixData.get(), WP6_INDEX_HEADER_EXTENDED_DOCUMENT_SUMMARY, &listener);
+	parsePacket(prefixData.get(), WP6_INDEX_HEADER_INITIAL_FONT, &listener);
+	parsePackets(prefixData.get(), WP6_INDEX_HEADER_OUTLINE_STYLE, &listener);
+
+	parse(input, encryption, &listener);
 }
 
 void WP6Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterface)
