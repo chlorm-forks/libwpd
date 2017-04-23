@@ -33,7 +33,7 @@ WPXContentParsingState::WPXContentParsingState() :
 	m_fontSize(12.0/*WP6_DEFAULT_FONT_SIZE*/), // FIXME ME!!!!!!!!!!!!!!!!!!! HELP WP6_DEFAULT_FONT_SIZE
 	m_fontName(new librevenge::RVNGString(/*WP6_DEFAULT_FONT_NAME*/"Times New Roman")), // EN PAS DEFAULT FONT AAN VOOR WP5/6/etc
 	m_fontColor(new RGBSColor(0x00,0x00,0x00,0x64)), //Set default to black. Maybe once it will change, but for the while...
-	m_highlightColor(0),
+	m_highlightColor(),
 
 	m_isParagraphColumnBreak(false),
 	m_isParagraphPageBreak(false),
@@ -121,9 +121,6 @@ WPXContentParsingState::WPXContentParsingState() :
 
 WPXContentParsingState::~WPXContentParsingState()
 {
-	DELETEP(m_fontName);
-	DELETEP(m_fontColor);
-	DELETEP(m_highlightColor);
 }
 
 WPXContentListener::WPXContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface) :
@@ -889,9 +886,9 @@ void WPXContentListener::_openSpan()
 	if (attributeBits & WPX_REDLINE_BIT)
 		propList.insert("fo:color", "#ff3333");  // #ff3333 = a nice bright red
 	else if (m_ps->m_fontColor)
-		propList.insert("fo:color", _colorToString(m_ps->m_fontColor));
+		propList.insert("fo:color", _colorToString(m_ps->m_fontColor.get()));
 	if (m_ps->m_highlightColor)
-		propList.insert("fo:background-color", _colorToString(m_ps->m_highlightColor));
+		propList.insert("fo:background-color", _colorToString(m_ps->m_highlightColor.get()));
 
 	if (!m_ps->m_isSpanOpened)
 		m_documentInterface->openSpan(propList);

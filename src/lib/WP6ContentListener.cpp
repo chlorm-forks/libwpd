@@ -692,9 +692,9 @@ void WP6ContentListener::highlightChange(const bool isOn, const RGBSColor &color
 	if (!isUndoOn())
 	{
 		_closeSpan();
-		DELETEP(m_ps->m_highlightColor);
+		m_ps->m_highlightColor.reset();
 		if (isOn)
-			m_ps->m_highlightColor = new RGBSColor(color.m_r, color.m_g, color.m_b, color.m_s);
+			m_ps->m_highlightColor.reset(new RGBSColor(color.m_r, color.m_g, color.m_b, color.m_s));
 	}
 }
 

@@ -52,9 +52,9 @@ struct WPXContentParsingState
 
 	unsigned m_textAttributeBits;
 	double m_fontSize;
-	librevenge::RVNGString *m_fontName;
-	RGBSColor *m_fontColor;
-	RGBSColor *m_highlightColor;
+	std::unique_ptr<librevenge::RVNGString> m_fontName;
+	std::unique_ptr<RGBSColor> m_fontColor;
+	std::unique_ptr<RGBSColor> m_highlightColor;
 
 	bool m_isParagraphColumnBreak;
 	bool m_isParagraphPageBreak;
