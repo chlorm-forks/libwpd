@@ -109,9 +109,9 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 	m_usePreWP9LeaderMethods(),
 	m_tabStops()
 {
-	unsigned char tmp_definition = readU8(input, encryption);
-	unsigned short tmp_tabAdjustValue = readU16(input, encryption);
-	if (tmp_definition == 0)
+	unsigned char definition = readU8(input, encryption);
+	unsigned short tabAdjustValue = readU16(input, encryption);
+	if (definition == 0)
 	{
 		m_isRelative = false;
 		m_tabAdjustValue = 0.0;
@@ -119,98 +119,98 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 	else
 	{
 		m_isRelative = true;
-		m_tabAdjustValue = (double)((double)tmp_tabAdjustValue/(double)WPX_NUM_WPUS_PER_INCH);
+		m_tabAdjustValue = (double)((double)tabAdjustValue/(double)WPX_NUM_WPUS_PER_INCH);
 	}
-	unsigned char tmp_repetitionCount = 0;
-	WPXTabStop tmp_tabStop;
-	unsigned char tmp_numTabStops = readU8(input, encryption);
-	bool tmp_usePreWP9LeaderMethod = false;
-	unsigned char tmp_tabType = 0;
-	for (int i = 0; i < tmp_numTabStops; i++)
+	unsigned char repetitionCount = 0;
+	WPXTabStop tabStop;
+	unsigned char numTabStops = readU8(input, encryption);
+	bool usePreWP9LeaderMethod = false;
+	unsigned char tabType = 0;
+	for (int i = 0; i < numTabStops; i++)
 	{
-		tmp_tabType = readU8(input, encryption);
-		if ((tmp_tabType & 0x80) != 0)
+		tabType = readU8(input, encryption);
+		if ((tabType & 0x80) != 0)
 		{
-			tmp_repetitionCount = (tmp_tabType & 0x7F);
+			repetitionCount = (tabType & 0x7F);
 		}
 		else
 		{
-			switch (tmp_tabType & 0x0F) //alignment bits
+			switch (tabType & 0x0F) //alignment bits
 			{
 			case 0x00:
-				tmp_tabStop.m_alignment = LEFT;
+				tabStop.m_alignment = LEFT;
 				break;
 			case 0x01:
-				tmp_tabStop.m_alignment = CENTER;
+				tabStop.m_alignment = CENTER;
 				break;
 			case 0x02:
-				tmp_tabStop.m_alignment = RIGHT;
+				tabStop.m_alignment = RIGHT;
 				break;
 			case 0x03:
-				tmp_tabStop.m_alignment = DECIMAL;
+				tabStop.m_alignment = DECIMAL;
 				break;
 			case 0x04:
-				tmp_tabStop.m_alignment = BAR;
+				tabStop.m_alignment = BAR;
 				break;
 			default: // should not happen, maybe corruption
-				tmp_tabStop.m_alignment = LEFT;
+				tabStop.m_alignment = LEFT;
 				break;
 			}
-			tmp_tabStop.m_leaderNumSpaces = 0;
-			if ((tmp_tabType & 0x10) == 0) // no leader character
+			tabStop.m_leaderNumSpaces = 0;
+			if ((tabType & 0x10) == 0) // no leader character
 			{
-				tmp_tabStop.m_leaderCharacter = '\0';
-				tmp_usePreWP9LeaderMethod = false;
+				tabStop.m_leaderCharacter = '\0';
+				usePreWP9LeaderMethod = false;
 			}
 			else
 			{
-				switch ((tmp_tabType & 0x60) >> 5) // leader character type
+				switch ((tabType & 0x60) >> 5) // leader character type
 				{
 				case 0: // pre-WP9 leader method
-					tmp_tabStop.m_leaderCharacter = '.';
-					tmp_tabStop.m_leaderNumSpaces = 0;
-					tmp_usePreWP9LeaderMethod = true;
+					tabStop.m_leaderCharacter = '.';
+					tabStop.m_leaderNumSpaces = 0;
+					usePreWP9LeaderMethod = true;
 					break;
 				case 1: // dot leader
-					tmp_tabStop.m_leaderCharacter = '.';
-					tmp_tabStop.m_leaderNumSpaces = 0;
-					tmp_usePreWP9LeaderMethod = false;
+					tabStop.m_leaderCharacter = '.';
+					tabStop.m_leaderNumSpaces = 0;
+					usePreWP9LeaderMethod = false;
 					break;
 				case 2: // hyphen leader
-					tmp_tabStop.m_leaderCharacter = '-';
-					tmp_tabStop.m_leaderNumSpaces = 0;
-					tmp_usePreWP9LeaderMethod = false;
+					tabStop.m_leaderCharacter = '-';
+					tabStop.m_leaderNumSpaces = 0;
+					usePreWP9LeaderMethod = false;
 					break;
 				case 3: // underscore leader
-					tmp_tabStop.m_leaderCharacter = '_';
-					tmp_tabStop.m_leaderNumSpaces = 0;
-					tmp_usePreWP9LeaderMethod = false;
+					tabStop.m_leaderCharacter = '_';
+					tabStop.m_leaderNumSpaces = 0;
+					usePreWP9LeaderMethod = false;
 					break;
 				default:
 					break;
 				}
 			}
 		}
-		unsigned short tmp_tabPosition = readU16(input, encryption);
-		if (tmp_repetitionCount == 0)
+		unsigned short tabPosition = readU16(input, encryption);
+		if (repetitionCount == 0)
 		{
-			if (tmp_tabPosition != 0xFFFF)
+			if (tabPosition != 0xFFFF)
 			{
-				tmp_tabStop.m_position = (double)((double)tmp_tabPosition/(double)WPX_NUM_WPUS_PER_INCH) -
-				                         m_tabAdjustValue;
-				m_tabStops.push_back(tmp_tabStop);
-				m_usePreWP9LeaderMethods.push_back(tmp_usePreWP9LeaderMethod);
+				tabStop.m_position = (double)((double)tabPosition/(double)WPX_NUM_WPUS_PER_INCH) -
+				                     m_tabAdjustValue;
+				m_tabStops.push_back(tabStop);
+				m_usePreWP9LeaderMethods.push_back(usePreWP9LeaderMethod);
 			}
 		}
 		else
 		{
-			for (int k=0; k<tmp_repetitionCount; k++)
+			for (int k=0; k<repetitionCount; k++)
 			{
-				tmp_tabStop.m_position += (double)((double)tmp_tabPosition/(double)WPX_NUM_WPUS_PER_INCH);
-				m_tabStops.push_back(tmp_tabStop);
-				m_usePreWP9LeaderMethods.push_back(tmp_usePreWP9LeaderMethod);
+				tabStop.m_position += (double)((double)tabPosition/(double)WPX_NUM_WPUS_PER_INCH);
+				m_tabStops.push_back(tabStop);
+				m_usePreWP9LeaderMethods.push_back(usePreWP9LeaderMethod);
 			}
-			tmp_repetitionCount = 0;
+			repetitionCount = 0;
 		}
 	}
 }
