@@ -41,18 +41,14 @@ WP3WindowGroup::WP3WindowGroup(librevenge::RVNGInputStream *input, WPXEncryption
 	m_horizontalOffset(0.0),
 	m_verticalOffset(0.0),
 	m_resourceID(0),
-	m_subDocument(0),
-	m_caption(0)
+	m_subDocument(),
+	m_caption()
 {
 	_read(input, encryption);
 }
 
 WP3WindowGroup::~WP3WindowGroup()
 {
-	if (m_subDocument)
-		delete m_subDocument;
-	if (m_caption)
-		delete m_caption;
 }
 
 void WP3WindowGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -84,10 +80,10 @@ void WP3WindowGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryp
 		input->seek(tmpNumSubRect * 8, librevenge::RVNG_SEEK_CUR);
 		unsigned short tmpBoxCaptionSize = readU16(input, encryption, true);
 		if (tmpBoxCaptionSize)
-			m_caption = new WP3SubDocument(input, encryption, tmpBoxCaptionSize);
+			m_caption.reset(new WP3SubDocument(input, encryption, tmpBoxCaptionSize));
 		unsigned short tmpTextBoxLength = readU16(input, encryption, true);
 		if (tmpTextBoxLength)
-			m_subDocument = new WP3SubDocument(input, encryption, tmpTextBoxLength);
+			m_subDocument.reset(new WP3SubDocument(input, encryption, tmpTextBoxLength));
 	}
 	break;
 
@@ -136,12 +132,12 @@ void WP3WindowGroup::parse(WP3Listener *listener)
 		else if (m_boxType == 0x00)
 		{
 			if (m_subDocument || m_caption)
-				listener->insertTextBox(m_height, m_width, m_verticalOffset, m_horizontalOffset, m_leftColumn, m_rightColumn, m_figureFlags, m_subDocument, m_caption);
+				listener->insertTextBox(m_height, m_width, m_verticalOffset, m_horizontalOffset, m_leftColumn, m_rightColumn, m_figureFlags, m_subDocument.get(), m_caption.get());
 		}
 		else if (m_boxType == 0x04 || m_boxType == 0x05)
 		{
 			if (m_subDocument || m_caption)
-				listener->insertWP51Table(m_height, m_width, m_verticalOffset, m_horizontalOffset, m_leftColumn, m_rightColumn, m_figureFlags, m_subDocument, m_caption);
+				listener->insertWP51Table(m_height, m_width, m_verticalOffset, m_horizontalOffset, m_leftColumn, m_rightColumn, m_figureFlags, m_subDocument.get(), m_caption.get());
 		}
 		break;
 

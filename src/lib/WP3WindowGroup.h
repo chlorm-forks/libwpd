@@ -29,6 +29,7 @@
 #include <librevenge/librevenge.h>
 #include "WP3VariableLengthGroup.h"
 #include "WP3SubDocument.h"
+#include <memory>
 #include <vector>
 
 class WP3Listener;
@@ -46,7 +47,8 @@ private:
 	unsigned char m_leftColumn, m_rightColumn, m_boxType;
 	double m_width, m_height, m_horizontalOffset, m_verticalOffset;
 	unsigned m_resourceID;
-	WP3SubDocument *m_subDocument, *m_caption;
+	std::unique_ptr<WP3SubDocument> m_subDocument;
+	std::unique_ptr<WP3SubDocument> m_caption;
 	// Unimplemented to prevent compiler from creating crasher ones
 	WP3WindowGroup(const WP3WindowGroup &);
 	WP3WindowGroup &operator=(const WP3WindowGroup &);
