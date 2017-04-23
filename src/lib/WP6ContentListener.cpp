@@ -164,7 +164,6 @@ WP6ContentListener::WP6ContentListener(std::list<WPXPageSpan> &pageList, WPXTabl
 
 WP6ContentListener::~WP6ContentListener()
 {
-	delete m_parseState;
 }
 
 void WP6ContentListener::setDate(const unsigned short type, const unsigned short year,
@@ -1767,9 +1766,9 @@ void WP6ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
                                             WPXTableList tableList, unsigned nextTableIndice)
 {
 	// save our old parsing state on our "stack"
-	WP6ContentParsingState *oldParseState = m_parseState;
+	auto oldParseState = std::move(m_parseState);
 
-	m_parseState = new WP6ContentParsingState(tableList, nextTableIndice);
+	m_parseState = std::unique_ptr<WP6ContentParsingState>(new WP6ContentParsingState(tableList, nextTableIndice));
 	m_parseState->m_numNestedNotes = oldParseState->m_numNestedNotes;
 
 	if (subDocumentType == WPX_SUBDOCUMENT_HEADER_FOOTER)
@@ -1806,8 +1805,7 @@ void WP6ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
 	oldParseState->m_numNestedNotes = m_parseState->m_numNestedNotes;
 
 	// restore our old parsing state
-	delete m_parseState;
-	m_parseState = oldParseState;
+	m_parseState = std::move(oldParseState);
 	m_parseState->m_noteTextPID = 0;
 }
 

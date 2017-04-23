@@ -35,6 +35,7 @@
 
 #include <stack>
 #include <map>
+#include <memory>
 #include <vector>
 
 class WPXTable;
@@ -272,7 +273,7 @@ protected:
 private:
 	WP6ContentListener(const WP6ContentListener &);
 	WP6ContentListener &operator=(const WP6ContentListener &);
-	WP6ContentParsingState *m_parseState;
+	std::unique_ptr<WP6ContentParsingState> m_parseState;
 
 	std::map<unsigned short,WP6OutlineDefinition> m_outlineDefineHash;
 	std::map<unsigned, librevenge::RVNGPropertyList> m_listDefinitions;
