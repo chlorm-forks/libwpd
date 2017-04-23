@@ -55,7 +55,6 @@ WP5ContentListener::WP5ContentListener(std::list<WPXPageSpan> &pageList, std::ve
 
 WP5ContentListener::~WP5ContentListener()
 {
-	delete m_parseState;
 }
 
 
@@ -561,9 +560,9 @@ void WP5ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
                                             WPXTableList /* tableList */, unsigned /* nextTableIndice */)
 {
 	// save our old parsing state on our "stack"
-	WP5ContentParsingState *oldParseState = m_parseState;
+	auto oldParseState = std::move(m_parseState);
 
-	m_parseState = new WP5ContentParsingState();
+	m_parseState = std::unique_ptr<WP5ContentParsingState>(new WP5ContentParsingState());
 	setFont(m_defaultFontName, m_defaultFontSize);
 
 	if (subDocumentType == WPX_SUBDOCUMENT_HEADER_FOOTER)
@@ -590,8 +589,7 @@ void WP5ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
 #endif
 
 	// restore our old parsing state
-	delete m_parseState;
-	m_parseState = oldParseState;
+	m_parseState = std::move(oldParseState);
 }
 
 void WP5ContentListener::headerFooterGroup(unsigned char /* headerFooterType */, unsigned char /* occurrenceBits */,
