@@ -30,6 +30,7 @@
 #include <ctype.h>
 #include <locale.h>
 #include <string>
+#include <vector>
 
 #include <boost/spirit/include/qi.hpp>
 
@@ -153,12 +154,10 @@ unsigned readU32(librevenge::RVNGInputStream *input, WPXEncryption *encryption, 
 void appendUCS4(librevenge::RVNGString &str, unsigned ucs4)
 {
 	int charLength = libwpd_unichar_to_utf8(ucs4, 0);
-	char *utf8 = new char[charLength+1];
+	std::vector<char> utf8(charLength+1);
 	utf8[charLength] = '\0';
-	libwpd_unichar_to_utf8(ucs4, utf8);
-	str.append(utf8);
-
-	delete[] utf8;
+	libwpd_unichar_to_utf8(ucs4, utf8.data());
+	str.append(utf8.data());
 }
 
 librevenge::RVNGString readPascalString(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
