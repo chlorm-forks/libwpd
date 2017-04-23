@@ -46,8 +46,6 @@ WPXEncryption::WPXEncryption(const char *password, const unsigned long encryptio
 
 WPXEncryption::~WPXEncryption()
 {
-	if (m_buffer)
-		delete [] m_buffer;
 }
 
 
@@ -72,9 +70,7 @@ const unsigned char *WPXEncryption::readAndDecrypt(librevenge::RVNGInputStream *
 	if (readStartPosition == (unsigned long)-1)
 		return 0;
 	const unsigned char *encryptedBuffer = input->read(numBytes, numBytesRead);
-	if (m_buffer)
-		delete [] m_buffer;
-	m_buffer = new unsigned char[numBytesRead];
+	m_buffer.reset(new unsigned char[numBytesRead]);
 	for (unsigned long i=0; i<numBytesRead; i++)
 	{
 		if (readStartPosition + i < m_encryptionStartOffset)
@@ -86,6 +82,6 @@ const unsigned char *WPXEncryption::readAndDecrypt(librevenge::RVNGInputStream *
 			m_buffer[i] = (unsigned char)(encryptedBuffer[i] ^ (m_password.cstr()[passwordOffset] ^ encryptionMask));
 		}
 	}
-	return m_buffer;
+	return m_buffer.get();
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

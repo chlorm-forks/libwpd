@@ -27,6 +27,8 @@
 #ifndef WPXENCRYPTION_H
 #define WPXENCRYPTION_H
 
+#include <memory>
+
 #include <librevenge/librevenge.h>
 #include <libwpd/libwpd.h>
 
@@ -63,7 +65,7 @@ public:
 	}
 
 private:
-	unsigned char *m_buffer;
+	std::unique_ptr<unsigned char[]> m_buffer;
 	librevenge::RVNGString m_password;
 	unsigned long m_encryptionStartOffset;
 	unsigned char m_encryptionMaskBase;
