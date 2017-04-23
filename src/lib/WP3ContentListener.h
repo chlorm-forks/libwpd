@@ -138,7 +138,7 @@ protected:
 private:
 	WP3ContentListener(const WP3ContentListener &);
 	WP3ContentListener &operator=(const WP3ContentListener &);
-	WP3ContentParsingState *m_parseState;
+	std::unique_ptr<WP3ContentParsingState> m_parseState;
 	std::vector<WP3SubDocument *> &m_subDocuments;
 };
 

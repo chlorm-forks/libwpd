@@ -58,7 +58,6 @@ WP3ContentListener::WP3ContentListener(std::list<WPXPageSpan> &pageList, std::ve
 
 WP3ContentListener::~WP3ContentListener()
 {
-	delete m_parseState;
 }
 
 
@@ -1113,9 +1112,9 @@ void WP3ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
                                             WPXTableList /* tableList */, unsigned /* nextTableIndice */)
 {
 	// save our old parsing state on our "stack"
-	WP3ContentParsingState *oldParseState = m_parseState;
+	auto oldParseState = std::move(m_parseState);
 
-	m_parseState = new WP3ContentParsingState();
+	m_parseState = std::unique_ptr<WP3ContentParsingState>(new WP3ContentParsingState());
 	if (subDocumentType == WPX_SUBDOCUMENT_TEXT_BOX || subDocumentType == WPX_SUBDOCUMENT_COMMENT_ANNOTATION)
 	{
 		m_ps->m_pageMarginRight = 0.0;
@@ -1150,8 +1149,7 @@ void WP3ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
 #endif
 
 	// restore our old parsing state
-	delete m_parseState;
-	m_parseState = oldParseState;
+	m_parseState = std::move(oldParseState);
 	setUndoOn(oldIsUndoOn);
 }
 
