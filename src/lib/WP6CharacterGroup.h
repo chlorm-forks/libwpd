@@ -27,6 +27,8 @@
 #ifndef WP6CHARACTERGROUP_H
 #define WP6CHARACTERGROUP_H
 
+#include <memory>
+
 #include "WP6VariableLengthGroup.h"
 #include "WP6FontDescriptorPacket.h"
 
@@ -75,7 +77,7 @@ private:
 	unsigned short m_hash;
 	unsigned short m_matchedFontIndex;
 	unsigned short m_matchedFontPointSize;
-	WP6FontDescriptorPacket *m_packet;
+	std::unique_ptr<WP6FontDescriptorPacket> m_packet;
 	// Unimplemented to prevent compiler from creating crasher ones
 	WP6CharacterGroup_FontFaceChangeSubGroup(const WP6CharacterGroup_FontFaceChangeSubGroup &);
 	WP6CharacterGroup_FontFaceChangeSubGroup &operator=(const WP6CharacterGroup_FontFaceChangeSubGroup &);

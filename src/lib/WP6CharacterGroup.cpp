@@ -94,7 +94,7 @@ void WP6CharacterGroup_CharacterShadingChangeSubGroup::parse(WP6Listener *listen
  *************************************************************************/
 
 WP6CharacterGroup_FontFaceChangeSubGroup::WP6CharacterGroup_FontFaceChangeSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned short sizeDeletable) :
-	m_oldMatchedPointSize(0), m_hash(0), m_matchedFontIndex(0), m_matchedFontPointSize(0), m_packet(0)
+	m_oldMatchedPointSize(0), m_hash(0), m_matchedFontIndex(0), m_matchedFontPointSize(0), m_packet()
 {
 	m_oldMatchedPointSize = readU16(input, encryption);
 	m_hash = readU16(input, encryption);
@@ -104,7 +104,7 @@ WP6CharacterGroup_FontFaceChangeSubGroup::WP6CharacterGroup_FontFaceChangeSubGro
 
 	if (sizeDeletable > 24)
 	{
-		m_packet = new WP6FontDescriptorPacket(input, encryption, 0, (unsigned)input->tell(), sizeDeletable);
+		m_packet.reset(new WP6FontDescriptorPacket(input, encryption, 0, (unsigned)input->tell(), sizeDeletable));
 
 		WPD_DEBUG_MSG(("WordPerfect: Character Group Font Face Change subgroup info (font name: %s)\n", m_packet->getFontName().cstr()));
 	}
@@ -112,7 +112,6 @@ WP6CharacterGroup_FontFaceChangeSubGroup::WP6CharacterGroup_FontFaceChangeSubGro
 
 WP6CharacterGroup_FontFaceChangeSubGroup::~WP6CharacterGroup_FontFaceChangeSubGroup()
 {
-	DELETEP(m_packet);
 }
 
 void WP6CharacterGroup_FontFaceChangeSubGroup::parse(WP6Listener *listener, const unsigned char /* numPrefixIDs */, unsigned short const *prefixIDs) const
