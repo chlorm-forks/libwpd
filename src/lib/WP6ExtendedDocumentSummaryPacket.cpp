@@ -33,7 +33,7 @@
 WP6ExtendedDocumentSummaryPacket::WP6ExtendedDocumentSummaryPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int /* id */, unsigned dataOffset, unsigned dataSize) :
 	WP6PrefixDataPacket(input, encryption),
 	m_dataSize(dataSize),
-	m_streamData(0),
+	m_streamData(),
 	m_stream()
 {
 	if (dataSize > 0)
@@ -42,8 +42,6 @@ WP6ExtendedDocumentSummaryPacket::WP6ExtendedDocumentSummaryPacket(librevenge::R
 
 WP6ExtendedDocumentSummaryPacket::~WP6ExtendedDocumentSummaryPacket()
 {
-	if (m_streamData)
-		delete [] m_streamData;
 }
 
 void WP6ExtendedDocumentSummaryPacket::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -52,11 +50,11 @@ void WP6ExtendedDocumentSummaryPacket::_readContents(librevenge::RVNGInputStream
 		return;
 	if (m_dataSize > ((std::numeric_limits<unsigned>::max)() / 2))
 		m_dataSize = ((std::numeric_limits<unsigned>::max)() / 2);
-	m_streamData = new unsigned char[m_dataSize];
+	m_streamData.reserve(m_dataSize);
 	for (unsigned i=0; i<(unsigned)m_dataSize; i++)
-		m_streamData[i] = readU8(input, encryption);
+		m_streamData.push_back(readU8(input, encryption));
 
-	m_stream.reset(new WPXMemoryInputStream(m_streamData, (unsigned long)m_dataSize));
+	m_stream.reset(new WPXMemoryInputStream(m_streamData.data(), (unsigned long)m_dataSize));
 }
 
 void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
