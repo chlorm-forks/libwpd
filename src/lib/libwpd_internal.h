@@ -54,6 +54,14 @@ void debugPrint(const char *format, ...) WPD_ATTRIBUTE_PRINTF(1, 2);
 
 #define WPD_NUM_ELEMENTS(array) sizeof(array)/sizeof(array[0])
 
+namespace libwpd
+{
+struct WPXDummyDeleter
+{
+	void operator()(void *) {}
+};
+}
+
 // add more of these as needed for byteswapping
 // (the 8-bit functions are just there to make things consistent)
 unsigned char readU8(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
