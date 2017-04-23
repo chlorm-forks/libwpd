@@ -26,6 +26,8 @@
 #ifndef WP1FOOTNOTEENDNOTEGROUP_H
 #define WP1FOOTNOTEENDNOTEGROUP_H
 
+#include <memory>
+
 #include "WP1VariableLengthGroup.h"
 #include "libwpd_internal.h"
 
@@ -44,7 +46,7 @@ private:
 	WP1FootnoteEndnoteGroup &operator=(const WP1FootnoteEndnoteGroup &);
 	WPXNoteType m_noteType;
 	unsigned short m_noteNumber;
-	WP1SubDocument *m_subDocument;
+	std::unique_ptr<WP1SubDocument> m_subDocument;
 };
 
 #endif /* WP1FOOTNOTEENDNOTEGROUP_H */

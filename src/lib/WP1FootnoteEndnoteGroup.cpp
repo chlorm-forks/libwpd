@@ -31,15 +31,13 @@ WP1FootnoteEndnoteGroup::WP1FootnoteEndnoteGroup(librevenge::RVNGInputStream *in
 	WP1VariableLengthGroup(group),
 	m_noteType(FOOTNOTE),
 	m_noteNumber(0),
-	m_subDocument(0)
+	m_subDocument()
 {
 	_read(input, encryption);
 }
 
 WP1FootnoteEndnoteGroup::~WP1FootnoteEndnoteGroup()
 {
-	if (m_subDocument)
-		delete m_subDocument;
 }
 
 void WP1FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -57,12 +55,12 @@ void WP1FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, 
 
 	WPD_DEBUG_MSG(("WP1SubDocument subDocumentSize = %u\n", tmpSubDocumentSize));
 	if (tmpSubDocumentSize)
-		m_subDocument = new WP1SubDocument(input, encryption, tmpSubDocumentSize);
+		m_subDocument.reset(new WP1SubDocument(input, encryption, tmpSubDocumentSize));
 }
 
 void WP1FootnoteEndnoteGroup::parse(WP1Listener *listener)
 {
 	WPD_DEBUG_MSG(("WordPerfect: handling a Footnote Endnote group\n"));
-	listener->insertNote(m_noteType, m_subDocument);
+	listener->insertNote(m_noteType, m_subDocument.get());
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */
