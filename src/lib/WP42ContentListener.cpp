@@ -54,7 +54,6 @@ WP42ContentListener::WP42ContentListener(std::list<WPXPageSpan> &pageList, std::
 
 WP42ContentListener::~WP42ContentListener()
 {
-	delete m_parseState;
 }
 
 
@@ -168,9 +167,8 @@ void WP42ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, 
                                              WPXTableList /* tableList */, unsigned /* nextTableIndice */)
 {
 	// save our old parsing state on our "stack"
-	WP42ContentParsingState *oldParseState = m_parseState;
-
-	m_parseState = new WP42ContentParsingState();
+	auto oldParseState = std::move(m_parseState);
+	m_parseState = std::unique_ptr<WP42ContentParsingState>(new WP42ContentParsingState());
 
 	if (subDocument)
 	{
@@ -192,8 +190,7 @@ void WP42ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, 
 #endif
 
 	// restore our old parsing state
-	delete m_parseState;
-	m_parseState = oldParseState;
+	m_parseState = std::move(oldParseState);
 }
 
 /****************************************

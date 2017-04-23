@@ -28,6 +28,8 @@
 #ifndef WP42CONTENTLISTENER_H
 #define WP42CONTENTLISTENER_H
 
+#include <memory>
+
 #include "WP42Listener.h"
 #include "WP42SubDocument.h"
 #include "WPXContentListener.h"
@@ -83,7 +85,7 @@ protected:
 private:
 	WP42ContentListener(const WP42ContentListener &);
 	WP42ContentListener &operator=(const WP42ContentListener &);
-	WP42ContentParsingState *m_parseState;
+	std::unique_ptr<WP42ContentParsingState> m_parseState;
 	std::vector<WP42SubDocument *> &m_subDocuments;
 };
 
