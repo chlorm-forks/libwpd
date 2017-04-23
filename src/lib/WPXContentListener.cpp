@@ -136,7 +136,6 @@ WPXContentListener::WPXContentListener(std::list<WPXPageSpan> &pageList, libreve
 
 WPXContentListener::~WPXContentListener()
 {
-	DELETEP(m_ps);
 }
 
 void WPXContentListener::startDocument()
@@ -1200,8 +1199,8 @@ void WPXContentListener::handleSubDocument(const WPXSubDocument *subDocument, WP
                                            WPXTableList tableList, unsigned nextTableIndice)
 {
 	// save our old parsing state on our "stack"
-	WPXContentParsingState *oldPS = m_ps;
-	m_ps = new WPXContentParsingState();
+	auto oldPS = std::move(m_ps);
+	m_ps = std::unique_ptr<WPXContentParsingState>(new WPXContentParsingState());
 	// BEGIN: copy page properties into the new parsing state
 	m_ps->m_pageFormWidth = oldPS->m_pageFormWidth;
 	m_ps->m_pageMarginLeft = oldPS->m_pageMarginLeft;
@@ -1240,8 +1239,7 @@ void WPXContentListener::handleSubDocument(const WPXSubDocument *subDocument, WP
 	setUndoOn(oldIsUndoOn);
 	if (m_ps->m_subDocumentType == WPX_SUBDOCUMENT_TEXT_BOX)
 		_closeSection();
-	delete m_ps;
-	m_ps = oldPS;
+	m_ps = std::move(oldPS);
 }
 
 void WPXContentListener::insertBreak(const unsigned char breakType)

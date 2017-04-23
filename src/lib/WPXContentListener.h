@@ -31,6 +31,7 @@
 #include "WPXSubDocument.h"
 #include "WPXPageSpan.h"
 #include "WPXListener.h"
+#include <memory>
 #include <vector>
 #include <list>
 #include <set>
@@ -157,7 +158,7 @@ protected:
 	void lineSpacingChange(const double lineSpacing);
 	void justificationChange(const unsigned char justification);
 
-	WPXContentParsingState *m_ps; // parse state
+	std::unique_ptr<WPXContentParsingState> m_ps; // parse state
 	librevenge::RVNGTextInterface *m_documentInterface;
 	librevenge::RVNGPropertyList m_metaData;
 
