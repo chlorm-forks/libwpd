@@ -119,7 +119,7 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 	else
 	{
 		m_isRelative = true;
-		m_tabAdjustValue = (double)((double)tabAdjustValue/(double)WPX_NUM_WPUS_PER_INCH);
+		m_tabAdjustValue = double(tabAdjustValue)/WPX_NUM_WPUS_PER_INCH;
 	}
 	unsigned char repetitionCount = 0;
 	WPXTabStop tabStop;
@@ -197,8 +197,7 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 		{
 			if (tabPosition != 0xFFFF)
 			{
-				tabStop.m_position = (double)((double)tabPosition/(double)WPX_NUM_WPUS_PER_INCH) -
-				                     m_tabAdjustValue;
+				tabStop.m_position = double(tabPosition)/WPX_NUM_WPUS_PER_INCH - m_tabAdjustValue;
 				m_tabStops.push_back(tabStop);
 				m_usePreWP9LeaderMethods.push_back(usePreWP9LeaderMethod);
 			}
@@ -208,7 +207,7 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 			m_tabStops.reserve(m_tabStops.capacity() + repetitionCount);
 			for (int k=0; k<repetitionCount; k++)
 			{
-				tabStop.m_position += (double)((double)tabPosition/(double)WPX_NUM_WPUS_PER_INCH);
+				tabStop.m_position += double(tabPosition)/WPX_NUM_WPUS_PER_INCH;
 				m_tabStops.push_back(tabStop);
 				m_usePreWP9LeaderMethods.push_back(usePreWP9LeaderMethod);
 			}
@@ -305,7 +304,7 @@ WP6ParagraphGroup_SpacingAfterParagraphSubGroup::WP6ParagraphGroup_SpacingAfterP
 	if (m_sizeNonDeletable == (unsigned short)0x06) // Let us use the optional information that is in WPUs
 	{
 		unsigned short spacingAfterAbsolute = readU16(input, encryption);
-		m_spacingAfterParagraphAbsolute = (double)((double)spacingAfterAbsolute / (double)WPX_NUM_WPUS_PER_INCH);
+		m_spacingAfterParagraphAbsolute = double(spacingAfterAbsolute) / WPX_NUM_WPUS_PER_INCH;
 		WPD_DEBUG_MSG(("WordPerfect: spacing after paragraph absolute: %i\n", spacingAfterAbsolute));
 	}
 }
