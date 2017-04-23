@@ -28,6 +28,8 @@
 #ifndef WP1CONTENTLISTENER_H
 #define WP1CONTENTLISTENER_H
 
+#include <memory>
+
 #include "WP1Listener.h"
 #include "WPXContentListener.h"
 
@@ -107,7 +109,7 @@ protected:
 	void _changeList() {}
 
 private:
-	WP1ContentParsingState *m_parseState;
+	std::unique_ptr<WP1ContentParsingState> m_parseState;
 	std::vector<WP1SubDocument *> &m_subDocuments;
 	WP1ContentListener(const WP1ContentListener &);
 	WP1ContentListener &operator=(WP1ContentListener &);
