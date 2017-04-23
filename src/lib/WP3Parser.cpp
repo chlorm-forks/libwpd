@@ -47,8 +47,6 @@ WP3Parser::~WP3Parser()
 
 WP3ResourceFork *WP3Parser::getResourceFork(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
 {
-	WP3ResourceFork *resourceFork = 0;
-
 	// Certain WP2 documents actually don't contain resource fork, so check for its existence
 	if (!getHeader() || getHeader()->getDocumentOffset() <= 0x10)
 	{
@@ -56,16 +54,7 @@ WP3ResourceFork *WP3Parser::getResourceFork(librevenge::RVNGInputStream *input, 
 		return 0;
 	}
 
-	try
-	{
-		resourceFork = new WP3ResourceFork(input, encryption);
-		return resourceFork;
-	}
-	catch (FileException)
-	{
-		DELETEP(resourceFork);
-		throw FileException();
-	}
+	return new WP3ResourceFork(input, encryption);
 }
 
 void WP3Parser::parse(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP3Listener *listener)
