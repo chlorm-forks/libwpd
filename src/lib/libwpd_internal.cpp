@@ -1295,9 +1295,7 @@ int _extractDisplayReferenceNumberFromBuf(const librevenge::RVNGString &buf, con
 		const char *const last = first + buf.size();
 		namespace qi = boost::spirit::qi;
 		const bool succeed = qi::parse(first, last, qi::int_, currentSum);
-		if (!succeed || first != last)
-			throw ParseException();
-		return currentSum;
+		return succeed ? currentSum : 0;
 	}
 
 	return 1;
