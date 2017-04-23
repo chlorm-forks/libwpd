@@ -34,7 +34,7 @@ WP6ExtendedDocumentSummaryPacket::WP6ExtendedDocumentSummaryPacket(librevenge::R
 	WP6PrefixDataPacket(input, encryption),
 	m_dataSize(dataSize),
 	m_streamData(0),
-	m_stream(0)
+	m_stream()
 {
 	if (dataSize > 0)
 		_read(input, encryption, dataOffset, dataSize);
@@ -42,8 +42,6 @@ WP6ExtendedDocumentSummaryPacket::WP6ExtendedDocumentSummaryPacket(librevenge::R
 
 WP6ExtendedDocumentSummaryPacket::~WP6ExtendedDocumentSummaryPacket()
 {
-	if (m_stream)
-		DELETEP(m_stream);
 	if (m_streamData)
 		delete [] m_streamData;
 }
@@ -58,7 +56,7 @@ void WP6ExtendedDocumentSummaryPacket::_readContents(librevenge::RVNGInputStream
 	for (unsigned i=0; i<(unsigned)m_dataSize; i++)
 		m_streamData[i] = readU8(input, encryption);
 
-	m_stream = new WPXMemoryInputStream(m_streamData, (unsigned long)m_dataSize);
+	m_stream.reset(new WPXMemoryInputStream(m_streamData, (unsigned long)m_dataSize));
 }
 
 void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
@@ -71,7 +69,7 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 	{
 		try
 		{
-			groupLength = readU16(m_stream, 0);
+			groupLength = readU16(m_stream.get(), 0);
 		}
 		catch (FileException)
 		{
@@ -79,7 +77,7 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		}
 		if ((groupLength == 0) || m_stream->isEnd())
 			return;
-		unsigned short tagID = readU16(m_stream, 0);
+		unsigned short tagID = readU16(m_stream.get(), 0);
 		if (m_stream->isEnd())
 			return;
 		if (m_stream->seek(2, librevenge::RVNG_SEEK_CUR))
@@ -88,8 +86,8 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		librevenge::RVNGString name;
 		unsigned short wpChar = 0;
 		if (!m_stream->isEnd())
-			wpChar = readU16(m_stream, 0);
-		for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream, 0))
+			wpChar = readU16(m_stream.get(), 0);
+		for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), 0))
 		{
 			unsigned char character = (unsigned char)(wpChar & 0x00FF);
 			unsigned char characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);
@@ -108,15 +106,15 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		{
 			try
 			{
-				unsigned short year = readU16(m_stream, 0);
-				unsigned char month = readU8(m_stream, 0);
-				unsigned char day = readU8(m_stream, 0);
-				unsigned char hour = readU8(m_stream, 0);
-				unsigned char minute = readU8(m_stream, 0);
-				unsigned char second = readU8(m_stream, 0);
-				unsigned char dayOfWeek = readU8(m_stream, 0);
-				unsigned char timeZone = readU8(m_stream, 0);
-				unsigned char unused = readU8(m_stream, 0);
+				unsigned short year = readU16(m_stream.get(), 0);
+				unsigned char month = readU8(m_stream.get(), 0);
+				unsigned char day = readU8(m_stream.get(), 0);
+				unsigned char hour = readU8(m_stream.get(), 0);
+				unsigned char minute = readU8(m_stream.get(), 0);
+				unsigned char second = readU8(m_stream.get(), 0);
+				unsigned char dayOfWeek = readU8(m_stream.get(), 0);
+				unsigned char timeZone = readU8(m_stream.get(), 0);
+				unsigned char unused = readU8(m_stream.get(), 0);
 				if (month > 0 && day > 0 && year >= 1900)
 					listener->setDate(tagID, year, month, day, hour, minute, second, dayOfWeek, timeZone, unused);
 			}
@@ -129,8 +127,8 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		{
 			librevenge::RVNGString data;
 			if (!m_stream->isEnd())
-				wpChar = readU16(m_stream, 0);
-			for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream, 0))
+				wpChar = readU16(m_stream.get(), 0);
+			for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), 0))
 			{
 				unsigned char character = (unsigned char)(wpChar & 0x00FF);
 				unsigned char characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);

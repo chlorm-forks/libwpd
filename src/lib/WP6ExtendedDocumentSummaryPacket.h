@@ -26,6 +26,9 @@
 
 #ifndef WP6EXTENDEDDOCUMENTSUMMARYPACKET_H
 #define WP6EXTENDEDDOCUMENTSUMMARYPACKET_H
+
+#include <memory>
+
 #include "WP6PrefixDataPacket.h"
 #include "WP6FileStructure.h"
 #include "WP6Listener.h"
@@ -44,7 +47,7 @@ private:
 	WP6ExtendedDocumentSummaryPacket &operator=(const WP6ExtendedDocumentSummaryPacket &);
 	unsigned m_dataSize;
 	unsigned char *m_streamData;
-	mutable WPXMemoryInputStream *m_stream;
+	mutable std::unique_ptr<WPXMemoryInputStream> m_stream;
 
 };
 #endif /* WP6EXTENDEDDOCUMENTSUMMARYPACKET_H */
