@@ -126,6 +126,7 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 	unsigned char numTabStops = readU8(input, encryption);
 	bool usePreWP9LeaderMethod = false;
 	unsigned char tabType = 0;
+	m_tabStops.reserve(numTabStops);
 	for (int i = 0; i < numTabStops; i++)
 	{
 		tabType = readU8(input, encryption);
@@ -204,6 +205,7 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 		}
 		else
 		{
+			m_tabStops.reserve(m_tabStops.capacity() + repetitionCount);
 			for (int k=0; k<repetitionCount; k++)
 			{
 				tabStop.m_position += (double)((double)tabPosition/(double)WPX_NUM_WPUS_PER_INCH);
@@ -213,6 +215,7 @@ WP6ParagraphGroup_TabSetSubGroup::WP6ParagraphGroup_TabSetSubGroup(librevenge::R
 			repetitionCount = 0;
 		}
 	}
+	m_tabStops.shrink_to_fit();
 }
 
 WP6ParagraphGroup_TabSetSubGroup::~WP6ParagraphGroup_TabSetSubGroup()
