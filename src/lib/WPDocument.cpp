@@ -178,7 +178,7 @@ WPDAPI WPDPasswordMatch WPDocument::verifyPassword(librevenge::RVNGInputStream *
 			return WPD_PASSWORD_MATCH_NONE;
 	}
 	else
-		document.reset(input);
+		document.reset(input, libwpd::WPXDummyDeleter());
 
 	std::unique_ptr<WPXHeader> header(WPXHeader::constructHeader(document.get(), 0));
 	if (header)
