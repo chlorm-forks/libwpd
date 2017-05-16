@@ -56,7 +56,7 @@ WP6PrefixData::WP6PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 		if (prefixDataPacket)
 		{
 			m_prefixDataPacketHash[i] = prefixDataPacket;
-			m_prefixDataPacketTypeHash.insert(::std::map<int, WP6PrefixDataPacket *>::value_type(prefixIndiceArray[i-1]->getType(), prefixDataPacket));
+			m_prefixDataPacketTypeHash.insert(std::map<int, WP6PrefixDataPacket *>::value_type(prefixIndiceArray[i-1]->getType(), prefixDataPacket));
 			if (dynamic_cast<WP6DefaultInitialFontPacket *>(prefixDataPacket))
 				m_defaultInitialFontPID = i;
 		}
