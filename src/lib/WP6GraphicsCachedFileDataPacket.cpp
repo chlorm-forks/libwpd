@@ -33,8 +33,8 @@
 WP6GraphicsCachedFileDataPacket::WP6GraphicsCachedFileDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int  id, unsigned dataOffset, unsigned dataSize):
 	WP6PrefixDataPacket(input, encryption),
 	m_id(id),
-	m_object(0),
-	m_data(0)
+	m_object(nullptr),
+	m_data(nullptr)
 {
 	_read(input, encryption, dataOffset, dataSize);
 }
@@ -43,10 +43,10 @@ WP6GraphicsCachedFileDataPacket::~WP6GraphicsCachedFileDataPacket()
 {
 	if (m_data)
 		delete [] m_data;
-	m_data = 0;
+	m_data = nullptr;
 	if (m_object)
 		delete m_object;
-	m_object = 0;
+	m_object = nullptr;
 }
 
 void WP6GraphicsCachedFileDataPacket::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)

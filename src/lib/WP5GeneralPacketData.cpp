@@ -51,7 +51,7 @@ WP5GeneralPacketData *WP5GeneralPacketData::constructGeneralPacketData(libreveng
 		return new WP5GraphicsInformationPacket(input, encryption, packetIndex->getID(), packetIndex->getDataOffset(),
 		                                        packetIndex->getDataSize());
 	default:
-		return 0;
+		return nullptr;
 	}
 }
 

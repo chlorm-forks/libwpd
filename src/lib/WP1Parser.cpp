@@ -36,7 +36,7 @@
 #include "WP1ContentListener.h"
 
 WP1Parser::WP1Parser(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
-	WPXParser(input, 0, encryption)
+	WPXParser(input, nullptr, encryption)
 {
 }
 
@@ -253,14 +253,14 @@ void WP1Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfac
 	{
 		WP1StylesListener stylesListener(pageList, subDocuments);
 		stylesListener.startSubDocument();
-		parseDocument(input, 0, &stylesListener);
+		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		input->seek(0, librevenge::RVNG_SEEK_SET);
 
 		WP1ContentListener listener(pageList, subDocuments, documentInterface);
 		listener.startSubDocument();
-		parseDocument(input, 0, &listener);
+		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
 
 		for (std::vector<WP1SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)

@@ -32,8 +32,8 @@
 
 WP6GeneralTextPacket::WP6GeneralTextPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int /* id */, unsigned dataOffset, unsigned dataSize):
 	WP6PrefixDataPacket(input, encryption),
-	m_subDocument(0),
-	m_streamData(0)
+	m_subDocument(nullptr),
+	m_streamData(nullptr)
 {
 	_read(input, encryption, dataOffset, dataSize);
 }

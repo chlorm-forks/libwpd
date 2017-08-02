@@ -73,9 +73,9 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		return printUsage();
 
-	char *szInputFile = 0;
+	char *szInputFile = nullptr;
 	bool isInfo = false;
-	char *password = 0;
+	char *password = nullptr;
 
 	for (int i = 1; i < argc; i++)
 	{

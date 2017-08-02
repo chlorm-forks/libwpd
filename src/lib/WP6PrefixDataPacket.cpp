@@ -49,7 +49,7 @@ WP6PrefixDataPacket::WP6PrefixDataPacket(librevenge::RVNGInputStream * /* input 
 
 WP6PrefixDataPacket *WP6PrefixDataPacket::constructPrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP6PrefixIndice *prefixIndice)
 {
-	WP6PrefixDataPacket *tmpPacket = 0;
+	WP6PrefixDataPacket *tmpPacket = nullptr;
 	try
 	{
 		switch (prefixIndice->getType())
@@ -110,7 +110,7 @@ WP6PrefixDataPacket *WP6PrefixDataPacket::constructPrefixDataPacket(librevenge::
 	{
 		if (tmpPacket)
 			delete tmpPacket;
-		tmpPacket = 0;
+		tmpPacket = nullptr;
 	}
 	return tmpPacket;
 }

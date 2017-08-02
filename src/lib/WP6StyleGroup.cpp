@@ -43,7 +43,7 @@ void WP6StyleGroup_GlobalOnSubGroup::parse(WP6Listener *listener, const unsigned
 
 WP6StyleGroup::WP6StyleGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP6VariableLengthGroup(),
-	m_subGroupData(0)
+	m_subGroupData(nullptr)
 {
 	_read(input, encryption);
 }

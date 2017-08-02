@@ -41,7 +41,7 @@ WP6StylesListener::WP6StylesListener(std::list<WPXPageSpan> &pageList, WPXTableL
 	WPXStylesListener(pageList),
 	m_currentPage(),
 	m_tableList(tableList),
-	m_currentTable(0),
+	m_currentTable(nullptr),
 	m_tempMarginLeft(1.0),
 	m_tempMarginRight(1.0),
 	m_currentPageHasContent(false),
@@ -219,8 +219,8 @@ void WP6StylesListener::headerFooterGroup(const unsigned char headerFooterType, 
 
 			WPXTableList tableList;
 			m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence,
-			                              ((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : 0), tableList);
-			_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : 0), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
+			                              ((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), tableList);
+			_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 		}
 		m_currentPageHasContent = tempCurrentPageHasContent;
 	}
@@ -290,7 +290,7 @@ void WP6StylesListener::endTable()
 	if (!isUndoOn())
 	{
 		m_isTableDefined = false;
-		m_currentTable = 0;
+		m_currentTable = nullptr;
 	}
 }
 
@@ -320,7 +320,7 @@ void WP6StylesListener::noteOn(const unsigned short textPID)
 	if (!isUndoOn())
 	{
 		m_currentPageHasContent = true;
-		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : 0), WPX_SUBDOCUMENT_NOTE, m_tableList);
+		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), WPX_SUBDOCUMENT_NOTE, m_tableList);
 	}
 }
 
@@ -338,7 +338,7 @@ void WP6StylesListener::commentAnnotation(const unsigned short textPID)
 	if (!isUndoOn())
 	{
 		m_currentPageHasContent = true;
-		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : 0), WPX_SUBDOCUMENT_COMMENT_ANNOTATION, m_tableList);
+		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), WPX_SUBDOCUMENT_COMMENT_ANNOTATION, m_tableList);
 	}
 }
 

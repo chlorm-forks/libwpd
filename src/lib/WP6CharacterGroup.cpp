@@ -276,7 +276,7 @@ void WP6CharacterGroup_CommentSubGroup::parse(WP6Listener *listener, const unsig
 
 WP6CharacterGroup::WP6CharacterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP6VariableLengthGroup(),
-	m_subGroupData(0)
+	m_subGroupData(nullptr)
 {
 	_read(input, encryption);
 }

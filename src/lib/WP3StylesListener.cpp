@@ -36,7 +36,7 @@ WP3StylesListener::WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableL
 	WPXStylesListener(pageList),
 	m_currentPage(WPXPageSpan()),
 	m_tableList(tableList),
-	m_currentTable(0),
+	m_currentTable(nullptr),
 	m_tempMarginLeft(1.0),
 	m_tempMarginRight(1.0),
 	m_currentPageHasContent(false),
@@ -222,7 +222,7 @@ void WP3StylesListener::headerFooterGroup(const unsigned char headerFooterType, 
 				_handleSubDocument(subDocument, WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 			}
 			else
-				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, 0, tableList);
+				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);
 		}
 		m_currentPageHasContent = tempCurrentPageHasContent;
 	}

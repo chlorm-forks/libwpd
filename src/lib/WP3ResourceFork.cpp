@@ -155,13 +155,13 @@ const WP3Resource *WP3ResourceFork::getResource(unsigned type, unsigned ID) cons
 	    = m_resourcesTypeMultimap.equal_range(type);
 
 	if (tempPair.first == m_resourcesTypeMultimap.end())
-		return NULL;
+		return nullptr;
 
 	for (std::multimap<unsigned, WP3Resource *>::const_iterator iter = tempPair.first; iter != tempPair.second; ++iter)
 		if (iter->second->getResourceReferenceID() == ID)
 			return iter->second;
 
-	return NULL;
+	return nullptr;
 }
 
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

@@ -1044,7 +1044,7 @@ void WPXContentListener::_closeTableRow()
 				// m_ps->m_currentTableCol++;
 				// Fill the table row untill the end with empty cells
 				RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
-				_openTableCell(1, 1, 0xFF, 0, 0, &tmpCellBorderColor, TOP);
+				_openTableCell(1, 1, 0xFF, nullptr, nullptr, &tmpCellBorderColor, TOP);
 				_closeTableCell();
 			}
 			else

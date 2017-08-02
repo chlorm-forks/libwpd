@@ -38,6 +38,6 @@ void WP3SubDocument::parse(WP3Listener *listener) const
 	if (!tmpStream)
 		return;
 	tmpStream->seek(0, librevenge::RVNG_SEEK_SET);
-	WP3Parser::parseDocument(tmpStream, 0, listener);
+	WP3Parser::parseDocument(tmpStream, nullptr, listener);
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

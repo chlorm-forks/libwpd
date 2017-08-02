@@ -28,7 +28,7 @@
 #include <string.h>
 
 WPXEncryption::WPXEncryption(const char *password, const unsigned long encryptionStartOffset) :
-	m_buffer(NULL),
+	m_buffer(nullptr),
 	m_password(),
 	m_encryptionStartOffset(encryptionStartOffset),
 	m_encryptionMaskBase(0)
@@ -68,7 +68,7 @@ const unsigned char *WPXEncryption::readAndDecrypt(librevenge::RVNGInputStream *
 
 	unsigned long readStartPosition = input->tell();
 	if (readStartPosition == (unsigned long)-1)
-		return 0;
+		return nullptr;
 	const unsigned char *encryptedBuffer = input->read(numBytes, numBytesRead);
 	m_buffer.reset(new unsigned char[numBytesRead]);
 	for (unsigned long i=0; i<numBytesRead; i++)

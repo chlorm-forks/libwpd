@@ -121,7 +121,7 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	WP5PrefixData *prefixData = 0;
+	WP5PrefixData *prefixData = nullptr;
 	std::vector<WP5SubDocument *> subDocuments;
 
 	try
@@ -221,14 +221,14 @@ void WP5Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfac
 	{
 		WP5StylesListener stylesListener(pageList, tableList, subDocuments);
 		stylesListener.startSubDocument();
-		parseDocument(input, 0, &stylesListener);
+		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		input->seek(0, librevenge::RVNG_SEEK_SET);
 
 		WP5ContentListener listener(pageList, subDocuments, documentInterface);
 		listener.startSubDocument();
-		parseDocument(input, 0, &listener);
+		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
 
 		for (std::vector<WP5SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)

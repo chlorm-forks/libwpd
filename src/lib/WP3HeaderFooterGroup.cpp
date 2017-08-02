@@ -30,7 +30,7 @@
 WP3HeaderFooterGroup::WP3HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP3VariableLengthGroup(),
 	m_definition(0),
-	m_subDocument(0)
+	m_subDocument(nullptr)
 {
 	_read(input, encryption);
 }

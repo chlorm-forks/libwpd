@@ -63,7 +63,7 @@ WP3SingleByteFunction *WP3SingleByteFunction::constructSingleByteFunction(librev
 
 	default:
 		// should not happen
-		return 0;
+		return nullptr;
 	}
 }
 

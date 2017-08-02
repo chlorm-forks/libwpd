@@ -49,7 +49,7 @@ WP6VariableLengthGroup::WP6VariableLengthGroup() :
 	m_size(0),
 	m_flags(0),
 	m_numPrefixIDs(0),
-	m_prefixIDs(0),
+	m_prefixIDs(nullptr),
 	m_sizeNonDeletable(0),
 	m_sizeDeletable(0)
 {
@@ -157,7 +157,7 @@ void WP6VariableLengthGroup::_read(librevenge::RVNGInputStream *input, WPXEncryp
 	else
 	{
 		m_numPrefixIDs = 0;
-		m_prefixIDs = 0;
+		m_prefixIDs = nullptr;
 	}
 
 	m_sizeNonDeletable = readU16(input, encryption);

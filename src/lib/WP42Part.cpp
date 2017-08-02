@@ -42,7 +42,7 @@ WP42Part *WP42Part::constructPart(librevenge::RVNGInputStream *input, WPXEncrypt
 	if (((unsigned char)0xC0 > readVal) || ((unsigned char)0xFE < readVal))
 	{
 		WPD_DEBUG_MSG(("WordPerfect: Returning 0 from constructPart\n"));
-		return 0;
+		return nullptr;
 	}
 
 	WPD_DEBUG_MSG(("WordPerfect: constructMultiByteFunctionGroup(input, val)\n"));

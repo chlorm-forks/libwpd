@@ -287,7 +287,7 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 	        (getSubGroup() != WP6_BOX_GROUP_PAGE_ANCHORED_BOX))  // Don't handle Graphics Rule for the while
 		return;
 
-	const WP6GraphicsBoxStylePacket *gbsPacket = 0;
+	const WP6GraphicsBoxStylePacket *gbsPacket = nullptr;
 	for (int j=0; j<getNumPrefixIDs(); j++)
 		if ((gbsPacket = dynamic_cast<const WP6GraphicsBoxStylePacket *>(listener->getPrefixDataPacket(getPrefixIDs()[j]))))
 			break;
@@ -308,7 +308,7 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 
 	std::vector<unsigned> graphicsDataIds;
 	std::vector<unsigned>::iterator gdiIter;
-	WP6SubDocument *subDocument = 0;
+	WP6SubDocument *subDocument = nullptr;
 
 	// Get the box content
 	for (int i=0; i<getNumPrefixIDs(); i++)

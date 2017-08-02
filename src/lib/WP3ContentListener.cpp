@@ -251,7 +251,7 @@ void WP3ContentListener::insertCell()
 
 		RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
 		_openTableCell((unsigned char)m_parseState->m_colSpan, (unsigned char)m_parseState->m_rowSpan, 0x00000000,
-		               m_parseState->m_cellFillColor.get(), 0, &tmpCellBorderColor, TOP);
+		               m_parseState->m_cellFillColor.get(), nullptr, &tmpCellBorderColor, TOP);
 		m_parseState->m_cellFillColor.reset();
 
 		m_ps->m_isCellWithoutParagraph = true;

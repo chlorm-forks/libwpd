@@ -67,7 +67,7 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 	{
 		try
 		{
-			groupLength = readU16(m_stream.get(), 0);
+			groupLength = readU16(m_stream.get(), nullptr);
 		}
 		catch (FileException)
 		{
@@ -75,7 +75,7 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		}
 		if ((groupLength == 0) || m_stream->isEnd())
 			return;
-		unsigned short tagID = readU16(m_stream.get(), 0);
+		unsigned short tagID = readU16(m_stream.get(), nullptr);
 		if (m_stream->isEnd())
 			return;
 		if (m_stream->seek(2, librevenge::RVNG_SEEK_CUR))
@@ -84,8 +84,8 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		librevenge::RVNGString name;
 		unsigned short wpChar = 0;
 		if (!m_stream->isEnd())
-			wpChar = readU16(m_stream.get(), 0);
-		for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), 0))
+			wpChar = readU16(m_stream.get(), nullptr);
+		for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), nullptr))
 		{
 			unsigned char character = (unsigned char)(wpChar & 0x00FF);
 			unsigned char characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);
@@ -104,15 +104,15 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		{
 			try
 			{
-				unsigned short year = readU16(m_stream.get(), 0);
-				unsigned char month = readU8(m_stream.get(), 0);
-				unsigned char day = readU8(m_stream.get(), 0);
-				unsigned char hour = readU8(m_stream.get(), 0);
-				unsigned char minute = readU8(m_stream.get(), 0);
-				unsigned char second = readU8(m_stream.get(), 0);
-				unsigned char dayOfWeek = readU8(m_stream.get(), 0);
-				unsigned char timeZone = readU8(m_stream.get(), 0);
-				unsigned char unused = readU8(m_stream.get(), 0);
+				unsigned short year = readU16(m_stream.get(), nullptr);
+				unsigned char month = readU8(m_stream.get(), nullptr);
+				unsigned char day = readU8(m_stream.get(), nullptr);
+				unsigned char hour = readU8(m_stream.get(), nullptr);
+				unsigned char minute = readU8(m_stream.get(), nullptr);
+				unsigned char second = readU8(m_stream.get(), nullptr);
+				unsigned char dayOfWeek = readU8(m_stream.get(), nullptr);
+				unsigned char timeZone = readU8(m_stream.get(), nullptr);
+				unsigned char unused = readU8(m_stream.get(), nullptr);
 				if (month > 0 && day > 0 && year >= 1900)
 					listener->setDate(tagID, year, month, day, hour, minute, second, dayOfWeek, timeZone, unused);
 			}
@@ -125,8 +125,8 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 		{
 			librevenge::RVNGString data;
 			if (!m_stream->isEnd())
-				wpChar = readU16(m_stream.get(), 0);
-			for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), 0))
+				wpChar = readU16(m_stream.get(), nullptr);
+			for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), nullptr))
 			{
 				unsigned char character = (unsigned char)(wpChar & 0x00FF);
 				unsigned char characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);

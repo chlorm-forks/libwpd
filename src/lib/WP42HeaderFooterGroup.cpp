@@ -30,7 +30,7 @@
 WP42HeaderFooterGroup::WP42HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group) :
 	WP42MultiByteFunctionGroup(group),
 	m_definition(0),
-	m_subDocument(0)
+	m_subDocument(nullptr)
 {
 	_read(input, encryption);
 }

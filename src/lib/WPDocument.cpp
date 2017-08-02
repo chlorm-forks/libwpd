@@ -84,7 +84,7 @@ WPDAPI WPDConfidence WPDocument::isFileFormatSupported(librevenge::RVNGInputStre
 		document.reset(input, libwpd::WPXDummyDeleter());
 
 	WPDConfidence confidence = WPD_CONFIDENCE_NONE;
-	std::unique_ptr<WPXHeader> header(WPXHeader::constructHeader(document.get(), 0));
+	std::unique_ptr<WPXHeader> header(WPXHeader::constructHeader(document.get(), nullptr));
 	if (header)
 	{
 		switch (header->getFileType())
@@ -130,9 +130,9 @@ WPDAPI WPDConfidence WPDocument::isFileFormatSupported(librevenge::RVNGInputStre
 		}
 	}
 	else
-		confidence = WP1Heuristics::isWP1FileFormat(input, 0);
+		confidence = WP1Heuristics::isWP1FileFormat(input, nullptr);
 	if (confidence != WPD_CONFIDENCE_EXCELLENT && confidence != WPD_CONFIDENCE_SUPPORTED_ENCRYPTION)
-		confidence = (std::max)(confidence, WP42Heuristics::isWP42FileFormat(input, 0));
+		confidence = (std::max)(confidence, WP42Heuristics::isWP42FileFormat(input, nullptr));
 
 	return confidence;
 }
@@ -180,7 +180,7 @@ WPDAPI WPDPasswordMatch WPDocument::verifyPassword(librevenge::RVNGInputStream *
 	else
 		document.reset(input, libwpd::WPXDummyDeleter());
 
-	std::unique_ptr<WPXHeader> header(WPXHeader::constructHeader(document.get(), 0));
+	std::unique_ptr<WPXHeader> header(WPXHeader::constructHeader(document.get(), nullptr));
 	if (header)
 	{
 		if (header->getDocumentEncryption())
@@ -246,7 +246,7 @@ WPDAPI WPDResult WPDocument::parse(librevenge::RVNGInputStream *input, libreveng
 		document.reset(input, libwpd::WPXDummyDeleter());
 
 	std::unique_ptr<WPXEncryption> encryption;
-	std::unique_ptr<WPXHeader> header(WPXHeader::constructHeader(document.get(), 0));
+	std::unique_ptr<WPXHeader> header(WPXHeader::constructHeader(document.get(), nullptr));
 	std::unique_ptr<WPXParser> parser;
 
 	if (header)
@@ -368,19 +368,19 @@ WPDAPI WPDResult WPDocument::parseSubDocument(librevenge::RVNGInputStream *input
 	switch (fileFormat)
 	{
 	case WPD_FILE_FORMAT_WP6:
-		parser.reset(new WP6Parser(input, 0, 0));
+		parser.reset(new WP6Parser(input, nullptr, nullptr));
 		break;
 	case WPD_FILE_FORMAT_WP5:
-		parser.reset(new WP5Parser(input, 0, 0));
+		parser.reset(new WP5Parser(input, nullptr, nullptr));
 		break;
 	case WPD_FILE_FORMAT_WP42:
-		parser.reset(new WP42Parser(input, 0));
+		parser.reset(new WP42Parser(input, nullptr));
 		break;
 	case WPD_FILE_FORMAT_WP3:
-		parser.reset(new WP3Parser(input, 0, 0));
+		parser.reset(new WP3Parser(input, nullptr, nullptr));
 		break;
 	case WPD_FILE_FORMAT_WP1:
-		parser.reset(new WP1Parser(input, 0));
+		parser.reset(new WP1Parser(input, nullptr));
 		break;
 	case WPD_FILE_FORMAT_UNKNOWN:
 	default:

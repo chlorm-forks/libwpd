@@ -37,7 +37,7 @@
 #include "WP6DefaultInitialFontPacket.h"
 
 WP6Listener::WP6Listener() :
-	m_prefixData(0)
+	m_prefixData(nullptr)
 {
 }
 
@@ -46,7 +46,7 @@ const WP6PrefixDataPacket *WP6Listener::getPrefixDataPacket(const int prefixID) 
 	if (m_prefixData)
 		return m_prefixData->getPrefixDataPacket(prefixID);
 	else
-		return 0;
+		return nullptr;
 }
 
 librevenge::RVNGString WP6Listener::getFontNameForPID(const int prefixID) const

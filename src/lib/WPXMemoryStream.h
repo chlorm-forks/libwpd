@@ -42,7 +42,7 @@ public:
 	}
 	const char *subStreamName(unsigned)
 	{
-		return 0;
+		return nullptr;
 	}
 	bool existsSubStream(const char *)
 	{
@@ -50,11 +50,11 @@ public:
 	}
 	librevenge::RVNGInputStream *getSubStreamByName(const char *)
 	{
-		return 0;
+		return nullptr;
 	}
 	librevenge::RVNGInputStream *getSubStreamById(unsigned)
 	{
-		return 0;
+		return nullptr;
 	}
 	const unsigned char *read(unsigned long numBytes, unsigned long &numBytesRead);
 	int seek(long offset, librevenge::RVNG_SEEK_TYPE seekType);

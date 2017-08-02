@@ -39,11 +39,11 @@ WPDPasswordMatch WP1Heuristics::verifyPassword(librevenge::RVNGInputStream *inpu
 		return WPD_PASSWORD_MATCH_DONTKNOW;
 
 	input->seek(0, librevenge::RVNG_SEEK_SET);
-	if (readU8(input, 0) == 0xFE && readU8(input, 0) == 0xFF &&
-	        readU8(input, 0) == 0x61 && readU8(input, 0) == 0x61)
+	if (readU8(input, nullptr) == 0xFE && readU8(input, nullptr) == 0xFF &&
+	        readU8(input, nullptr) == 0x61 && readU8(input, nullptr) == 0x61)
 	{
 		WPXEncryption encryption(password, 6);
-		if (readU16(input, 0, true) == encryption.getCheckSum())
+		if (readU16(input, nullptr, true) == encryption.getCheckSum())
 			return WPD_PASSWORD_MATCH_OK;
 		else
 			return WPD_PASSWORD_MATCH_NONE;
@@ -61,18 +61,18 @@ WPDConfidence WP1Heuristics::isWP1FileFormat(librevenge::RVNGInputStream *input,
 	input->seek(0, librevenge::RVNG_SEEK_SET);
 	std::unique_ptr<WPXEncryption> encryption;
 
-	if (readU8(input, 0) == 0xFE && readU8(input, 0) == 0xFF &&
-	        readU8(input, 0) == 0x61 && readU8(input, 0) == 0x61)
+	if (readU8(input, nullptr) == 0xFE && readU8(input, nullptr) == 0xFF &&
+	        readU8(input, nullptr) == 0x61 && readU8(input, nullptr) == 0x61)
 	{
 		if (password)
 		{
 			encryption.reset(new WPXEncryption(password, 6));
-			if (readU16(input, 0, true) != encryption->getCheckSum())
+			if (readU16(input, nullptr, true) != encryption->getCheckSum())
 				return WPD_CONFIDENCE_SUPPORTED_ENCRYPTION;
 		}
 		else
 		{
-			if (readU16(input,0) != 0x0000)
+			if (readU16(input,nullptr) != 0x0000)
 				return WPD_CONFIDENCE_SUPPORTED_ENCRYPTION;
 		}
 	}

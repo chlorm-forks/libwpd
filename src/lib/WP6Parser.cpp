@@ -50,7 +50,7 @@ WP6Parser::~WP6Parser()
 
 WP6PrefixData *WP6Parser::getPrefixData(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
 {
-	WP6PrefixData *prefixData = 0;
+	WP6PrefixData *prefixData = nullptr;
 	try
 	{
 		prefixData = new WP6PrefixData(input, encryption, (static_cast<WP6Header *>(getHeader())->getNumPrefixIndices()));
@@ -68,7 +68,7 @@ WP6PrefixData *WP6Parser::getPrefixData(librevenge::RVNGInputStream *input, WPXE
 		WPD_DEBUG_MSG(("WordPerfect: Prefix Data most likely corrupted. Trying to ignore.\n"));
 		// TODO: Try to check packet after packet so that we try to recover at least the begining if the corruption is not at
 		//       the begining.
-		return 0;
+		return nullptr;
 	}
 }
 
@@ -236,14 +236,14 @@ void WP6Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfac
 	{
 		WP6StylesListener stylesListener(pageList, tableList);
 		stylesListener.startSubDocument();
-		parseDocument(input, 0, &stylesListener);
+		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		input->seek(0, librevenge::RVNG_SEEK_SET);
 
 		WP6ContentListener listener(pageList, tableList, documentInterface);
 		listener.startSubDocument();
-		parseDocument(input, 0, &listener);
+		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
 	}
 	catch (FileException)

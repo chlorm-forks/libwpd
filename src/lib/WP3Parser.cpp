@@ -51,7 +51,7 @@ WP3ResourceFork *WP3Parser::getResourceFork(librevenge::RVNGInputStream *input, 
 	if (!getHeader() || getHeader()->getDocumentOffset() <= 0x10)
 	{
 		WPD_DEBUG_MSG(("WP3Parser: Document does not contain resource fork\n"));
-		return 0;
+		return nullptr;
 	}
 
 	return new WP3ResourceFork(input, encryption);
@@ -106,7 +106,7 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	WP3ResourceFork *resourceFork = 0;
+	WP3ResourceFork *resourceFork = nullptr;
 	std::vector<WP3SubDocument *> subDocuments;
 
 	try
@@ -178,14 +178,14 @@ void WP3Parser::parseSubDocument(librevenge::RVNGTextInterface *textInterface)
 	{
 		WP3StylesListener stylesListener(pageList, tableList, subDocuments);
 		stylesListener.startSubDocument();
-		parseDocument(input, 0, &stylesListener);
+		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		input->seek(0, librevenge::RVNG_SEEK_SET);
 
 		WP3ContentListener listener(pageList, subDocuments, textInterface);
 		listener.startSubDocument();
-		parseDocument(input, 0, &listener);
+		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
 
 		for (std::vector<WP3SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)

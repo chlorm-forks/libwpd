@@ -43,7 +43,7 @@ WP1Part *WP1Part::constructPart(librevenge::RVNGInputStream *input, WPXEncryptio
 	if (((unsigned char)0xC0 > readVal) || ((unsigned char)0xFE < readVal))
 	{
 		WPD_DEBUG_MSG(("WordPerfect: Returning 0 from constructPart\n"));
-		return 0;
+		return nullptr;
 	}
 	else if (WP1_FUNCTION_GROUP_SIZE[readVal-0xC0] == -1)
 	{
@@ -52,7 +52,7 @@ WP1Part *WP1Part::constructPart(librevenge::RVNGInputStream *input, WPXEncryptio
 		if (!WP1VariableLengthGroup::isGroupConsistent(input, encryption, readVal))
 		{
 			WPD_DEBUG_MSG(("WordPerfect: Consistency Check (variable length) failed; ignoring this byte\n"));
-			return 0;
+			return nullptr;
 		}
 		WPD_DEBUG_MSG(("WordPerfect: constructVariableLengthGroup\n"));
 		return WP1VariableLengthGroup::constructVariableLengthGroup(input, encryption, readVal);

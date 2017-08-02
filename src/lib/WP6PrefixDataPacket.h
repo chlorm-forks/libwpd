@@ -40,7 +40,7 @@ public:
 	virtual void parse(WP6Listener * /* listener */) const {}
 	virtual WP6SubDocument *getSubDocument() const
 	{
-		return 0;
+		return nullptr;
 	}
 	unsigned getDataSize() const
 	{

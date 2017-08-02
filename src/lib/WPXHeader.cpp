@@ -63,7 +63,7 @@ WPXHeader *WPXHeader::constructHeader(librevenge::RVNGInputStream *input, WPXEnc
 	if (strcmp(fileMagic, "WPC"))
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File magic is not equal to \"WPC\"!\n"));
-		return 0;
+		return nullptr;
 	}
 
 	/* get the document pointer */
@@ -110,7 +110,7 @@ WPXHeader *WPXHeader::constructHeader(librevenge::RVNGInputStream *input, WPXEnc
 		default:
 			// unhandled file format
 			WPD_DEBUG_MSG(("WordPerfect: Unsupported major number: %d\n", majorVersion));
-			return 0;
+			return nullptr;
 		}
 	case 0x2c:
 		WPD_DEBUG_MSG(("WordPerfect: Supported file type: \"MAC WP 2.0 document\"\n"));
@@ -124,11 +124,11 @@ WPXHeader *WPXHeader::constructHeader(librevenge::RVNGInputStream *input, WPXEnc
 		default:
 			// unhandled file format
 			WPD_DEBUG_MSG(("WordPerfect: Unsupported major number: %d\n", majorVersion));
-			return 0;
+			return nullptr;
 		}
 	default:
 		WPD_DEBUG_MSG(("WordPerfect: Unsupported file type: %d\n", fileType));
-		return 0;
+		return nullptr;
 	}
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

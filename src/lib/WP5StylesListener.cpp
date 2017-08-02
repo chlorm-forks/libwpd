@@ -38,7 +38,7 @@ WP5StylesListener::WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableL
 	m_currentPage(),
 	m_nextPage(),
 	m_tableList(tableList),
-	m_currentTable(0),
+	m_currentTable(nullptr),
 	m_tempMarginLeft(1.0),
 	m_tempMarginRight(1.0),
 	m_currentPageHasContent(false),
@@ -96,7 +96,7 @@ void WP5StylesListener::insertBreak(unsigned char breakType)
 			}
 			else
 				m_currentPage.setHeaderFooter((*HFiter).getType(), (*HFiter).getInternalType(),
-				                              (*HFiter).getOccurrence(), 0, (*HFiter).getTableList());
+				                              (*HFiter).getOccurrence(), nullptr, (*HFiter).getTableList());
 		}
 		m_nextPage = WPXPageSpan();
 		m_currentPageHasContent = false;
@@ -226,7 +226,7 @@ void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsign
 				if (wpxOccurrence != NEVER)
 					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
 				else
-					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, 0, tableList);
+					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);
 			}
 			else /* FOOTER || !tempCurrentPageHasContent */
 			{
@@ -236,7 +236,7 @@ void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsign
 					_handleSubDocument(subDocument, WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 				}
 				else
-					m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, 0, tableList);
+					m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);
 			}
 		}
 		m_currentPageHasContent = tempCurrentPageHasContent;

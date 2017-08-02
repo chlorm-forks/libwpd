@@ -42,7 +42,7 @@ WP5BoxGroup::WP5BoxGroup(librevenge::RVNGInputStream *input, WPXEncryption *encr
 	m_y(0),
 	m_boxType(0),
 	m_graphicsOffset(0),
-	m_data(NULL)
+	m_data(nullptr)
 {
 	_read(input, encryption);
 }

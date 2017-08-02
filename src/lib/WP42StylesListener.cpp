@@ -96,7 +96,7 @@ void WP42StylesListener::insertBreak(unsigned char breakType)
 				else
 				{
 					m_currentPage.setHeaderFooter((*HFiter).getType(), (*HFiter).getInternalType(),
-					                              (*HFiter).getOccurrence(), 0, (*HFiter).getTableList());
+					                              (*HFiter).getOccurrence(), nullptr, (*HFiter).getTableList());
 				}
 			}
 			m_nextPage = WPXPageSpan();
@@ -156,7 +156,7 @@ void WP42StylesListener::headerFooterGroup(unsigned char headerFooterDefinition,
 				_handleSubDocument(subDocument, WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 			}
 			else
-				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, 0, tableList);
+				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);
 		}
 		m_currentPageHasContent = tempCurrentPageHasContent;
 	}

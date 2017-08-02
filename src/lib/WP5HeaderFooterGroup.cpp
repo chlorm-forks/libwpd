@@ -29,7 +29,7 @@
 WP5HeaderFooterGroup::WP5HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP5VariableLengthGroup(),
 	m_occurrenceBits(0),
-	m_subDocument(0)
+	m_subDocument(nullptr)
 {
 	_read(input, encryption);
 }

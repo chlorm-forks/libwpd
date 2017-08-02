@@ -84,7 +84,7 @@ const WP6PrefixDataPacket *WP6PrefixData::getPrefixDataPacket(const int prefixID
 	if (pos != m_prefixDataPacketHash.end())
 		return static_cast<const WP6PrefixDataPacket *>(pos->second);
 	else
-		return 0;
+		return nullptr;
 }
 
 std::pair<MPDP_CIter, MPDP_CIter> WP6PrefixData::getPrefixDataPacketsOfType(const int type) const

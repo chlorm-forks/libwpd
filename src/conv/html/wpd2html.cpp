@@ -67,8 +67,8 @@ int main(int argc, char *argv[])
 	if (argc < 2)
 		return printUsage();
 
-	char *file = 0;
-	char *password = 0;
+	char *file = nullptr;
+	char *password = nullptr;
 
 	for (int i = 1; i < argc; i++)
 	{

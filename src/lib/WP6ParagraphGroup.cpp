@@ -33,7 +33,7 @@
 
 WP6ParagraphGroup::WP6ParagraphGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP6VariableLengthGroup(),
-	m_subGroupData(0)
+	m_subGroupData(nullptr)
 {
 	_read(input, encryption);
 }

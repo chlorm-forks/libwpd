@@ -30,7 +30,7 @@
 
 WP5FootnoteEndnoteGroup::WP5FootnoteEndnoteGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP5VariableLengthGroup(),
-	m_subDocument(0),
+	m_subDocument(nullptr),
 	m_noteReference()
 {
 	_read(input, encryption);

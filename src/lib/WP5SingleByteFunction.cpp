@@ -59,7 +59,7 @@ WP5SingleByteFunction *WP5SingleByteFunction::constructSingleByteFunction(librev
 
 	default:
 		// should not happen
-		return 0;
+		return nullptr;
 	}
 }
 

@@ -48,7 +48,7 @@ WP6Part *WP6Part::constructPart(librevenge::RVNGInputStream *input, WPXEncryptio
 		if (!WP6VariableLengthGroup::isGroupConsistent(input, encryption, readVal))
 		{
 			WPD_DEBUG_MSG(("WordPerfect: Consistency Check (variable length) failed; ignoring this byte\n"));
-			return 0;
+			return nullptr;
 		}
 		WPD_DEBUG_MSG(("WordPerfect: constructVariableLengthGroup(input, val=0x%.2x)\n", readVal));
 		return WP6VariableLengthGroup::constructVariableLengthGroup(input, encryption, readVal);
@@ -59,7 +59,7 @@ WP6Part *WP6Part::constructPart(librevenge::RVNGInputStream *input, WPXEncryptio
 		if (!WP6FixedLengthGroup::isGroupConsistent(input, encryption, readVal))
 		{
 			WPD_DEBUG_MSG(("WordPerfect: Consistency Check (fixed length) failed; ignoring this byte\n"));
-			return 0;
+			return nullptr;
 		}
 		WPD_DEBUG_MSG(("WordPerfect: constructFixedLengthGroup(input, val=0x%.2x)\n", readVal));
 		return WP6FixedLengthGroup::constructFixedLengthGroup(input, encryption, readVal);
@@ -70,6 +70,6 @@ WP6Part *WP6Part::constructPart(librevenge::RVNGInputStream *input, WPXEncryptio
 #endif
 
 	WPD_DEBUG_MSG(("WordPerfect: Returning 0 from constructPart\n"));
-	return 0;
+	return nullptr;
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

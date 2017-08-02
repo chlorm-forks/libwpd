@@ -30,7 +30,7 @@
 #include <string.h>
 
 WPXSubDocument::WPXSubDocument(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const unsigned dataSize) :
-	m_stream(0),
+	m_stream(nullptr),
 	m_streamData(new unsigned char[dataSize])
 {
 	unsigned i=0;
@@ -44,8 +44,8 @@ WPXSubDocument::WPXSubDocument(librevenge::RVNGInputStream *input, WPXEncryption
 }
 
 WPXSubDocument::WPXSubDocument(unsigned char *streamData, const unsigned dataSize) :
-	m_stream(0),
-	m_streamData(0)
+	m_stream(nullptr),
+	m_streamData(nullptr)
 {
 	if (streamData)
 		m_stream = new WPXMemoryInputStream(streamData, dataSize);

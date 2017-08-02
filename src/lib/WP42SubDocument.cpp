@@ -38,7 +38,7 @@ void WP42SubDocument::parse(WP42Listener *listener) const
 	if (!tmpStream)
 		return;
 	tmpStream->seek(0, librevenge::RVNG_SEEK_SET);
-	listener->marginReset(readU8(tmpStream, 0), readU8(tmpStream, 0));
-	WP42Parser::parseDocument(tmpStream, 0, listener);
+	listener->marginReset(readU8(tmpStream, nullptr), readU8(tmpStream, nullptr));
+	WP42Parser::parseDocument(tmpStream, nullptr, listener);
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

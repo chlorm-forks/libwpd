@@ -34,7 +34,7 @@
 class WP1Heuristics
 {
 public:
-	static libwpd::WPDConfidence isWP1FileFormat(librevenge::RVNGInputStream *input, const char *password = 0);
+	static libwpd::WPDConfidence isWP1FileFormat(librevenge::RVNGInputStream *input, const char *password = nullptr);
 	static libwpd::WPDPasswordMatch verifyPassword(librevenge::RVNGInputStream *input, const char *password);
 };
 

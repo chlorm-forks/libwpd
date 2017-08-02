@@ -230,39 +230,39 @@ const unsigned tibetan_1_252[] = { 0x0F84, 0 };
 
 const unsigned *tibetanMap1[] =
 {
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
 	tibetan_1_33,  // k
 	tibetan_1_34,  // kh
 	tibetan_1_35,  // g
@@ -388,8 +388,8 @@ const unsigned *tibetanMap1[] =
 	tibetan_1_155, // b+lx
 	tibetan_1_156, // h
 	tibetan_1_157, // `
-	0,
-	0,
+	nullptr,
+	nullptr,
 	tibetan_1_160, // +v
 	tibetan_1_161, // +a
 	tibetan_1_162, // +a
@@ -398,18 +398,18 @@ const unsigned *tibetanMap1[] =
 	tibetan_1_165, // +r
 	tibetan_1_166, // +y
 	tibetan_1_167, // +h
-	0,
-	0,
+	nullptr,
+	nullptr,
 	tibetan_1_170, // T
 	tibetan_1_171, // TH
 	tibetan_1_172, // D
 	tibetan_1_173, // N
 	tibetan_1_174, // SH
 	tibetan_1_175, // k+SH
-	0,
-	0,
-	0,
-	0,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
 	tibetan_1_180, // g
 	tibetan_1_181, // b
 	tibetan_1_182, // dz
@@ -417,9 +417,9 @@ const unsigned *tibetanMap1[] =
 	tibetan_1_184, // x
 	tibetan_1_185, // nyl
 	tibetan_1_186, // +lx
-	0,
-	0,
-	0,
+	nullptr,
+	nullptr,
+	nullptr,
 	tibetan_1_190, // 0
 	tibetan_1_191, // 1
 	tibetan_1_192, // 2
@@ -440,12 +440,12 @@ const unsigned *tibetanMap1[] =
 	tibetan_1_207, // =
 	tibetan_1_208, // {
 	tibetan_1_209, // }
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
 	tibetan_1_216, // +a+u
 	tibetan_1_217, // +a+u
 	tibetan_1_218, // +a+u
@@ -483,8 +483,8 @@ const unsigned *tibetanMap1[] =
 	tibetan_1_250, // +o+M
 	tibetan_1_251, // +oo+M
 	tibetan_1_252, // R
-	0,
-	0,
-	0,
+	nullptr,
+	nullptr,
+	nullptr,
 };
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

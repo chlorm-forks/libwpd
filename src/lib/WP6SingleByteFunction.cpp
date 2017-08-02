@@ -97,7 +97,7 @@ WP6SingleByteFunction *WP6SingleByteFunction::constructSingleByteFunction(librev
 	// Add the remaining cases here
 	default:
 		// should not happen
-		return 0;
+		return nullptr;
 	}
 }
 
@@ -147,14 +147,14 @@ void WP6TableRowFunction::parse(WP6Listener *listener)
 	// would use the multi-byte variant of this function
 	listener->insertRow(0x0000, true, false);
 	RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
-	listener->insertCell(1, 1, 0x00, 0, 0, &tmpCellBorderColor, TOP, false, 0x00000000);
+	listener->insertCell(1, 1, 0x00, nullptr, nullptr, &tmpCellBorderColor, TOP, false, 0x00000000);
 }
 
 void WP6TableCellFunction::parse(WP6Listener *listener)
 {
 	// default values
 	RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
-	listener->insertCell(1, 1, 0x00, 0, 0, &tmpCellBorderColor, TOP, false, 0x00000000);
+	listener->insertCell(1, 1, 0x00, nullptr, nullptr, &tmpCellBorderColor, TOP, false, 0x00000000);
 }
 
 void WP6TableOffFunction::parse(WP6Listener *listener)
@@ -174,7 +174,7 @@ void WP6TableRowAtSoftEOPFunction::parse(WP6Listener *listener)
 	// would use the multi-byte variant of this function
 	listener->insertRow(0x0000, true, false);
 	RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
-	listener->insertCell(1, 1, 0x00, 0, 0, &tmpCellBorderColor, TOP, false, 0x00000000);
+	listener->insertCell(1, 1, 0x00, nullptr, nullptr, &tmpCellBorderColor, TOP, false, 0x00000000);
 	listener->insertBreak(WPX_SOFT_PAGE_BREAK);
 }
 
@@ -184,7 +184,7 @@ void WP6TableRowAtEOPFunction::parse(WP6Listener *listener)
 	// would use the multi-byte variant of this function
 	listener->insertRow(0x0000, true, false);
 	RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
-	listener->insertCell(1, 1, 0x00, 0, 0, &tmpCellBorderColor, TOP, false, 0x00000000);
+	listener->insertCell(1, 1, 0x00, nullptr, nullptr, &tmpCellBorderColor, TOP, false, 0x00000000);
 	listener->insertBreak(WPX_PAGE_BREAK);
 }
 
@@ -194,7 +194,7 @@ void WP6TableRowAtEOCFunction::parse(WP6Listener *listener)
 	// would use the multi-byte variant of this function
 	listener->insertRow(0x0000, true, false);
 	RGBSColor tmpCellBorderColor(0x00, 0x00, 0x00, 0x64);
-	listener->insertCell(1, 1, 0x00, 0, 0, &tmpCellBorderColor, TOP, false, 0x00000000);
+	listener->insertCell(1, 1, 0x00, nullptr, nullptr, &tmpCellBorderColor, TOP, false, 0x00000000);
 	listener->insertBreak(WPX_COLUMN_BREAK);
 }
 

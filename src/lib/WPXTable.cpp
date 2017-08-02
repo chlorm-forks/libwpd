@@ -200,8 +200,8 @@ void WPXTableList::release()
 			delete m_tableList;
 			delete m_refCount;
 		}
-		m_refCount = 0;
-		m_tableList = 0;
+		m_refCount = nullptr;
+		m_tableList = nullptr;
 	}
 }
 

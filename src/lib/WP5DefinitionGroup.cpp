@@ -88,7 +88,7 @@ void WP5DefinitionGroup_DefineTablesSubGroup::parse(WP5Listener *listener)
 
 WP5DefinitionGroup::WP5DefinitionGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP5VariableLengthGroup(),
-	m_subGroupData(0)
+	m_subGroupData(nullptr)
 {
 	_read(input, encryption);
 }

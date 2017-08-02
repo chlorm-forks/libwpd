@@ -168,13 +168,13 @@ void WPXPageSpan::setHeaderFooter(const WPXHeaderFooterType type, const unsigned
 	if (containsHFLeft && !containsHFRight)
 	{
 		WPD_DEBUG_MSG(("Inserting dummy header right\n"));
-		WPXHeaderFooter dummyHeader(type, EVEN, DUMMY_INTERNAL_HEADER_FOOTER, 0);
+		WPXHeaderFooter dummyHeader(type, EVEN, DUMMY_INTERNAL_HEADER_FOOTER, nullptr);
 		m_headerFooterList.push_back(dummyHeader);
 	}
 	else if (!containsHFLeft && containsHFRight)
 	{
 		WPD_DEBUG_MSG(("Inserting dummy header left\n"));
-		WPXHeaderFooter dummyHeader(type, ODD, DUMMY_INTERNAL_HEADER_FOOTER, 0);
+		WPXHeaderFooter dummyHeader(type, ODD, DUMMY_INTERNAL_HEADER_FOOTER, nullptr);
 		m_headerFooterList.push_back(dummyHeader);
 	}
 }

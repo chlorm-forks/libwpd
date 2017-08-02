@@ -32,7 +32,7 @@
 #include "WP5PrefixData.h"
 
 WP5Listener::WP5Listener() :
-	m_prefixData(0)
+	m_prefixData(nullptr)
 {
 }
 
@@ -41,6 +41,6 @@ const WP5GeneralPacketData *WP5Listener::getGeneralPacketData(const int type) co
 	if (m_prefixData)
 		return m_prefixData->getGeneralPacketData(type);
 	else
-		return 0;
+		return nullptr;
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

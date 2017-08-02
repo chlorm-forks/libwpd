@@ -38,7 +38,7 @@
 #include "WP42ContentListener.h"
 
 WP42Parser::WP42Parser(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
-	WPXParser(input, 0, encryption)
+	WPXParser(input, nullptr, encryption)
 {
 }
 
@@ -231,12 +231,12 @@ void WP42Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfa
 	{
 		WP42StylesListener stylesListener(pageList, subDocuments);
 		stylesListener.startSubDocument();
-		parseDocument(input, 0, &stylesListener);
+		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		WP42ContentListener listener(pageList, subDocuments, documentInterface);
 		listener.startSubDocument();
-		parseDocument(input, 0, &listener);
+		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
 		for (std::vector<WP42SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
 			if (*iterSubDoc)

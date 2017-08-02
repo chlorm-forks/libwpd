@@ -45,7 +45,7 @@ public:
 	const librevenge::RVNGBinaryData *getImage(unsigned long imageIndex) const
 	{
 		if (imageIndex < m_images.size()) return m_images[imageIndex];
-		return 0;
+		return nullptr;
 	}
 
 private:
