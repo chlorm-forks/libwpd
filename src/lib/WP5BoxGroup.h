@@ -33,10 +33,10 @@ class WP5BoxGroup : public WP5VariableLengthGroup
 {
 public:
 	WP5BoxGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP5Listener *listener);
+	void parse(WP5Listener *listener) override;
 
 protected:
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 
 private:
 	unsigned short m_boxNumber;

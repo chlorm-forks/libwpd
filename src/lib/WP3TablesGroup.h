@@ -34,9 +34,9 @@ class WP3TablesGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3TablesGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3TablesGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3TablesGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	// variables needed for subgroup 1 (Table Function)

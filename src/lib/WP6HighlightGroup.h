@@ -34,14 +34,14 @@ class WP6HighlightGroup : public WP6FixedLengthGroup
 {
 public:
 	WP6HighlightGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	virtual void parse(WP6Listener *listener) = 0;
+	void parse(WP6Listener *listener) override = 0;
 	const RGBSColor getColor() const
 	{
 		return m_color;
 	}
 
 protected:
-	virtual void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 
 private:
 	RGBSColor m_color;
@@ -51,14 +51,14 @@ class WP6HighlightOnGroup : public WP6HighlightGroup
 {
 public:
 	WP6HighlightOnGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6HighlightOffGroup : public WP6HighlightGroup
 {
 public:
 	WP6HighlightOffGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 #endif /* WP6HIGHLIGHTGROUP_H */

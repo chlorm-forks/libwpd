@@ -33,9 +33,9 @@ class WP42DefineColumnsGroup : public WP42MultiByteFunctionGroup
 {
 public:
 	WP42DefineColumnsGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP42DefineColumnsGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP42Listener *listener);
+	~WP42DefineColumnsGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP42Listener *listener) override;
 
 private:
 	unsigned char m_groupId;

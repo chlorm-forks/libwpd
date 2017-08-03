@@ -49,95 +49,95 @@ public:
 	             const unsigned char /* month */, const unsigned char /* day */,
 	             const unsigned char /* hour */, const unsigned char /* minute */,
 	             const unsigned char /* second */, const unsigned char /* dayOfWeek */,
-	             const unsigned char /* timeZone */, const unsigned char /* unused */) {}
-	void setExtendedInformation(const unsigned short /* type */, const librevenge::RVNGString & /*data*/) {}
-	void startDocument() {}
-	void startSubDocument() {}
-	void setAlignmentCharacter(const unsigned /* character */) {}
-	void setLeaderCharacter(const unsigned /* character */, const unsigned char /* numberOfSpaces */) {}
+	             const unsigned char /* timeZone */, const unsigned char /* unused */) override {}
+	void setExtendedInformation(const unsigned short /* type */, const librevenge::RVNGString & /*data*/) override {}
+	void startDocument() override {}
+	void startSubDocument() override {}
+	void setAlignmentCharacter(const unsigned /* character */) override {}
+	void setLeaderCharacter(const unsigned /* character */, const unsigned char /* numberOfSpaces */) override {}
 	void defineTabStops(const bool /* isRelative */, const std::vector<WPXTabStop> & /* tabStops */,
-	                    const std::vector<bool> & /* usePreWP9LeaderMethods */) {}
-	void insertCharacter(unsigned /* character */)
+	                    const std::vector<bool> & /* usePreWP9LeaderMethods */) override {}
+	void insertCharacter(unsigned /* character */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertTab(const unsigned char /* tabType */, double /* tabPosition */)
+	void insertTab(const unsigned char /* tabType */, double /* tabPosition */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void handleLineBreak()
+	void handleLineBreak() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertEOL()
+	void insertEOL() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertBreak(const unsigned char breakType);
-	void characterColorChange(const unsigned char /* red */, const unsigned char /* green */, const unsigned char /* blue */) {}
-	void characterShadingChange(const unsigned char /* shading */) {}
-	void highlightChange(const bool /* isOn */, const RGBSColor & /* color */) {}
-	void fontChange(const unsigned short /* matchedFontPointSize */, const unsigned short /* fontPID */, const librevenge::RVNGString & /* fontName */) {}
-	void attributeChange(const bool /* isOn */, const unsigned char /* attribute */) {}
-	void lineSpacingChange(const double /* lineSpacing */) {}
-	void spacingAfterParagraphChange(const double /* spacingRelative */, const double /* spacingAbsolute */) {}
-	void justificationChange(const unsigned char /* justification */) {}
-	void pageNumberingChange(const WPXPageNumberPosition /* page numbering position */, const unsigned short /* matchedFontPointSize */, const unsigned short /* fontPID */);
-	void pageMarginChange(const unsigned char side, const unsigned short margin);
-	void pageFormChange(const unsigned short length, const unsigned short width, const WPXFormOrientation orientation);
-	void marginChange(const unsigned char side, const unsigned short margin);
-	void paragraphMarginChange(const unsigned char /* side */, const signed short /* margin */) {}
-	void indentFirstLineChange(const signed short /* offset */) {}
+	void insertBreak(const unsigned char breakType) override;
+	void characterColorChange(const unsigned char /* red */, const unsigned char /* green */, const unsigned char /* blue */) override {}
+	void characterShadingChange(const unsigned char /* shading */) override {}
+	void highlightChange(const bool /* isOn */, const RGBSColor & /* color */) override {}
+	void fontChange(const unsigned short /* matchedFontPointSize */, const unsigned short /* fontPID */, const librevenge::RVNGString & /* fontName */) override {}
+	void attributeChange(const bool /* isOn */, const unsigned char /* attribute */) override {}
+	void lineSpacingChange(const double /* lineSpacing */) override {}
+	void spacingAfterParagraphChange(const double /* spacingRelative */, const double /* spacingAbsolute */) override {}
+	void justificationChange(const unsigned char /* justification */) override {}
+	void pageNumberingChange(const WPXPageNumberPosition /* page numbering position */, const unsigned short /* matchedFontPointSize */, const unsigned short /* fontPID */) override;
+	void pageMarginChange(const unsigned char side, const unsigned short margin) override;
+	void pageFormChange(const unsigned short length, const unsigned short width, const WPXFormOrientation orientation) override;
+	void marginChange(const unsigned char side, const unsigned short margin) override;
+	void paragraphMarginChange(const unsigned char /* side */, const signed short /* margin */) override {}
+	void indentFirstLineChange(const signed short /* offset */) override {}
 	void columnChange(const WPXTextColumnType /* columnType */, const unsigned char /* numColumns */,
-	                  const std::vector<double> & /* columnWidth */, const std::vector<bool> & /* isFixedWidth */) {}
-	void updateOutlineDefinition(const unsigned short /* outlineHash */, const unsigned char * /* numberingMethods */, const unsigned char /* tabBehaviourFlag */) {}
+	                  const std::vector<double> & /* columnWidth */, const std::vector<bool> & /* isFixedWidth */) override {}
+	void updateOutlineDefinition(const unsigned short /* outlineHash */, const unsigned char * /* numberingMethods */, const unsigned char /* tabBehaviourFlag */) override {}
 
-	void paragraphNumberOn(const unsigned short /* outlineHash */, const unsigned char /* level */, const unsigned char /* flag */) {}
-	void paragraphNumberOff()
+	void paragraphNumberOn(const unsigned short /* outlineHash */, const unsigned char /* level */, const unsigned char /* flag */) override {}
+	void paragraphNumberOff() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void displayNumberReferenceGroupOn(const unsigned char /* subGroup */, const unsigned char /* level */) {}
-	void displayNumberReferenceGroupOff(const unsigned char /* subGroup */)
+	void displayNumberReferenceGroupOn(const unsigned char /* subGroup */, const unsigned char /* level */) override {}
+	void displayNumberReferenceGroupOff(const unsigned char /* subGroup */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void styleGroupOn(const unsigned char /* subGroup */) {}
-	void styleGroupOff(const unsigned char /* subGroup */) {}
-	void globalOn(const unsigned char /* systemStyle */) {}
-	void globalOff() {}
-	void noteOn(const unsigned short textPID);
-	void noteOff(const WPXNoteType /* noteType */) {}
-	void headerFooterGroup(const unsigned char headerFooterType, const unsigned char occurrenceBits, const unsigned short textPID);
-	void suppressPageCharacteristics(const unsigned char suppressCode);
-	void setPageNumber(const unsigned short pageNumber);
-	void setPageNumberingType(const WPXNumberingType pageNumberingType);
+	void styleGroupOn(const unsigned char /* subGroup */) override {}
+	void styleGroupOff(const unsigned char /* subGroup */) override {}
+	void globalOn(const unsigned char /* systemStyle */) override {}
+	void globalOff() override {}
+	void noteOn(const unsigned short textPID) override;
+	void noteOff(const WPXNoteType /* noteType */) override {}
+	void headerFooterGroup(const unsigned char headerFooterType, const unsigned char occurrenceBits, const unsigned short textPID) override;
+	void suppressPageCharacteristics(const unsigned char suppressCode) override;
+	void setPageNumber(const unsigned short pageNumber) override;
+	void setPageNumberingType(const WPXNumberingType pageNumberingType) override;
 
-	void endDocument();
-	void endSubDocument();
+	void endDocument() override;
+	void endSubDocument() override;
 
-	void defineTable(const unsigned char position, const unsigned short leftOffset);
+	void defineTable(const unsigned char position, const unsigned short leftOffset) override;
 	void addTableColumnDefinition(const unsigned /* width */, const unsigned /* leftGutter */, const unsigned /* rightGutter */,
-	                              const unsigned /* attributes */, const unsigned char /* alignment */) {}
-	void startTable();
-	void insertRow(const unsigned short rowHeight, const bool isMinimumHeight, const bool isHeaderRow);
+	                              const unsigned /* attributes */, const unsigned char /* alignment */) override {}
+	void startTable() override;
+	void insertRow(const unsigned short rowHeight, const bool isMinimumHeight, const bool isHeaderRow) override;
 	void insertCell(const unsigned char colSpan, const unsigned char rowSpan, const unsigned char borderBits,
 	                const RGBSColor *cellFgColor, const RGBSColor *cellBgColor,
 	                const RGBSColor *cellBorderColor, const WPXVerticalAlignment cellVerticalAlignment,
-	                const bool useCellAttributes, const unsigned cellAttributes);
-	void endTable();
+	                const bool useCellAttributes, const unsigned cellAttributes) override;
+	void endTable() override;
 	void boxOn(const unsigned char /* anchoringType */, const unsigned char /* generalPositioningFlags */, const unsigned char /* horizontalPositioningFlags */,
 	           const signed short /* horizontalOffset */, const unsigned char /* leftColumn */, const unsigned char /* rightColumn */,
 	           const unsigned char /* verticalPositioningFlags */, const signed short /* verticalOffset */, const unsigned char /* widthFlags */,
 	           const unsigned short /* width */, const unsigned char /* heightFlags */, const unsigned short /* height */, const unsigned char /* boxContentType */,
 	           const unsigned short /* nativeWidth */, const unsigned short /* nativeHeight */,
-	           const librevenge::RVNGString & /* linkTarget */) {}
-	void boxOff() {}
-	void insertGraphicsData(const unsigned short /* packetId */) {}
-	void insertTextBox(const WP6SubDocument *subDocument);
-	void commentAnnotation(const unsigned short textPID);
+	           const librevenge::RVNGString & /* linkTarget */) override {}
+	void boxOff() override {}
+	void insertGraphicsData(const unsigned short /* packetId */) override {}
+	void insertTextBox(const WP6SubDocument *subDocument) override;
+	void commentAnnotation(const unsigned short textPID) override;
 
-	void undoChange(const unsigned char undoType, const unsigned short undoLevel);
+	void undoChange(const unsigned char undoType, const unsigned short undoLevel) override;
 
 protected:
 	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, int nextTableIndice = 0);

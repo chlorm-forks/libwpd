@@ -51,62 +51,62 @@ class WP1ContentListener : public WP1Listener, protected WPXContentListener
 {
 public:
 	WP1ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP1SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
-	~WP1ContentListener();
+	~WP1ContentListener() override;
 
-	void startDocument()
+	void startDocument() override
 	{
 		WPXContentListener::startDocument();
 	}
-	void startSubDocument()
+	void startSubDocument() override
 	{
 		WPXContentListener::startSubDocument();
 	}
-	void insertCharacter(unsigned character);
-	void insertExtendedCharacter(unsigned char extendedCharacter);
-	void insertTab();
-	void insertBreak(unsigned char breakType)
+	void insertCharacter(unsigned character) override;
+	void insertExtendedCharacter(unsigned char extendedCharacter) override;
+	void insertTab() override;
+	void insertBreak(unsigned char breakType) override
 	{
 		WPXContentListener::insertBreak(breakType);
 	}
-	void insertEOL();
-	void insertNote(WPXNoteType noteType, WP1SubDocument *subDocument);
-	void attributeChange(bool isOn, unsigned char attribute);
-	void fontPointSize(unsigned char pointSize);
-	void fontId(unsigned short id);
-	void marginReset(unsigned short leftMargin, unsigned short rightMargin);
-	void topMarginSet(unsigned short /* topMargin */) {}
-	void bottomMarginSet(unsigned short /* bottomMargin */) {}
-	void leftIndent(unsigned short leftMarginOffset);
-	void leftRightIndent(unsigned short leftRightMarginOffset);
-	void leftMarginRelease(unsigned short release);
-	void setTabs(const std::vector<WPXTabStop> &tabStops);
-	void headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument);
-	void suppressPageCharacteristics(unsigned char /* suppressCode */) {}
-	void justificationChange(unsigned char justification);
-	void lineSpacingChange(unsigned char spacing)
+	void insertEOL() override;
+	void insertNote(WPXNoteType noteType, WP1SubDocument *subDocument) override;
+	void attributeChange(bool isOn, unsigned char attribute) override;
+	void fontPointSize(unsigned char pointSize) override;
+	void fontId(unsigned short id) override;
+	void marginReset(unsigned short leftMargin, unsigned short rightMargin) override;
+	void topMarginSet(unsigned short /* topMargin */) override {}
+	void bottomMarginSet(unsigned short /* bottomMargin */) override {}
+	void leftIndent(unsigned short leftMarginOffset) override;
+	void leftRightIndent(unsigned short leftRightMarginOffset) override;
+	void leftMarginRelease(unsigned short release) override;
+	void setTabs(const std::vector<WPXTabStop> &tabStops) override;
+	void headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument) override;
+	void suppressPageCharacteristics(unsigned char /* suppressCode */) override {}
+	void justificationChange(unsigned char justification) override;
+	void lineSpacingChange(unsigned char spacing) override
 	{
 		WPXContentListener::lineSpacingChange((double)((double)spacing/2.0));
 	}
-	void flushRightOn();
-	void flushRightOff() {}
-	void centerOn();
-	void centerOff() {}
-	void endDocument()
+	void flushRightOn() override;
+	void flushRightOff() override {}
+	void centerOn() override;
+	void centerOff() override {}
+	void endDocument() override
 	{
 		WPXContentListener::endDocument();
 	}
-	void endSubDocument()
+	void endSubDocument() override
 	{
 		WPXContentListener::endSubDocument();
 	}
-	void insertPicture(unsigned short width, unsigned short height, const librevenge::RVNGBinaryData &binaryData);
+	void insertPicture(unsigned short width, unsigned short height, const librevenge::RVNGBinaryData &binaryData) override;
 
 protected:
 	using WPXContentListener::lineSpacingChange;
-	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0);
+	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0) override;
 
-	void _flushText();
-	void _changeList() {}
+	void _flushText() override;
+	void _changeList() override {}
 
 private:
 	std::unique_ptr<WP1ContentParsingState> m_parseState;

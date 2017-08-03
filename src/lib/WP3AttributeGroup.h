@@ -33,10 +33,10 @@ class WP3AttributeGroup : public WP3FixedLengthGroup
 {
 public:
 	WP3AttributeGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 
 protected:
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 
 private:
 	unsigned char m_attribute;

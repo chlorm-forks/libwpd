@@ -35,8 +35,8 @@ class WP6FontDescriptorPacket : public WP6PrefixDataPacket
 {
 public:
 	WP6FontDescriptorPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
-	~WP6FontDescriptorPacket();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	~WP6FontDescriptorPacket() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 	const librevenge::RVNGString &getFontName() const
 	{
 		return m_fontName;

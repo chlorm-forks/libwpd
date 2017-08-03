@@ -32,9 +32,9 @@ class WP1SetTabsGroup : public WP1VariableLengthGroup
 {
 public:
 	WP1SetTabsGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1SetTabsGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1SetTabsGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	std::vector<WPXTabStop> m_tabStops;

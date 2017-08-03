@@ -32,10 +32,10 @@ class WP3UnsupportedFixedLengthGroup : public WP3FixedLengthGroup
 {
 public:
 	WP3UnsupportedFixedLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	void parse(WP3Listener * /* listener */) {}
+	void parse(WP3Listener * /* listener */) override {}
 
 protected:
-	void _readContents(librevenge::RVNGInputStream * /* input */, WPXEncryption * /* encryption */) {}
+	void _readContents(librevenge::RVNGInputStream * /* input */, WPXEncryption * /* encryption */) override {}
 };
 
 #endif /* WP3UNSUPPORTEDFIXEDLENGTHGROUP_H */

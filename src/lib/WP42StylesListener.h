@@ -40,27 +40,27 @@ class WP42StylesListener : public WP42Listener, protected WPXStylesListener
 public:
 	WP42StylesListener(std::list<WPXPageSpan> &pageList, std::vector<WP42SubDocument *> &subDocuments);
 
-	void startDocument() {}
-	void startSubDocument() {}
-	void insertCharacter(unsigned /* character */)
+	void startDocument() override {}
+	void startSubDocument() override {}
+	void insertCharacter(unsigned /* character */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertTab(unsigned char /* tabType */, double /* tabPosition */)
+	void insertTab(unsigned char /* tabType */, double /* tabPosition */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertEOL()
+	void insertEOL() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertBreak(unsigned char breakType);
-	void attributeChange(bool /* isOn */, unsigned char /* attribute */) {}
-	void marginReset(unsigned char /* leftMargin */, unsigned char /* rightMargin */) {}
-	void headerFooterGroup(unsigned char headerFooterDefinition, WP42SubDocument *subDocument);
-	void suppressPageCharacteristics(unsigned char suppressCode);
-	void endDocument();
-	void endSubDocument();
+	void insertBreak(unsigned char breakType) override;
+	void attributeChange(bool /* isOn */, unsigned char /* attribute */) override {}
+	void marginReset(unsigned char /* leftMargin */, unsigned char /* rightMargin */) override {}
+	void headerFooterGroup(unsigned char headerFooterDefinition, WP42SubDocument *subDocument) override;
+	void suppressPageCharacteristics(unsigned char suppressCode) override;
+	void endDocument() override;
+	void endSubDocument() override;
 
 protected:
 	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, int nextTableIndice = 0);

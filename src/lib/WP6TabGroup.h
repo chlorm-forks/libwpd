@@ -34,8 +34,8 @@ class WP6TabGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6TabGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) override;
 
 private:
 	double m_position;

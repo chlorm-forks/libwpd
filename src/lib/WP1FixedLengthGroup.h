@@ -34,7 +34,7 @@ class WP1FixedLengthGroup : public WP1Part
 {
 public:
 	WP1FixedLengthGroup(unsigned char group); // WP1FixedLengthGroup should _never_ be constructed, only its inherited classes
-	virtual ~WP1FixedLengthGroup() {}
+	~WP1FixedLengthGroup() override {}
 
 	static WP1FixedLengthGroup *constructFixedLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
 

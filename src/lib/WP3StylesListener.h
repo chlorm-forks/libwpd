@@ -39,73 +39,73 @@ class WP3StylesListener : public WP3Listener, protected WPXStylesListener
 public:
 	WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<WP3SubDocument *> &subDocuments);
 
-	void startDocument() {}
-	void startSubDocument() {}
-	void insertCharacter(unsigned /* character */)
+	void startDocument() override {}
+	void startSubDocument() override {}
+	void insertCharacter(unsigned /* character */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertTab()
+	void insertTab() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertTab(unsigned char /* tabType */, double /* tabPosition */)
+	void insertTab(unsigned char /* tabType */, double /* tabPosition */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertEOL()
+	void insertEOL() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertBreak(unsigned char breakType);
-	void attributeChange(bool /* isOn */, unsigned char /* attribute */) {}
-	void lineSpacingChange(double /* lineSpacing */) {}
-	void justificationChange(unsigned char /* justification */) {}
-	void pageMarginChange(unsigned char side, unsigned short margin);
-	void pageFormChange(unsigned short length, unsigned short width, WPXFormOrientation orientation);
-	void marginChange(unsigned char side, unsigned short margin);
-	void indentFirstLineChange(double /* offset */) {}
-	void setTabs(bool /* isRelative */, const std::vector<WPXTabStop> /* tabStops */) {}
+	void insertBreak(unsigned char breakType) override;
+	void attributeChange(bool /* isOn */, unsigned char /* attribute */) override {}
+	void lineSpacingChange(double /* lineSpacing */) override {}
+	void justificationChange(unsigned char /* justification */) override {}
+	void pageMarginChange(unsigned char side, unsigned short margin) override;
+	void pageFormChange(unsigned short length, unsigned short width, WPXFormOrientation orientation) override;
+	void marginChange(unsigned char side, unsigned short margin) override;
+	void indentFirstLineChange(double /* offset */) override {}
+	void setTabs(bool /* isRelative */, const std::vector<WPXTabStop> /* tabStops */) override {}
 	void columnChange(WPXTextColumnType /* columnType */, unsigned char /* numColumns */,
-	                  const std::vector<double> & /* columnWidth */, const std::vector<bool> & /* isFixedWidth */) {}
-	void endDocument();
-	void endSubDocument();
+	                  const std::vector<double> & /* columnWidth */, const std::vector<bool> & /* isFixedWidth */) override {}
+	void endDocument() override;
+	void endSubDocument() override;
 
-	void defineTable(unsigned char /* position */, unsigned short /* leftOffset */) {}
+	void defineTable(unsigned char /* position */, unsigned short /* leftOffset */) override {}
 	void addTableColumnDefinition(unsigned /* width */, unsigned /* leftGutter */, unsigned /* rightGutter */,
-	                              unsigned /* attributes */, unsigned char /* alignment */) {}
-	void startTable();
-	void closeCell() {}
-	void closeRow() {}
-	void setTableCellSpan(unsigned short /* colSpan */, unsigned short /* rowSpan */) {}
-	void setTableCellFillColor(const RGBSColor * /* cellFillColor */) {}
-	void endTable() {}
-	void undoChange(unsigned char undoType, unsigned short undoLevel);
-	void setTextColor(const RGBSColor * /* fontColor */) {}
-	void setTextFont(const librevenge::RVNGString & /* fontName */) {}
-	void setFontSize(unsigned short /* fontSize */) {}
-	void insertPageNumber(const librevenge::RVNGString & /* pageNumber */) {}
-	void insertNoteReference(const librevenge::RVNGString & /* noteReference */) {}
-	void insertNote(WPXNoteType /* noteType */, const WP3SubDocument * /* subDocument */)
+	                              unsigned /* attributes */, unsigned char /* alignment */) override {}
+	void startTable() override;
+	void closeCell() override {}
+	void closeRow() override {}
+	void setTableCellSpan(unsigned short /* colSpan */, unsigned short /* rowSpan */) override {}
+	void setTableCellFillColor(const RGBSColor * /* cellFillColor */) override {}
+	void endTable() override {}
+	void undoChange(unsigned char undoType, unsigned short undoLevel) override;
+	void setTextColor(const RGBSColor * /* fontColor */) override {}
+	void setTextFont(const librevenge::RVNGString & /* fontName */) override {}
+	void setFontSize(unsigned short /* fontSize */) override {}
+	void insertPageNumber(const librevenge::RVNGString & /* pageNumber */) override {}
+	void insertNoteReference(const librevenge::RVNGString & /* noteReference */) override {}
+	void insertNote(WPXNoteType /* noteType */, const WP3SubDocument * /* subDocument */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP3SubDocument *subDocument);
-	void suppressPage(unsigned short suppressCode);
-	void backTab()
+	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP3SubDocument *subDocument) override;
+	void suppressPage(unsigned short suppressCode) override;
+	void backTab() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void leftIndent() {}
-	void leftIndent(double /* offset */) {}
-	void leftRightIndent() {}
-	void leftRightIndent(double /* offset */) {}
+	void leftIndent() override {}
+	void leftIndent(double /* offset */) override {}
+	void leftRightIndent() override {}
+	void leftRightIndent(double /* offset */) override {}
 	void insertPicture(double /* height */, double /* width */, double /* verticalOffset */, double /* horizontalOffset */, unsigned char /* leftColumn */, unsigned char /* rightColumn */,
-	                   unsigned short /* figureFlags */, const librevenge::RVNGBinaryData & /* binaryData */) {}
+	                   unsigned short /* figureFlags */, const librevenge::RVNGBinaryData & /* binaryData */) override {}
 	void insertTextBox(double /* height */, double /* width */, double /* verticalOffset */, double /* horizontalOffset */, unsigned char /* leftColumn */, unsigned char /* rightColumn */,
-	                   unsigned short /* figureFlags */, const WP3SubDocument * /* subDocument */, const WP3SubDocument * /* caption */) {}
+	                   unsigned short /* figureFlags */, const WP3SubDocument * /* subDocument */, const WP3SubDocument * /* caption */) override {}
 	void insertWP51Table(double /* height */, double /* width */, double /* verticalOffset */, double /* horizontalOffset */, unsigned char /* leftColumn */, unsigned char /* rightColumn */,
-	                     unsigned short /* figureFlags */, const WP3SubDocument * /* subDocument */, const WP3SubDocument * /* caption */) {}
+	                     unsigned short /* figureFlags */, const WP3SubDocument * /* subDocument */, const WP3SubDocument * /* caption */) override {}
 
 protected:
 	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, int nextTableIndice = 0);

@@ -32,9 +32,9 @@ class WP1JustificationGroup : public WP1FixedLengthGroup
 {
 public:
 	WP1JustificationGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1JustificationGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1JustificationGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	unsigned char m_justification;

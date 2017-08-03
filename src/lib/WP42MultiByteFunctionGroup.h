@@ -34,7 +34,7 @@ class WP42MultiByteFunctionGroup : public WP42Part
 {
 public:
 	WP42MultiByteFunctionGroup(unsigned char group); // WP42MultiByteFunctionGroup should _never_ be constructed, only its inherited classes
-	virtual ~WP42MultiByteFunctionGroup() {}
+	~WP42MultiByteFunctionGroup() override {}
 
 	static WP42MultiByteFunctionGroup *constructMultiByteFunctionGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
 

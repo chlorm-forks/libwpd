@@ -34,7 +34,7 @@ class WP6HyperlinkPacket : public WP6PrefixDataPacket
 {
 public:
 	WP6HyperlinkPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 
 	const librevenge::RVNGString &getTarget() const;
 

@@ -35,10 +35,10 @@ class WP3ExtendedCharacterGroup : public WP3FixedLengthGroup
 {
 public:
 	WP3ExtendedCharacterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 
 protected:
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 
 private:
 	unsigned char m_macCharacter;

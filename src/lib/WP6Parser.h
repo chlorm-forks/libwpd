@@ -37,10 +37,10 @@ class WP6Parser : public WPXParser
 {
 public:
 	WP6Parser(librevenge::RVNGInputStream *input, WPXHeader *header, WPXEncryption *encryption);
-	~WP6Parser();
+	~WP6Parser() override;
 
-	void parse(librevenge::RVNGTextInterface *documentInterface);
-	void parseSubDocument(librevenge::RVNGTextInterface *documentInterface);
+	void parse(librevenge::RVNGTextInterface *documentInterface) override;
+	void parseSubDocument(librevenge::RVNGTextInterface *documentInterface) override;
 
 	static void parseDocument(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP6Listener *listener);
 

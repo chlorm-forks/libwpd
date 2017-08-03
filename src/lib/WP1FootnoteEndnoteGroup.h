@@ -37,9 +37,9 @@ class WP1FootnoteEndnoteGroup : public WP1VariableLengthGroup
 {
 public:
 	WP1FootnoteEndnoteGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1FootnoteEndnoteGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1FootnoteEndnoteGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	WP1FootnoteEndnoteGroup(const WP1FootnoteEndnoteGroup &);

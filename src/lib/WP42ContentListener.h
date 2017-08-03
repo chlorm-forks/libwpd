@@ -46,41 +46,41 @@ class WP42ContentListener : public WP42Listener, protected WPXContentListener
 {
 public:
 	WP42ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP42SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
-	~WP42ContentListener();
+	~WP42ContentListener() override;
 
-	void startDocument()
+	void startDocument() override
 	{
 		WPXContentListener::startDocument();
 	}
-	void startSubDocument()
+	void startSubDocument() override
 	{
 		WPXContentListener::startSubDocument();
 	}
-	void insertCharacter(unsigned character);
-	void insertTab(unsigned char tabType, double tabPosition);
-	void insertBreak(unsigned char breakType)
+	void insertCharacter(unsigned character) override;
+	void insertTab(unsigned char tabType, double tabPosition) override;
+	void insertBreak(unsigned char breakType) override
 	{
 		WPXContentListener::insertBreak(breakType);
 	}
-	void insertEOL();
-	void attributeChange(bool isOn, unsigned char attribute);
-	void marginReset(unsigned char leftMargin, unsigned char rightMargin);
-	void headerFooterGroup(unsigned char headerFooterDefinition, WP42SubDocument *subDocument);
-	void suppressPageCharacteristics(unsigned char /* suppressCode */) {}
-	void endDocument()
+	void insertEOL() override;
+	void attributeChange(bool isOn, unsigned char attribute) override;
+	void marginReset(unsigned char leftMargin, unsigned char rightMargin) override;
+	void headerFooterGroup(unsigned char headerFooterDefinition, WP42SubDocument *subDocument) override;
+	void suppressPageCharacteristics(unsigned char /* suppressCode */) override {}
+	void endDocument() override
 	{
 		WPXContentListener::endDocument();
 	}
-	void endSubDocument()
+	void endSubDocument() override
 	{
 		WPXContentListener::endSubDocument();
 	}
 
 protected:
-	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0);
+	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0) override;
 
-	void _flushText();
-	void _changeList() {}
+	void _flushText() override;
+	void _changeList() override {}
 
 private:
 	WP42ContentListener(const WP42ContentListener &);

@@ -34,7 +34,7 @@ class WP5Header : public WPXHeader
 public:
 	WP5Header(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned documentOffset, unsigned char productType,
 	          unsigned char fileType, unsigned char majorVersion, unsigned char minorVersion, unsigned short documentEncryption);
-	~WP5Header() {}
+	~WP5Header() override {}
 };
 #endif /* _WP5HEADER_H  */
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

@@ -36,10 +36,10 @@ class WP6GeneralTextPacket : public WP6PrefixDataPacket
 {
 public:
 	WP6GeneralTextPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
-	~WP6GeneralTextPacket();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener) const;
-	WP6SubDocument *getSubDocument() const
+	~WP6GeneralTextPacket() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) const override;
+	WP6SubDocument *getSubDocument() const override
 	{
 		return m_subDocument;
 	}

@@ -32,9 +32,9 @@ class WP1MarginReleaseGroup : public WP1FixedLengthGroup
 {
 public:
 	WP1MarginReleaseGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1MarginReleaseGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1MarginReleaseGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	unsigned short m_release;

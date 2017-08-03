@@ -38,9 +38,9 @@ class WP3WindowGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3WindowGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3WindowGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3WindowGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	unsigned short m_figureFlags;

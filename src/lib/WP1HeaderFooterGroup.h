@@ -34,9 +34,9 @@ class WP1HeaderFooterGroup : public WP1VariableLengthGroup
 {
 public:
 	WP1HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1HeaderFooterGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1HeaderFooterGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	WP1HeaderFooterGroup(const WP1HeaderFooterGroup &);

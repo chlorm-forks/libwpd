@@ -36,9 +36,9 @@ class WP3DefinitionGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3DefinitionGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3DefinitionGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3DefinitionGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	/* Variables used for subgroup 0x01 Set Columns On/Off */

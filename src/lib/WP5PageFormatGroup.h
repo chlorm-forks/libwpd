@@ -35,9 +35,9 @@ class WP5PageFormatGroup : public WP5VariableLengthGroup
 {
 public:
 	WP5PageFormatGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP5PageFormatGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP5Listener *listener);
+	~WP5PageFormatGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP5Listener *listener) override;
 
 private:
 	// variables needed for subgroup 1 (Left/Right Margin Set)

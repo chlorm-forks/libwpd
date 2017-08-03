@@ -33,8 +33,8 @@ class WP5ListFontsUsedPacket : public WP5GeneralPacketData
 {
 public:
 	WP5ListFontsUsedPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize, unsigned short packetType);
-	~WP5ListFontsUsedPacket();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned dataSize);
+	~WP5ListFontsUsedPacket() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned dataSize) override;
 	unsigned getFontNameOffset(unsigned fontNumber) const;
 	double getFontSize(unsigned fontNumber) const;
 

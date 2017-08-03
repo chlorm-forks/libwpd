@@ -35,7 +35,7 @@ class WP6ParagraphGroup_LineSpacingSubGroup : public WP6VariableLengthGroup_SubG
 {
 public:
 	WP6ParagraphGroup_LineSpacingSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	double m_lineSpacing;
@@ -45,7 +45,7 @@ class WP6ParagraphGroup_JustificationModeSubGroup : public WP6VariableLengthGrou
 {
 public:
 	WP6ParagraphGroup_JustificationModeSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	unsigned char m_justification;
@@ -55,7 +55,7 @@ class WP6ParagraphGroup_SpacingAfterParagraphSubGroup : public WP6VariableLength
 {
 public:
 	WP6ParagraphGroup_SpacingAfterParagraphSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const unsigned short sizeNonDeletable);
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	double m_spacingAfterParagraphAbsolute;
@@ -67,8 +67,8 @@ class WP6ParagraphGroup_TabSetSubGroup : public WP6VariableLengthGroup_SubGroup
 {
 public:
 	WP6ParagraphGroup_TabSetSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP6ParagraphGroup_TabSetSubGroup();
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	~WP6ParagraphGroup_TabSetSubGroup() override;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	bool m_isRelative;
@@ -81,7 +81,7 @@ class WP6ParagraphGroup_IndentFirstLineSubGroup : public WP6VariableLengthGroup_
 {
 public:
 	WP6ParagraphGroup_IndentFirstLineSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	signed short m_firstLineOffset;
@@ -91,7 +91,7 @@ class WP6ParagraphGroup_LeftMarginAdjustmentSubGroup : public WP6VariableLengthG
 {
 public:
 	WP6ParagraphGroup_LeftMarginAdjustmentSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	signed short m_leftMargin;
@@ -101,7 +101,7 @@ class WP6ParagraphGroup_RightMarginAdjustmentSubGroup : public WP6VariableLength
 {
 public:
 	WP6ParagraphGroup_RightMarginAdjustmentSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	signed short m_rightMargin;
@@ -111,7 +111,7 @@ class WP6ParagraphGroup_OutlineDefineSubGroup : public WP6VariableLengthGroup_Su
 {
 public:
 	WP6ParagraphGroup_OutlineDefineSubGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const;
+	void parse(WP6Listener *listener, const unsigned char numPrefixIDs, unsigned short const *prefixIDs) const override;
 
 private:
 	unsigned short m_outlineHash;
@@ -123,9 +123,9 @@ class WP6ParagraphGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6ParagraphGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP6ParagraphGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener);
+	~WP6ParagraphGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) override;
 private:
 	WP6ParagraphGroup(const WP6ParagraphGroup &);
 	WP6ParagraphGroup &operator=(const WP6ParagraphGroup &);

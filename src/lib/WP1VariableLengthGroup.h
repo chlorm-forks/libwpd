@@ -34,7 +34,7 @@ class WP1VariableLengthGroup : public WP1Part
 {
 public:
 	WP1VariableLengthGroup(unsigned char group); // WP1VariableLengthGroup should _never_ be constructed, only its inherited classes
-	virtual ~WP1VariableLengthGroup() {}
+	~WP1VariableLengthGroup() override {}
 
 	static WP1VariableLengthGroup *constructVariableLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
 

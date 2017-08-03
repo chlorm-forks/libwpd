@@ -33,7 +33,7 @@ class WP61Header : public WP6Header
 public:
 	WP61Header(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned documentOffset, unsigned char productType,
 	           unsigned char fileType, unsigned char majorVersion, unsigned char minorVersion, unsigned short documentEncryption);
-	~WP61Header();
+	~WP61Header() override;
 
 	unsigned getDocumentSize() const
 	{

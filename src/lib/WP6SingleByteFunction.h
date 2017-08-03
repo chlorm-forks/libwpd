@@ -38,91 +38,91 @@ public:
 class WP6SpaceFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6HardSpaceFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6EOLFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6EOCFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6EOPFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6SoftEOPFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6SoftHyphenFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6HyphenFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6TableOffFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6TableCellFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6TableRowFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6TableOffAtSoftEOPFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6TableRowAtSoftEOPFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6TableRowAtEOPFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 class WP6TableRowAtEOCFunction : public WP6SingleByteFunction
 {
 public:
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 };
 
 #endif /* WP6SINGLEBYTEFUNCTION_H */

@@ -34,10 +34,10 @@ class WP42Parser : public WPXParser
 {
 public:
 	WP42Parser(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP42Parser();
+	~WP42Parser() override;
 
-	void parse(librevenge::RVNGTextInterface *documentInterface);
-	void parseSubDocument(librevenge::RVNGTextInterface *documentInterface);
+	void parse(librevenge::RVNGTextInterface *documentInterface) override;
+	void parseSubDocument(librevenge::RVNGTextInterface *documentInterface) override;
 
 	static void parseDocument(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP42Listener *listener);
 

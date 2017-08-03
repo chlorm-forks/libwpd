@@ -39,55 +39,55 @@ class WP1StylesListener : public WP1Listener, protected WPXStylesListener
 {
 public:
 	WP1StylesListener(std::list<WPXPageSpan> &pageList, std::vector<WP1SubDocument *> &subDocuments);
-	~WP1StylesListener() {}
+	~WP1StylesListener() override {}
 
-	void startDocument() {}
-	void startSubDocument() {}
-	void insertCharacter(unsigned /* character */)
+	void startDocument() override {}
+	void startSubDocument() override {}
+	void insertCharacter(unsigned /* character */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertExtendedCharacter(unsigned char /* extendedCharacter */)
+	void insertExtendedCharacter(unsigned char /* extendedCharacter */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertTab()
+	void insertTab() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertEOL()
+	void insertEOL() override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void insertBreak(unsigned char breakType);
-	void insertNote(WPXNoteType /* noteType */, WP1SubDocument * /* subDocument */) {}
-	void attributeChange(bool /* isOn */, unsigned char /* attribute */) {}
-	void fontPointSize(unsigned char /* pointSize */) {}
-	void fontId(unsigned short /* id */) {}
-	void marginReset(unsigned short leftMargin, unsigned short rightMargin);
-	void topMarginSet(unsigned short topMargin);
-	void bottomMarginSet(unsigned short bottomMargin);
-	void leftIndent(unsigned short /* leftMarginOffset */)
+	void insertBreak(unsigned char breakType) override;
+	void insertNote(WPXNoteType /* noteType */, WP1SubDocument * /* subDocument */) override {}
+	void attributeChange(bool /* isOn */, unsigned char /* attribute */) override {}
+	void fontPointSize(unsigned char /* pointSize */) override {}
+	void fontId(unsigned short /* id */) override {}
+	void marginReset(unsigned short leftMargin, unsigned short rightMargin) override;
+	void topMarginSet(unsigned short topMargin) override;
+	void bottomMarginSet(unsigned short bottomMargin) override;
+	void leftIndent(unsigned short /* leftMarginOffset */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void leftRightIndent(unsigned short /* leftRightMarginOffset */)
+	void leftRightIndent(unsigned short /* leftRightMarginOffset */) override
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void leftMarginRelease(unsigned short /* release */) {}
-	void setTabs(const std::vector<WPXTabStop> & /* tabStops */) {}
-	void headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument);
-	void suppressPageCharacteristics(unsigned char suppressCode);
-	void justificationChange(unsigned char /* justification */) {}
-	void lineSpacingChange(unsigned char /* spacing */) {}
-	void flushRightOn() {}
-	void flushRightOff() {}
-	void centerOn() {}
-	void centerOff() {}
-	void endDocument();
-	void endSubDocument();
-	void insertPicture(unsigned short /* width */, unsigned short /* height */, const librevenge::RVNGBinaryData & /* binaryData */) {}
+	void leftMarginRelease(unsigned short /* release */) override {}
+	void setTabs(const std::vector<WPXTabStop> & /* tabStops */) override {}
+	void headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument) override;
+	void suppressPageCharacteristics(unsigned char suppressCode) override;
+	void justificationChange(unsigned char /* justification */) override {}
+	void lineSpacingChange(unsigned char /* spacing */) override {}
+	void flushRightOn() override {}
+	void flushRightOff() override {}
+	void centerOn() override {}
+	void centerOff() override {}
+	void endDocument() override;
+	void endSubDocument() override;
+	void insertPicture(unsigned short /* width */, unsigned short /* height */, const librevenge::RVNGBinaryData & /* binaryData */) override {}
 
 protected:
 	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, int nextTableIndice = 0);

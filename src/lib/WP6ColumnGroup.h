@@ -38,8 +38,8 @@ class WP6ColumnGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6ColumnGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) override;
 
 private:
 	// variables needed for subgroup 0 and 1 (Left/Right Margin Set)

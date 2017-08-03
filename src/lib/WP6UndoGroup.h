@@ -33,10 +33,10 @@ class WP6UndoGroup : public WP6FixedLengthGroup
 {
 public:
 	WP6UndoGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	void parse(WP6Listener *listener);
+	void parse(WP6Listener *listener) override;
 
 protected:
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 
 private:
 	unsigned char m_undoType;

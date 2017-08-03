@@ -33,8 +33,8 @@ class WP6DisplayNumberReferenceGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6DisplayNumberReferenceGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) override;
 
 private:
 	unsigned char m_levelNumberToDisplay;

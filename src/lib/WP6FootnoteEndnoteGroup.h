@@ -33,8 +33,8 @@ class WP6FootnoteEndnoteGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6FootnoteEndnoteGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) override;
 };
 
 #endif /* WP6FOOTNOTEENDNOTEGROUP_H */

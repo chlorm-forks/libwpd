@@ -53,84 +53,84 @@ class WP3ContentListener : public WP3Listener, protected WPXContentListener
 {
 public:
 	WP3ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP3SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
-	~WP3ContentListener();
+	~WP3ContentListener() override;
 
-	void startDocument()
+	void startDocument() override
 	{
 		WPXContentListener::startDocument();
 	}
-	void startSubDocument()
+	void startSubDocument() override
 	{
 		WPXContentListener::startSubDocument();
 	}
-	void insertCharacter(unsigned character);
-	void insertTab();
-	void insertTab(unsigned char tabType, double tabPosition);
-	void insertBreak(unsigned char breakType)
+	void insertCharacter(unsigned character) override;
+	void insertTab() override;
+	void insertTab(unsigned char tabType, double tabPosition) override;
+	void insertBreak(unsigned char breakType) override
 	{
 		WPXContentListener::insertBreak(breakType);
 	}
-	void insertEOL();
-	void attributeChange(bool isOn, unsigned char attribute);
-	void lineSpacingChange(double lineSpacing)
+	void insertEOL() override;
+	void attributeChange(bool isOn, unsigned char attribute) override;
+	void lineSpacingChange(double lineSpacing) override
 	{
 		WPXContentListener::lineSpacingChange(lineSpacing);
 	}
-	void pageMarginChange(unsigned char /* side */, unsigned short /* margin */) {}
-	void pageFormChange(unsigned short /* length */, unsigned short /* width */, WPXFormOrientation /* orientation */) {}
-	void marginChange(unsigned char side, unsigned short margin);
-	void indentFirstLineChange(double offset);
-	void setTabs(bool isRelative, const std::vector<WPXTabStop> tabStops);
+	void pageMarginChange(unsigned char /* side */, unsigned short /* margin */) override {}
+	void pageFormChange(unsigned short /* length */, unsigned short /* width */, WPXFormOrientation /* orientation */) override {}
+	void marginChange(unsigned char side, unsigned short margin) override;
+	void indentFirstLineChange(double offset) override;
+	void setTabs(bool isRelative, const std::vector<WPXTabStop> tabStops) override;
 	void columnChange(WPXTextColumnType columnType, unsigned char numColumns, const std::vector<double> &columnWidth,
-	                  const std::vector<bool> &isFixedWidth);
-	void endDocument()
+	                  const std::vector<bool> &isFixedWidth) override;
+	void endDocument() override
 	{
 		WPXContentListener::endDocument();
 	}
-	void endSubDocument()
+	void endSubDocument() override
 	{
 		WPXContentListener::endSubDocument();
 	}
 
-	void defineTable(unsigned char position, unsigned short leftOffset);
+	void defineTable(unsigned char position, unsigned short leftOffset) override;
 	void addTableColumnDefinition(unsigned width, unsigned leftGutter, unsigned rightGutter,
-	                              unsigned attributes, unsigned char alignment);
-	void startTable();
+	                              unsigned attributes, unsigned char alignment) override;
+	void startTable() override;
 	void insertRow();
 	void insertCell();
-	void closeCell();
-	void closeRow();
-	void setTableCellSpan(unsigned short colSpan, unsigned short rowSpan);
-	void setTableCellFillColor(const RGBSColor *cellFillColor);
-	void endTable();
-	void undoChange(unsigned char undoType, unsigned short undoLevel);
-	void justificationChange(unsigned char justification);
-	void setTextColor(const RGBSColor *fontColor);
-	void setTextFont(const librevenge::RVNGString &fontName);
-	void setFontSize(unsigned short fontSize);
-	void insertPageNumber(const librevenge::RVNGString &pageNumber);
-	void insertNoteReference(const librevenge::RVNGString &noteReference);
-	void insertNote(WPXNoteType noteType, const WP3SubDocument *subDocument);
-	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP3SubDocument *subDocument);
-	void suppressPage(unsigned short /* suppressCode */) {}
-	void backTab();
-	void leftIndent();
-	void leftIndent(double offset);
-	void leftRightIndent();
-	void leftRightIndent(double offset);
+	void closeCell() override;
+	void closeRow() override;
+	void setTableCellSpan(unsigned short colSpan, unsigned short rowSpan) override;
+	void setTableCellFillColor(const RGBSColor *cellFillColor) override;
+	void endTable() override;
+	void undoChange(unsigned char undoType, unsigned short undoLevel) override;
+	void justificationChange(unsigned char justification) override;
+	void setTextColor(const RGBSColor *fontColor) override;
+	void setTextFont(const librevenge::RVNGString &fontName) override;
+	void setFontSize(unsigned short fontSize) override;
+	void insertPageNumber(const librevenge::RVNGString &pageNumber) override;
+	void insertNoteReference(const librevenge::RVNGString &noteReference) override;
+	void insertNote(WPXNoteType noteType, const WP3SubDocument *subDocument) override;
+	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP3SubDocument *subDocument) override;
+	void suppressPage(unsigned short /* suppressCode */) override {}
+	void backTab() override;
+	void leftIndent() override;
+	void leftIndent(double offset) override;
+	void leftRightIndent() override;
+	void leftRightIndent(double offset) override;
 	void insertPicture(double height, double width, double verticalOffset, double horizontalOffset, unsigned char leftColumn, unsigned char rightColumn,
-	                   unsigned short figureFlags, const librevenge::RVNGBinaryData &binaryData);
+	                   unsigned short figureFlags, const librevenge::RVNGBinaryData &binaryData) override;
 	void insertTextBox(double height, double width, double verticalOffset, double horizontalOffset, unsigned char leftColumn, unsigned char rightColumn,
-	                   unsigned short figureFlags, const WP3SubDocument *subDocument, const WP3SubDocument *caption);
+	                   unsigned short figureFlags, const WP3SubDocument *subDocument, const WP3SubDocument *caption) override;
 	void insertWP51Table(double height, double width, double verticalOffset, double horizontalOffset, unsigned char leftColumn, unsigned char rightColumn,
-	                     unsigned short figureFlags, const WP3SubDocument *subDocument, const WP3SubDocument *caption);
+	                     unsigned short figureFlags, const WP3SubDocument *subDocument, const WP3SubDocument *caption) override;
 
 protected:
-	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0);
-	void _openParagraph();
+	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0) override;
+	void _openParagraph() override;
 
-	void _flushText();
-	void _changeList() {}
+	void _flushText() override;
+	void _changeList() override {}
 
 	void _handleFrameParameters(librevenge::RVNGPropertyList &propList, double height, double width, double verticalOffset, double horizontalOffset, unsigned char leftColumn, unsigned char rightColumn,
 	                            unsigned short figureFlags);

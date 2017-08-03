@@ -35,9 +35,9 @@ class WP1PictureGroup : public WP1VariableLengthGroup
 {
 public:
 	WP1PictureGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1PictureGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1PictureGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	WP1PictureGroup(const WP1PictureGroup &);

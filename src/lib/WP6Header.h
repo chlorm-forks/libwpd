@@ -33,7 +33,7 @@ class WP6Header : public WPXHeader
 public:
 	WP6Header(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned documentOffset, unsigned char productType,
 	          unsigned char fileType, unsigned char majorVersion, unsigned char minorVersion, unsigned short documentEncryption);
-	virtual ~WP6Header() {}
+	~WP6Header() override {}
 
 	unsigned short getIndexHeaderOffset() const
 	{

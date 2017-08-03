@@ -34,9 +34,9 @@ class WP6GraphicsCachedFileDataPacket : public WP6PrefixDataPacket
 {
 public:
 	WP6GraphicsCachedFileDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
-	~WP6GraphicsCachedFileDataPacket();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener * /* listener */) const {}
+	~WP6GraphicsCachedFileDataPacket() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener * /* listener */) const override {}
 	const librevenge::RVNGBinaryData *getBinaryObject() const
 	{
 		return m_object;

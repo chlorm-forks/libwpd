@@ -36,9 +36,9 @@ class WP3PageFormatGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3PageFormatGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3PageFormatGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3PageFormatGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	// variables needed for subgroup 0x01 (Horizontal Margins)

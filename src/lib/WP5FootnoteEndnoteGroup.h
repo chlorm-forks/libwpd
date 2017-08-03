@@ -35,9 +35,9 @@ class WP5FootnoteEndnoteGroup : public WP5VariableLengthGroup
 {
 public:
 	WP5FootnoteEndnoteGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP5FootnoteEndnoteGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP5Listener *listener);
+	~WP5FootnoteEndnoteGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP5Listener *listener) override;
 
 private:
 	WP5FootnoteEndnoteGroup(const WP5FootnoteEndnoteGroup &);

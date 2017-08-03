@@ -35,9 +35,9 @@ class WP1MarginResetGroup : public WP1FixedLengthGroup
 {
 public:
 	WP1MarginResetGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1MarginResetGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1MarginResetGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	unsigned short m_leftMargin, m_rightMargin;

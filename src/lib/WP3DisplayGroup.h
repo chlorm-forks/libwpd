@@ -34,9 +34,9 @@ class WP3DisplayGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3DisplayGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3DisplayGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3DisplayGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	librevenge::RVNGString m_noteReference;

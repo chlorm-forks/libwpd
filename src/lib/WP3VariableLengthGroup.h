@@ -35,7 +35,7 @@ class WP3VariableLengthGroup : public WP3Part
 {
 public:
 	WP3VariableLengthGroup(); // WP3VariableLengthGroup should _never_ be constructed, only its inherited classes
-	virtual ~WP3VariableLengthGroup() {}
+	~WP3VariableLengthGroup() override {}
 
 	static WP3VariableLengthGroup *constructVariableLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const unsigned char group);
 

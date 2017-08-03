@@ -33,9 +33,9 @@ class WP42MarginResetGroup : public WP42MultiByteFunctionGroup
 {
 public:
 	WP42MarginResetGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP42MarginResetGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP42Listener *listener);
+	~WP42MarginResetGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP42Listener *listener) override;
 
 private:
 	unsigned char m_leftMargin, m_rightMargin;

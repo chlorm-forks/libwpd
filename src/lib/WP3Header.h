@@ -33,7 +33,7 @@ class WP3Header : public WPXHeader
 public:
 	WP3Header(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned documentOffset, unsigned char productType,
 	          unsigned char fileType, unsigned char majorVersion, unsigned char minorVersion, unsigned short documentEncryption);
-	~WP3Header() {}
+	~WP3Header() override {}
 };
 #endif /* _WP3HEADER_H  */
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

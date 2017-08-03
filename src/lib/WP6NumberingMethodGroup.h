@@ -27,9 +27,9 @@ class WP6NumberingMethodGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6NumberingMethodGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP6NumberingMethodGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener);
+	~WP6NumberingMethodGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) override;
 private:
 	unsigned char m_levelNumber;
 	unsigned char m_numberingMethod;

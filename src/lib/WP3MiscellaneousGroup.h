@@ -35,9 +35,9 @@ class WP3MiscellaneousGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3MiscellaneousGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3MiscellaneousGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3MiscellaneousGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	// variables needed for subgroup 4 (Page Size Override)

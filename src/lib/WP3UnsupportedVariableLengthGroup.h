@@ -35,7 +35,7 @@ class WP3UnsupportedVariableLengthGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3UnsupportedVariableLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener * /* listener */) {}
+	void parse(WP3Listener * /* listener */) override {}
 };
 
 #endif /* WP3UNSUPPORTEDVARIABLELENGTHGROUP_H */

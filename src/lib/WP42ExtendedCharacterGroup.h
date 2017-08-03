@@ -32,9 +32,9 @@ class WP42ExtendedCharacterGroup : public WP42MultiByteFunctionGroup
 {
 public:
 	WP42ExtendedCharacterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP42ExtendedCharacterGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP42Listener *listener);
+	~WP42ExtendedCharacterGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP42Listener *listener) override;
 
 private:
 	unsigned char m_extendedCharacter;

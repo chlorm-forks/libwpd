@@ -38,8 +38,8 @@ class WP42UnsupportedMultiByteFunctionGroup : public WP42MultiByteFunctionGroup
 public:
 	WP42UnsupportedMultiByteFunctionGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
 
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP42Listener * /* listener */) {}
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP42Listener * /* listener */) override {}
 };
 
 #endif /* WP42UNSUPPORTEDMULTIBYTEFUNCTIONGROUP_H */

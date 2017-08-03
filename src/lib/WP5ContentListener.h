@@ -51,76 +51,76 @@ class WP5ContentListener : public WP5Listener, protected WPXContentListener
 {
 public:
 	WP5ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP5SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
-	~WP5ContentListener();
+	~WP5ContentListener() override;
 
-	void startDocument()
+	void startDocument() override
 	{
 		WPXContentListener::startDocument();
 	}
-	void startSubDocument()
+	void startSubDocument() override
 	{
 		WPXContentListener::startSubDocument();
 	}
-	void setFont(const librevenge::RVNGString &fontName, double fontSize);
-	void setTabs(const std::vector<WPXTabStop> &tabStops, unsigned short tabOffset);
-	void insertCharacter(unsigned character);
-	void insertTab(unsigned char tabType, double tabPosition);
-	void insertIndent(unsigned char indentType, double indentPosition);
-	void insertEOL();
-	void insertBreak(unsigned char breakType)
+	void setFont(const librevenge::RVNGString &fontName, double fontSize) override;
+	void setTabs(const std::vector<WPXTabStop> &tabStops, unsigned short tabOffset) override;
+	void insertCharacter(unsigned character) override;
+	void insertTab(unsigned char tabType, double tabPosition) override;
+	void insertIndent(unsigned char indentType, double indentPosition) override;
+	void insertEOL() override;
+	void insertBreak(unsigned char breakType) override
 	{
 		WPXContentListener::insertBreak(breakType);
 	}
-	void lineSpacingChange(double lineSpacing)
+	void lineSpacingChange(double lineSpacing) override
 	{
 		WPXContentListener::lineSpacingChange(lineSpacing);
 	}
-	void justificationChange(unsigned char justification)
+	void justificationChange(unsigned char justification) override
 	{
 		WPXContentListener::justificationChange(justification);
 	}
-	void characterColorChange(unsigned char red, unsigned char green, unsigned char blue);
-	void attributeChange(bool isOn, unsigned char attribute);
-	void pageMarginChange(unsigned char /* side */, unsigned short /* margin */) {}
-	void pageFormChange(unsigned short /* length */, unsigned short /* width */, WPXFormOrientation /* orientation */) {}
-	void marginChange(unsigned char side, unsigned short margin);
+	void characterColorChange(unsigned char red, unsigned char green, unsigned char blue) override;
+	void attributeChange(bool isOn, unsigned char attribute) override;
+	void pageMarginChange(unsigned char /* side */, unsigned short /* margin */) override {}
+	void pageFormChange(unsigned short /* length */, unsigned short /* width */, WPXFormOrientation /* orientation */) override {}
+	void marginChange(unsigned char side, unsigned short margin) override;
 	void paragraphMarginChange(unsigned char /* side */, signed short /* margin */) {}
-	void endDocument()
+	void endDocument() override
 	{
 		WPXContentListener::endDocument();
 	}
-	void endSubDocument()
+	void endSubDocument() override
 	{
 		WPXContentListener::endSubDocument();
 	}
 
-	void defineTable(unsigned char position, unsigned short leftOffset);
+	void defineTable(unsigned char position, unsigned short leftOffset) override;
 	void addTableColumnDefinition(unsigned width, unsigned leftGutter, unsigned rightGutter,
-	                              unsigned attributes, unsigned char alignment);
-	void startTable();
-	void insertRow(unsigned short rowHeight, bool isMinimumHeight, bool isHeaderRow);
+	                              unsigned attributes, unsigned char alignment) override;
+	void startTable() override;
+	void insertRow(unsigned short rowHeight, bool isMinimumHeight, bool isHeaderRow) override;
 	void insertCell(unsigned char colSpan, unsigned char rowSpan, unsigned char borderBits,
 	                const RGBSColor *cellFgColor, const RGBSColor *cellBgColor,
 	                const RGBSColor *cellBorderColor, WPXVerticalAlignment cellVerticalAlignment,
-	                bool useCellAttributes, unsigned cellAttributes);
-	void endTable();
+	                bool useCellAttributes, unsigned cellAttributes) override;
+	void endTable() override;
 
-	void insertNoteReference(const librevenge::RVNGString &noteReference);
-	void insertNote(WPXNoteType noteType, const WP5SubDocument *subDocument);
-	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP5SubDocument *subDocument);
-	void suppressPageCharacteristics(unsigned char /* suppressCode */) {}
+	void insertNoteReference(const librevenge::RVNGString &noteReference) override;
+	void insertNote(WPXNoteType noteType, const WP5SubDocument *subDocument) override;
+	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP5SubDocument *subDocument) override;
+	void suppressPageCharacteristics(unsigned char /* suppressCode */) override {}
 
 	void setDefaultFont(const librevenge::RVNGString &fontName, double fontSize);
 
-	void boxOn(unsigned char positionAndType, unsigned char alignment, unsigned short width, unsigned short height, unsigned short x, unsigned short y);
-	virtual void boxOff();
-	virtual void insertGraphicsData(const librevenge::RVNGBinaryData *data);
+	void boxOn(unsigned char positionAndType, unsigned char alignment, unsigned short width, unsigned short height, unsigned short x, unsigned short y) override;
+	void boxOff() override;
+	void insertGraphicsData(const librevenge::RVNGBinaryData *data) override;
 
 protected:
-	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0);
+	void _handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType subDocumentType, WPXTableList tableList, unsigned nextTableIndice = 0) override;
 
-	void _flushText();
-	void _changeList() {}
+	void _flushText() override;
+	void _changeList() override {}
 
 private:
 	WP5ContentListener(const WP5ContentListener &);

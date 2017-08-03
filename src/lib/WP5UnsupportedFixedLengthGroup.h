@@ -33,10 +33,10 @@ class WP5UnsupportedFixedLengthGroup : public WP5FixedLengthGroup
 {
 public:
 	WP5UnsupportedFixedLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char groupID);
-	void parse(WP5Listener * /* listener */) {}
+	void parse(WP5Listener * /* listener */) override {}
 
 protected:
-	void _readContents(librevenge::RVNGInputStream * /* input */, WPXEncryption * /* encryption */) {}
+	void _readContents(librevenge::RVNGInputStream * /* input */, WPXEncryption * /* encryption */) override {}
 };
 
 #endif /* WP5UNSUPPORTEDFIXEDLENGTHGROUP_H */

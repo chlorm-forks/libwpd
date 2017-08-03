@@ -33,9 +33,9 @@ class WP3FontGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3FontGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3FontGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3FontGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	/* Set Text Color */

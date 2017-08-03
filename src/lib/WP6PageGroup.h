@@ -33,9 +33,9 @@ class WP6PageGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6PageGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP6PageGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener *listener);
+	~WP6PageGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener *listener) override;
 
 private:
 	// variables needed for subgroup 0 and 1 (Left/Right Margin Set)

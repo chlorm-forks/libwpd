@@ -33,7 +33,7 @@ class WP60Header : public WP6Header
 public:
 	WP60Header(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned documentOffset, unsigned char productType,
 	           unsigned char fileType, unsigned char majorVersion, unsigned char minorVersion, unsigned short documentEncryption);
-	~WP60Header();
+	~WP60Header() override;
 };
 #endif /* _WP60HEADER_H  */
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

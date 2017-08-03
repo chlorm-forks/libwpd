@@ -33,9 +33,9 @@ class WP6TableStylePacket : public WP6PrefixDataPacket
 {
 public:
 	WP6TableStylePacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
-	~WP6TableStylePacket();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener * /*listener*/) const {}
+	~WP6TableStylePacket() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener * /*listener*/) const override {}
 
 private:
 	WP6TableStylePacket(const WP6TableStylePacket &);

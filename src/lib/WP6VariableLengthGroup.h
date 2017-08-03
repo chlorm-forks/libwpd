@@ -41,7 +41,7 @@ class WP6VariableLengthGroup : public WP6Part
 {
 public:
 	WP6VariableLengthGroup(); // WP6VariableLengthGroup should _never_ be constructed, only its inherited classes
-	virtual ~WP6VariableLengthGroup();
+	~WP6VariableLengthGroup() override;
 
 	static WP6VariableLengthGroup *constructVariableLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const unsigned char groupID);
 

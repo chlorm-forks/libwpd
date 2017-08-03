@@ -36,7 +36,7 @@ class WP6UnsupportedVariableLengthGroup : public WP6VariableLengthGroup
 {
 public:
 	WP6UnsupportedVariableLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener * /* listener */) {}
+	void parse(WP6Listener * /* listener */) override {}
 };
 
 #endif /* WP6UNSUPPORTEDVARIABLELENGTHGROUP_H */

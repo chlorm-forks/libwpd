@@ -32,7 +32,7 @@ class WP6DefaultInitialFontPacket : public WP6PrefixDataPacket
 {
 public:
 	WP6DefaultInitialFontPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 	unsigned short getInitialFontDescriptorPID() const
 	{
 		return m_initialFontDescriptorPID;
@@ -41,7 +41,7 @@ public:
 	{
 		return m_pointSize;
 	}
-	void parse(WP6Listener *listener) const;
+	void parse(WP6Listener *listener) const override;
 
 private:
 	unsigned short m_numPrefixIDs;

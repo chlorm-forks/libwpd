@@ -147,7 +147,7 @@ class WPXContentListener : public WPXListener
 {
 protected:
 	WPXContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface);
-	virtual ~WPXContentListener();
+	~WPXContentListener() override;
 
 	void startDocument();
 	void startSubDocument();

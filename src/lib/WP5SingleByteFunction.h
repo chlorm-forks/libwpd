@@ -39,32 +39,32 @@ public:
 class WP5EOLFunction : public WP5SingleByteFunction
 {
 public:
-	void parse(WP5Listener *listener);
+	void parse(WP5Listener *listener) override;
 };
 
 class WP5SpaceFunction : public WP5SingleByteFunction
 {
 public:
-	void parse(WP5Listener *listener);
+	void parse(WP5Listener *listener) override;
 };
 
 class WP5HardSpaceFunction : public WP5SingleByteFunction
 {
 public:
-	void parse(WP5Listener *listener);
+	void parse(WP5Listener *listener) override;
 };
 
 
 class WP5HyphenFunction : public WP5SingleByteFunction
 {
 public:
-	void parse(WP5Listener *listener);
+	void parse(WP5Listener *listener) override;
 };
 
 class WP5SoftHyphenFunction : public WP5SingleByteFunction
 {
 public:
-	void parse(WP5Listener *listener);
+	void parse(WP5Listener *listener) override;
 };
 
 #endif /* WP5SINGLEBYTEFUNCTION_H */

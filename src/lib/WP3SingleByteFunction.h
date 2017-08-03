@@ -39,55 +39,55 @@ public:
 class WP3HardSpaceFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3EOLFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3EOPFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3HyphenFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3SoftHyphenFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3CondensedTabFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3CondensedBackTabFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3CondensedIndentFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 class WP3CondensedLRIndentFunction : public WP3SingleByteFunction
 {
 public:
-	void parse(WP3Listener *listener);
+	void parse(WP3Listener *listener) override;
 };
 
 #endif /* WP3SINGLEBYTEFUNCTION_H */

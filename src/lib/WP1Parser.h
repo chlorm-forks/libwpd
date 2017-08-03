@@ -37,10 +37,10 @@ class WP1Parser : public WPXParser
 {
 public:
 	WP1Parser(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP1Parser();
+	~WP1Parser() override;
 
-	void parse(librevenge::RVNGTextInterface *documentInterface);
-	void parseSubDocument(librevenge::RVNGTextInterface *documentInterface);
+	void parse(librevenge::RVNGTextInterface *documentInterface) override;
+	void parseSubDocument(librevenge::RVNGTextInterface *documentInterface) override;
 
 	static void parseDocument(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP1Listener *listener);
 

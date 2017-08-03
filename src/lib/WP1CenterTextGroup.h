@@ -32,8 +32,8 @@ class WP1CenterTextGroup : public WP1FixedLengthGroup
 {
 public:
 	WP1CenterTextGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1CenterTextGroup();
-	void parse(WP1Listener *listener);
+	~WP1CenterTextGroup() override;
+	void parse(WP1Listener *listener) override;
 };
 
 #endif /* WP1CENTERTEXTGROUP_H */

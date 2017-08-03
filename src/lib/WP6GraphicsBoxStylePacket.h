@@ -35,9 +35,9 @@ class WP6GraphicsBoxStylePacket : public WP6PrefixDataPacket
 {
 public:
 	WP6GraphicsBoxStylePacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
-	~WP6GraphicsBoxStylePacket();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP6Listener * /*listener*/) const {}
+	~WP6GraphicsBoxStylePacket() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP6Listener * /*listener*/) const override {}
 
 	unsigned char getGeneralPositioningFlags() const
 	{

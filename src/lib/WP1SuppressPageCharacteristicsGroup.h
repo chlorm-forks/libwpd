@@ -32,9 +32,9 @@ class WP1SuppressPageCharacteristicsGroup : public WP1FixedLengthGroup
 {
 public:
 	WP1SuppressPageCharacteristicsGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group);
-	~WP1SuppressPageCharacteristicsGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP1Listener *listener);
+	~WP1SuppressPageCharacteristicsGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP1Listener *listener) override;
 
 private:
 	unsigned char m_suppressCode;

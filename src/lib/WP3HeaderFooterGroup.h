@@ -33,9 +33,9 @@ class WP3HeaderFooterGroup : public WP3VariableLengthGroup
 {
 public:
 	WP3HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP3HeaderFooterGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP3Listener *listener);
+	~WP3HeaderFooterGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP3Listener *listener) override;
 
 private:
 	WP3HeaderFooterGroup(const WP3HeaderFooterGroup &);

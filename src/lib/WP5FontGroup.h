@@ -32,10 +32,10 @@ class WP5FontGroup : public WP5VariableLengthGroup
 {
 public:
 	WP5FontGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP5Listener *listener);
+	void parse(WP5Listener *listener) override;
 
 protected:
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 
 private:
 	unsigned char m_red, m_green, m_blue;

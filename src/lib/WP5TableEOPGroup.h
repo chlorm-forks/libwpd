@@ -33,9 +33,9 @@ class WP5TableEOPGroup : public WP5VariableLengthGroup
 {
 public:
 	WP5TableEOPGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	~WP5TableEOPGroup();
-	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
-	void parse(WP5Listener *listener);
+	~WP5TableEOPGroup() override;
+	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
+	void parse(WP5Listener *listener) override;
 
 };
 
