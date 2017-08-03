@@ -188,10 +188,10 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 
 		// cleanup section: free the used resources
 		delete prefixData;
-		for (std::vector<WP5SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
+		for (auto &subDocument : subDocuments)
 		{
-			if (*iterSubDoc)
-				delete (*iterSubDoc);
+			if (subDocument)
+				delete subDocument;
 		}
 	}
 	catch (FileException)
@@ -199,10 +199,10 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
 
 		delete prefixData;
-		for (std::vector<WP5SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
+		for (auto &subDocument : subDocuments)
 		{
-			if (*iterSubDoc)
-				delete (*iterSubDoc);
+			if (subDocument)
+				delete subDocument;
 		}
 
 		throw FileException();
@@ -231,16 +231,16 @@ void WP5Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfac
 		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
 
-		for (std::vector<WP5SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
-			if (*iterSubDoc)
-				delete (*iterSubDoc);
+		for (auto &subDocument : subDocuments)
+			if (subDocument)
+				delete subDocument;
 	}
 	catch (FileException)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
-		for (std::vector<WP5SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
-			if (*iterSubDoc)
-				delete (*iterSubDoc);
+		for (auto &subDocument : subDocuments)
+			if (subDocument)
+				delete subDocument;
 		throw FileException();
 	}
 }

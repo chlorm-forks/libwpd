@@ -142,10 +142,10 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 		parse(input, encryption, &listener);
 
 		// cleanup section: free the used resources
-		for (std::vector<WP3SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
+		for (auto &subDocument : subDocuments)
 		{
-			if (*iterSubDoc)
-				delete *iterSubDoc;
+			if (subDocument)
+				delete subDocument;
 		}
 
 		delete resourceFork;
@@ -154,10 +154,10 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
 
-		for (std::vector<WP3SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
+		for (auto &subDocument : subDocuments)
 		{
-			if (*iterSubDoc)
-				delete *iterSubDoc;
+			if (subDocument)
+				delete subDocument;
 		}
 
 		delete resourceFork;
@@ -188,16 +188,16 @@ void WP3Parser::parseSubDocument(librevenge::RVNGTextInterface *textInterface)
 		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
 
-		for (std::vector<WP3SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
-			if (*iterSubDoc)
-				delete *iterSubDoc;
+		for (auto &subDocument : subDocuments)
+			if (subDocument)
+				delete subDocument;
 	}
 	catch (FileException)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
-		for (std::vector<WP3SubDocument *>::iterator iterSubDoc = subDocuments.begin(); iterSubDoc != subDocuments.end(); ++iterSubDoc)
-			if (*iterSubDoc)
-				delete *iterSubDoc;
+		for (auto &subDocument : subDocuments)
+			if (subDocument)
+				delete subDocument;
 		throw FileException();
 	}
 }

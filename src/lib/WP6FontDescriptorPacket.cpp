@@ -118,11 +118,11 @@ void WP6FontDescriptorPacket::_readFontName(librevenge::RVNGInputStream *input, 
 		WPD_DEBUG_MSG(("WordPerfect: stripping font name (original: %s)\n", m_fontName.cstr()));
 		std::string stringValue(m_fontName.cstr());
 		std::string::size_type pos;
-		for (unsigned k = 0; k < countElements(FONT_WEIGHT_STRINGS); k++)
+		for (auto &k : FONT_WEIGHT_STRINGS)
 		{
 			if (!stringValue.empty())
-				while ((pos = stringValue.find(FONT_WEIGHT_STRINGS[k])) != std::string::npos)
-					stringValue.replace(pos, strlen(FONT_WEIGHT_STRINGS[k]),"");
+				while ((pos = stringValue.find(k)) != std::string::npos)
+					stringValue.replace(pos, strlen(k),"");
 		}
 		// SPECIAL CASE: eliminate the -WP postfix (if it's there), which isn't spaced out from
 		// the rest of the font

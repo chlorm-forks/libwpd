@@ -374,12 +374,12 @@ void WPXContentListener::_openPageSpan()
 	bool pageNumberInserted = false;
 
 	std::vector<WPXHeaderFooter> headerFooterList = currentPage.getHeaderFooterList();
-	for (std::vector<WPXHeaderFooter>::iterator iter = headerFooterList.begin(); iter != headerFooterList.end(); ++iter)
+	for (auto &iter : headerFooterList)
 	{
-		if (((*iter).getOccurrence() != NEVER) && !currentPage.getHeaderFooterSuppression((*iter).getInternalType()))
+		if ((iter.getOccurrence() != NEVER) && !currentPage.getHeaderFooterSuppression(iter.getInternalType()))
 		{
 			propList.clear();
-			switch ((*iter).getOccurrence())
+			switch (iter.getOccurrence())
 			{
 			case ODD:
 				propList.insert("librevenge:occurrence", "odd");
@@ -395,7 +395,7 @@ void WPXContentListener::_openPageSpan()
 				break;
 			}
 
-			if ((*iter).getType() == HEADER)
+			if (iter.getType() == HEADER)
 			{
 				m_documentInterface->openHeader(propList);
 				if (!currentPage.getPageNumberSuppression() &&
@@ -412,9 +412,9 @@ void WPXContentListener::_openPageSpan()
 				m_documentInterface->openFooter(propList);
 
 			WPD_DEBUG_MSG(("Header Footer Element: Starting to parse the subDocument\n"));
-			handleSubDocument((*iter).getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, (*iter).getTableList(), 0);
+			handleSubDocument(iter.getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, iter.getTableList(), 0);
 			WPD_DEBUG_MSG(("Header Footer Element: End of the subDocument parsing\n"));
-			if ((*iter).getType() == HEADER)
+			if (iter.getType() == HEADER)
 				m_documentInterface->closeHeader();
 			else
 			{

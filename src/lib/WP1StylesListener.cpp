@@ -83,19 +83,18 @@ void WP1StylesListener::insertBreak(unsigned char breakType)
 			m_currentPage = WPXPageSpan(m_pageList.back(), 0.0, 0.0);
 			m_currentPage.setPageSpan(1);
 
-			for (std::vector<WPXHeaderFooter>::const_iterator HFiter = (m_nextPage.getHeaderFooterList()).begin();
-			        HFiter != (m_nextPage.getHeaderFooterList()).end(); ++HFiter)
+			for (const auto &HFiter : (m_nextPage.getHeaderFooterList()))
 			{
-				if ((*HFiter).getOccurrence() != NEVER)
+				if (HFiter.getOccurrence() != NEVER)
 				{
-					m_currentPage.setHeaderFooter((*HFiter).getType(), (*HFiter).getInternalType(),
-					                              (*HFiter).getOccurrence(), (*HFiter).getSubDocument(), (*HFiter).getTableList());
-					_handleSubDocument((*HFiter).getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, (*HFiter).getTableList());
+					m_currentPage.setHeaderFooter(HFiter.getType(), HFiter.getInternalType(),
+					                              HFiter.getOccurrence(), HFiter.getSubDocument(), HFiter.getTableList());
+					_handleSubDocument(HFiter.getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, HFiter.getTableList());
 				}
 				else
 				{
-					m_currentPage.setHeaderFooter((*HFiter).getType(), (*HFiter).getInternalType(),
-					                              (*HFiter).getOccurrence(), nullptr, (*HFiter).getTableList());
+					m_currentPage.setHeaderFooter(HFiter.getType(), HFiter.getInternalType(),
+					                              HFiter.getOccurrence(), nullptr, HFiter.getTableList());
 				}
 			}
 			m_nextPage = WPXPageSpan();

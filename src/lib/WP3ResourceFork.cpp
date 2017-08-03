@@ -145,8 +145,8 @@ WP3ResourceFork::WP3ResourceFork(librevenge::RVNGInputStream *input, WPXEncrypti
 WP3ResourceFork::~WP3ResourceFork()
 {
 	// delete the pointers from one of the multimaps.
-	for (std::multimap<unsigned, WP3Resource *>::iterator iter = m_resourcesTypeMultimap.begin(); iter != m_resourcesTypeMultimap.end(); ++iter)
-		delete iter->second;
+	for (auto &iter : m_resourcesTypeMultimap)
+		delete iter.second;
 }
 
 const WP3Resource *WP3ResourceFork::getResource(unsigned type, unsigned ID) const

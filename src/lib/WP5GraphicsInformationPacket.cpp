@@ -38,17 +38,17 @@ WP5GraphicsInformationPacket::WP5GraphicsInformationPacket(librevenge::RVNGInput
 
 WP5GraphicsInformationPacket::~WP5GraphicsInformationPacket()
 {
-	for (std::vector<unsigned char *>::iterator iter1 = m_data.begin(); iter1 != m_data.end(); ++iter1)
+	for (auto &iter1 : m_data)
 	{
-		if ((*iter1))
-			delete [](*iter1);
-		(*iter1) = 0;
+		if (iter1)
+			delete []iter1;
+		iter1 = 0;
 	}
-	for (std::vector<librevenge::RVNGBinaryData *>::iterator iter2 = m_images.begin(); iter2 != m_images.end(); ++iter2)
+	for (auto &image : m_images)
 	{
-		if ((*iter2))
-			delete (*iter2);
-		(*iter2) = 0;
+		if (image)
+			delete image;
+		image = 0;
 	}
 }
 

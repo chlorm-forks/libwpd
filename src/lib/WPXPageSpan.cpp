@@ -101,8 +101,8 @@ WPXPageSpan::WPXPageSpan() :
 	m_headerFooterList(),
 	m_pageSpan(1)
 {
-	for (int i=0; i<WPX_NUM_HEADER_FOOTER_TYPES; i++)
-		m_isHeaderFooterSuppressed[i]=false;
+	for (bool &i : m_isHeaderFooterSuppressed)
+		i=false;
 }
 
 // NB: this is not a literal "clone" function: it is contingent on the side margins that are passed,
@@ -125,8 +125,8 @@ WPXPageSpan::WPXPageSpan(const WPXPageSpan &page, double paragraphMarginLeft, do
 	m_headerFooterList(page.getHeaderFooterList()),
 	m_pageSpan(page.getPageSpan())
 {
-	for (int i=0; i<WPX_NUM_HEADER_FOOTER_TYPES; i++)
-		m_isHeaderFooterSuppressed[i] = false;
+	for (bool &i : m_isHeaderFooterSuppressed)
+		i = false;
 }
 
 WPXPageSpan::~WPXPageSpan()
@@ -194,9 +194,9 @@ void WPXPageSpan::_removeHeaderFooter(WPXHeaderFooterType type, WPXHeaderFooterO
 
 bool WPXPageSpan::_containsHeaderFooter(WPXHeaderFooterType type, WPXHeaderFooterOccurrence occurrence)
 {
-	for (std::vector<WPXHeaderFooter>::iterator iter = m_headerFooterList.begin(); iter != m_headerFooterList.end(); ++iter)
+	for (auto &iter : m_headerFooterList)
 	{
-		if ((*iter).getType()==type && (*iter).getOccurrence()==occurrence)
+		if (iter.getType()==type && iter.getOccurrence()==occurrence)
 			return true;
 	}
 

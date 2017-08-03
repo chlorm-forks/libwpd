@@ -323,8 +323,8 @@ WP6ParagraphGroup_OutlineDefineSubGroup::WP6ParagraphGroup_OutlineDefineSubGroup
 {
 	// NB: this is identical to WP6OutlineStylePacket::_readContents!!
 	m_outlineHash = readU16(input, encryption);
-	for (unsigned i=0; i<WP6_NUM_LIST_LEVELS; i++)
-		m_numberingMethods[i] = readU8(input, encryption);
+	for (unsigned char &numberingMethod : m_numberingMethods)
+		numberingMethod = readU8(input, encryption);
 	m_tabBehaviourFlag = readU8(input, encryption);
 
 	WPD_DEBUG_MSG(("WordPerfect: Read Outline Style Packet (, outlineHash: %i, tab behaviour flag: %i)\n", (int) m_outlineHash, (int) m_tabBehaviourFlag));

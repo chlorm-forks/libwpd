@@ -54,8 +54,8 @@ WP6OutlineDefinition::WP6OutlineDefinition(const unsigned char *numberingMethods
 WP6OutlineDefinition::WP6OutlineDefinition()
 {
 	unsigned char numberingMethods[WP6_NUM_LIST_LEVELS];
-	for (int i=0; i<WP6_NUM_LIST_LEVELS; i++)
-		numberingMethods[i] = WP6_INDEX_HEADER_OUTLINE_STYLE_ARABIC_NUMBERING;
+	for (unsigned char &numberingMethod : numberingMethods)
+		numberingMethod = WP6_INDEX_HEADER_OUTLINE_STYLE_ARABIC_NUMBERING;
 
 	_updateNumberingMethods(numberingMethods);
 }

@@ -37,13 +37,11 @@ WPXTableCell::WPXTableCell(unsigned char colSpan, unsigned char rowSpan, unsigne
 
 WPXTable::~WPXTable()
 {
-	typedef std::vector<WPXTableCell *>::iterator VTCIter;
-	typedef std::vector< std::vector<WPXTableCell *> >::iterator VVTCIter;
-	for (VVTCIter iter1 = m_tableRows.begin(); iter1 != m_tableRows.end(); ++iter1)
+	for (auto &tableRow : m_tableRows)
 	{
-		for (VTCIter iter2 = (*iter1).begin(); iter2 != (*iter1).end(); ++iter2)
+		for (auto &iter2 : tableRow)
 		{
-			delete (*iter2);
+			delete iter2;
 		}
 	}
 }
@@ -89,7 +87,6 @@ void WPXTable::makeBordersConsistent()
 void WPXTable::_makeCellBordersConsistent(WPXTableCell *cell, std::vector<WPXTableCell *> &adjacentCells,
                                           int adjacencyBitCell, int adjacencyBitBoundCells)
 {
-	typedef std::vector<WPXTableCell *>::iterator VTCIter;
 	if (!adjacentCells.empty())
 	{
 		// if this cell is adjacent to > 1 cell, and it has no border
@@ -98,9 +95,9 @@ void WPXTable::_makeCellBordersConsistent(WPXTableCell *cell, std::vector<WPXTab
 		// is not resolvable given how WP/OOo define table borders. see BUGS
 		if (cell->m_borderBits & adjacencyBitCell)
 		{
-			for (VTCIter iter = adjacentCells.begin(); iter != adjacentCells.end(); ++iter)
+			for (auto &adjacentCell : adjacentCells)
 			{
-				(*iter)->m_borderBits |= (unsigned char)(adjacencyBitBoundCells & 0xff);
+				adjacentCell->m_borderBits |= (unsigned char)(adjacencyBitBoundCells & 0xff);
 			}
 		}
 		// otherwise we can get the same effect by bottom border from
@@ -195,8 +192,8 @@ void WPXTableList::release()
 	{
 		if (--(*m_refCount) == 0)
 		{
-			for (std::vector<WPXTable *>::iterator iter = (*m_tableList).begin(); iter != (*m_tableList).end(); ++iter)
-				delete (*iter);
+			for (auto &iter : (*m_tableList))
+				delete iter;
 			delete m_tableList;
 			delete m_refCount;
 		}
