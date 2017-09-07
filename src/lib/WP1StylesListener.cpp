@@ -83,7 +83,8 @@ void WP1StylesListener::insertBreak(unsigned char breakType)
 			m_currentPage = WPXPageSpan(m_pageList.back(), 0.0, 0.0);
 			m_currentPage.setPageSpan(1);
 
-			for (const auto &HFiter : (m_nextPage.getHeaderFooterList()))
+			auto headerFooterList = m_nextPage.getHeaderFooterList();
+			for (const auto &HFiter : headerFooterList)
 			{
 				if (HFiter.getOccurrence() != NEVER)
 				{
