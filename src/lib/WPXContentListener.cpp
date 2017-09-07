@@ -430,7 +430,7 @@ void WPXContentListener::_openPageSpan()
 			}
 
 			WPD_DEBUG_MSG(("Header Footer Element: type: %i occurrence: %i\n",
-			               (*iter).getType(), (*iter).getOccurrence()));
+			               iter.getType(), iter.getOccurrence()));
 		}
 	}
 
