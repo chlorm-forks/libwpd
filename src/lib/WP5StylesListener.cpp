@@ -86,17 +86,17 @@ void WP5StylesListener::insertBreak(unsigned char breakType)
 		m_currentPage.setPageSpan(1);
 
 		std::vector<WPXHeaderFooter> headerFooterList = m_nextPage.getHeaderFooterList();
-		for (const auto &HFiter : headerFooterList)
+		for (const auto &hf : headerFooterList)
 		{
-			if (HFiter.getOccurrence() != NEVER)
+			if (hf.getOccurrence() != NEVER)
 			{
-				m_currentPage.setHeaderFooter(HFiter.getType(), HFiter.getInternalType(),
-				                              HFiter.getOccurrence(), HFiter.getSubDocument(), HFiter.getTableList());
-				_handleSubDocument(HFiter.getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, HFiter.getTableList());
+				m_currentPage.setHeaderFooter(hf.getType(), hf.getInternalType(),
+				                              hf.getOccurrence(), hf.getSubDocument(), hf.getTableList());
+				_handleSubDocument(hf.getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, hf.getTableList());
 			}
 			else
-				m_currentPage.setHeaderFooter(HFiter.getType(), HFiter.getInternalType(),
-				                              HFiter.getOccurrence(), nullptr, HFiter.getTableList());
+				m_currentPage.setHeaderFooter(hf.getType(), hf.getInternalType(),
+				                              hf.getOccurrence(), nullptr, hf.getTableList());
 		}
 		m_nextPage = WPXPageSpan();
 		m_currentPageHasContent = false;
