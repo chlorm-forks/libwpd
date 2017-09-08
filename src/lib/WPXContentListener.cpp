@@ -374,7 +374,7 @@ void WPXContentListener::_openPageSpan()
 	bool pageNumberInserted = false;
 
 	std::vector<WPXHeaderFooter> headerFooterList = currentPage.getHeaderFooterList();
-	for (auto &hf : headerFooterList)
+	for (const auto &hf : headerFooterList)
 	{
 		if ((hf.getOccurrence() != NEVER) && !currentPage.getHeaderFooterSuppression(hf.getInternalType()))
 		{
