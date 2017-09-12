@@ -1,4 +1,9 @@
 CHANGES:
+0.10.1 - 0.10.2
+- Require C++11 for build.
+- Fix various crashes, leaks and hangs when reading damaged files found
+  by oss-fuzz.
+
 0.10.0 - 0.10.1
 - Fix crash when NULL is passed as input stream.
 - Use symbol visibility on Linux. The library only exports public functions
