@@ -43,7 +43,7 @@ void WP1HeaderFooterGroup::_readContents(librevenge::RVNGInputStream *input, WPX
 {
 	m_definition = readU8(input, encryption);
 
-	unsigned tmpSubDocumentSize = getSize() - 0x13;
+	const unsigned tmpSubDocumentSize = getSize() > 0x13 ? getSize() - 0x13 : 0;
 	input->seek(18, librevenge::RVNG_SEEK_CUR);
 	WPD_DEBUG_MSG(("WP1SubDocument subDocumentSize = %u\n", tmpSubDocumentSize));
 	if (tmpSubDocumentSize)
