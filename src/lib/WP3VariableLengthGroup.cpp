@@ -79,8 +79,6 @@ WP3VariableLengthGroup *WP3VariableLengthGroup::constructVariableLengthGroup(lib
 bool WP3VariableLengthGroup::isGroupConsistent(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const unsigned char group)
 {
 	long startPosition = input->tell();
-	if (0 > startPosition  || startPosition > ((std::numeric_limits<long>::max)()))
-		return false;
 
 	try
 	{
