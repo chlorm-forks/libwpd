@@ -7,8 +7,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-#include <algorithm>
 #include <cstdint>
+#include <cstdlib>
 
 #include <librevenge-generators/RVNGDummyTextGenerator.h>
 
