@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <cstdint>
 
-#include <librevenge-generators/librevenge-generators.h>
+#include <librevenge-generators/RVNGDummyTextGenerator.h>
 
 #include <librevenge-stream/librevenge-stream.h>
 
@@ -19,7 +19,7 @@
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size)
 {
 	librevenge::RVNGStringStream input(data, size);
-	librevenge::RVNGRawTextGenerator generator(true);
+	librevenge::RVNGDummyTextGenerator generator;
 	libwpd::WPDocument::parse(&input, &generator, "");
 	return 0;
 }
