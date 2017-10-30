@@ -46,9 +46,11 @@ void WP3HeaderFooterGroup::_readContents(librevenge::RVNGInputStream *input, WPX
 		input->seek(14, librevenge::RVNG_SEEK_CUR);
 		unsigned short tmpSubDocumentLength = readU16(input, encryption, true);  // read first the old subdocument length
 		input->seek(tmpSubDocumentLength, librevenge::RVNG_SEEK_CUR);  // and skip the old subdocument
+		if (input->isEnd())
+			return;
 		m_definition = readU8(input, encryption);
 		input->seek(4, librevenge::RVNG_SEEK_CUR);
-		tmpSubDocumentLength = readU16(input, encryption, true);
+		tmpSubDocumentLength = input->isEnd() ? 0 : readU16(input, encryption, true);
 		if (tmpSubDocumentLength)
 			m_subDocument = new WP3SubDocument(input, encryption, tmpSubDocumentLength);
 	}
