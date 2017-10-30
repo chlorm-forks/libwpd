@@ -43,7 +43,7 @@ void WP42HeaderFooterGroup::_readContents(librevenge::RVNGInputStream *input, WP
 {
 	input->seek(4, librevenge::RVNG_SEEK_CUR);
 	long tmpStartPosition = input->tell();
-	while (readU8(input, encryption) != 0xD1)
+	while (!input->isEnd() && readU8(input, encryption) != 0xD1)
 	{
 	}
 	input->seek(-3, librevenge::RVNG_SEEK_CUR);
