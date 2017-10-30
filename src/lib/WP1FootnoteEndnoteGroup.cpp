@@ -53,7 +53,7 @@ void WP1FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, 
 	m_noteNumber = readU16(input, encryption, true);
 	input->seek(getSize() - tmpSubDocumentSize - 3, librevenge::RVNG_SEEK_CUR);
 
-	WPD_DEBUG_MSG(("WP1SubDocument subDocumentSize = %u\n", tmpSubDocumentSize));
+	WPD_DEBUG_MSG(("WP1SubDocument subDocumentSize = %i\n", tmpSubDocumentSize));
 	if (tmpSubDocumentSize > 0)
 		m_subDocument.reset(new WP1SubDocument(input, encryption, unsigned(tmpSubDocumentSize)));
 }
