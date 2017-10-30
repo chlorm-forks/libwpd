@@ -61,7 +61,8 @@ void WP5FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, 
 		tmpSizeOfNote -= 4;
 	}
 
-	m_subDocument = new WP5SubDocument(input, encryption, (unsigned)tmpSizeOfNote);
+	if (tmpSizeOfNote > 0)
+		m_subDocument = new WP5SubDocument(input, encryption, (unsigned)tmpSizeOfNote);
 	if (tmpFlags & 0x80)
 		m_noteReference.sprintf("%c", tmpNumOfNote);
 	else
