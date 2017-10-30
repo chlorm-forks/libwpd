@@ -42,7 +42,7 @@ WP1FootnoteEndnoteGroup::~WP1FootnoteEndnoteGroup()
 
 void WP1FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
 {
-	unsigned tmpSubDocumentSize = getSize() - 29;
+	int tmpSubDocumentSize = getSize() - 29;
 	unsigned char tmpNoteDefinition = readU8(input, encryption);
 	if (tmpNoteDefinition & 0x02)
 	{
@@ -54,8 +54,8 @@ void WP1FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, 
 	input->seek(getSize() - tmpSubDocumentSize - 3, librevenge::RVNG_SEEK_CUR);
 
 	WPD_DEBUG_MSG(("WP1SubDocument subDocumentSize = %u\n", tmpSubDocumentSize));
-	if (tmpSubDocumentSize)
-		m_subDocument.reset(new WP1SubDocument(input, encryption, tmpSubDocumentSize));
+	if (tmpSubDocumentSize > 0)
+		m_subDocument.reset(new WP1SubDocument(input, encryption, unsigned(tmpSubDocumentSize)));
 }
 
 void WP1FootnoteEndnoteGroup::parse(WP1Listener *listener)
