@@ -815,7 +815,7 @@ void WP6ContentListener::marginChange(unsigned char side, unsigned short margin)
 {
 	if (!isUndoOn())
 	{
-		double marginInch = (double)((double)margin/ (double)WPX_NUM_WPUS_PER_INCH);
+		auto marginInch = (double)((double)margin/ (double)WPX_NUM_WPUS_PER_INCH);
 
 		switch (side)
 		{
@@ -872,7 +872,7 @@ void WP6ContentListener::paragraphMarginChange(unsigned char side, signed short 
 
 		m_ps->m_currentListLevel = 0;
 
-		double marginInch = (double)((double)margin / (double)WPX_NUM_WPUS_PER_INCH);
+		auto marginInch = (double)((double)margin / (double)WPX_NUM_WPUS_PER_INCH);
 		switch (side)
 		{
 		case WPX_LEFT:
@@ -904,7 +904,7 @@ void WP6ContentListener::indentFirstLineChange(signed short offset)
 {
 	if (!isUndoOn())
 	{
-		double offsetInch = (double)((double)offset / (double)WPX_NUM_WPUS_PER_INCH);
+		auto offsetInch = (double)((double)offset / (double)WPX_NUM_WPUS_PER_INCH);
 		m_ps->m_textIndentByParagraphIndentChange = offsetInch;
 		// This is necessary in case we have Indent First Line and Hard Back Tab
 		// in the same time. The Hard Back Tab applies to the current paragraph
@@ -1248,7 +1248,7 @@ void WP6ContentListener::noteOff(const WPXNoteType noteType)
 		else
 			m_documentInterface->openEndnote(propList);
 
-		unsigned short textPID = (unsigned short)m_parseState->m_noteTextPID;
+		auto textPID = (unsigned short)m_parseState->m_noteTextPID;
 		handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr),
 		                  WPX_SUBDOCUMENT_NOTE, m_parseState->m_tableList, m_parseState->m_nextTableIndice);
 
@@ -1376,7 +1376,7 @@ void WP6ContentListener::insertRow(const unsigned short rowHeight, const bool is
 	if (!isUndoOn() && m_ps->m_isTableOpened)
 	{
 		_flushText();
-		double rowHeightInch = (double)((double) rowHeight / (double)WPX_NUM_WPUS_PER_INCH);
+		auto rowHeightInch = (double)((double) rowHeight / (double)WPX_NUM_WPUS_PER_INCH);
 		_openTableRow(rowHeightInch, isMinimumHeight, isHeaderRow);
 	}
 }
@@ -1708,7 +1708,7 @@ void WP6ContentListener::insertGraphicsData(const unsigned short packetId)
 	if (isUndoOn() || !m_parseState->m_isFrameOpened)
 		return;
 
-	if (const WP6GraphicsCachedFileDataPacket *gcfdPacket = dynamic_cast<const WP6GraphicsCachedFileDataPacket *>(this->getPrefixDataPacket(packetId)))
+	if (const auto *gcfdPacket = dynamic_cast<const WP6GraphicsCachedFileDataPacket *>(this->getPrefixDataPacket(packetId)))
 	{
 		librevenge::RVNGPropertyList propList;
 		propList.insert("librevenge:mime-type", "image/x-wpg");

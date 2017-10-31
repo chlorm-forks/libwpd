@@ -59,8 +59,8 @@ void WP6ColumnGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryp
 	{
 		m_colType = readU8(input, encryption);
 		unsigned tmpRowSpacing = readU32(input, encryption);
-		signed short tmpRowSpacingIntegerPart = (signed short)((tmpRowSpacing & 0xffff0000) >> 16);
-		double tmpRowSpacingFractionalPart = (double)((double)(tmpRowSpacing & 0xffff)/(double)0x10000);
+		auto tmpRowSpacingIntegerPart = (signed short)((tmpRowSpacing & 0xffff0000) >> 16);
+		auto tmpRowSpacingFractionalPart = (double)((double)(tmpRowSpacing & 0xffff)/(double)0x10000);
 		m_rowSpacing = (double)tmpRowSpacingIntegerPart + tmpRowSpacingFractionalPart;
 		m_numColumns = readU8(input, encryption);
 		if (m_numColumns > 1)

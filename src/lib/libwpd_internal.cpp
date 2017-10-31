@@ -90,7 +90,7 @@ static int libwpd_unichar_to_utf8(unsigned c, char *outbuf)
 
 	if (outbuf)
 	{
-		for (unsigned char i = (unsigned char)(len - 1); i > 0; --i)
+		for (auto i = (unsigned char)(len - 1); i > 0; --i)
 		{
 			outbuf[i] = (char)((c & 0x3f) | 0x80);
 			c >>= 6;
@@ -1163,16 +1163,16 @@ int extendedCharacterWP42ToUCS4(unsigned char character, const unsigned **chars)
 
 unsigned short fixedPointToWPUs(const unsigned fixedPointNumber)
 {
-	signed short fixedPointNumberIntegerPart = (signed short)((fixedPointNumber & 0xFFFF0000) >> 16);
-	double fixedPointNumberFractionalPart = (double)((double)(fixedPointNumber & 0x0000FFFF)/(double)0xFFFF);
-	unsigned short numberWPU = (unsigned short)rint((((double)fixedPointNumberIntegerPart + fixedPointNumberFractionalPart)*50)/3);
+	auto fixedPointNumberIntegerPart = (signed short)((fixedPointNumber & 0xFFFF0000) >> 16);
+	auto fixedPointNumberFractionalPart = (double)((double)(fixedPointNumber & 0x0000FFFF)/(double)0xFFFF);
+	auto numberWPU = (unsigned short)rint((((double)fixedPointNumberIntegerPart + fixedPointNumberFractionalPart)*50)/3);
 	return numberWPU;
 }
 
 double fixedPointToDouble(const unsigned fixedPointNumber)
 {
-	signed short fixedPointNumberIntegerPart = (signed short)((fixedPointNumber & 0xFFFF0000) >> 16);
-	double fixedPointNumberFractionalPart = (double)((double)(fixedPointNumber & 0x0000FFFF)/(double)0xFFFF);
+	auto fixedPointNumberIntegerPart = (signed short)((fixedPointNumber & 0xFFFF0000) >> 16);
+	auto fixedPointNumberFractionalPart = (double)((double)(fixedPointNumber & 0x0000FFFF)/(double)0xFFFF);
 	return ((double)fixedPointNumberIntegerPart + fixedPointNumberFractionalPart);
 }
 

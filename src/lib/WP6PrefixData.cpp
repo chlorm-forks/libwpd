@@ -42,7 +42,7 @@ WP6PrefixData::WP6PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 		return;
 	}
 	unsigned short i;
-	WP6PrefixIndice **prefixIndiceArray = new WP6PrefixIndice *[std::size_t(numPrefixIndices-1)];
+	auto **prefixIndiceArray = new WP6PrefixIndice *[std::size_t(numPrefixIndices-1)];
 	for (i=1; i<numPrefixIndices; i++)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: constructing prefix indice 0x%x\n", i));
@@ -80,7 +80,7 @@ WP6PrefixData::~WP6PrefixData()
 
 const WP6PrefixDataPacket *WP6PrefixData::getPrefixDataPacket(const int prefixID) const
 {
-	DPH::const_iterator pos = m_prefixDataPacketHash.find(prefixID);
+	auto pos = m_prefixDataPacketHash.find(prefixID);
 	if (pos != m_prefixDataPacketHash.end())
 		return static_cast<const WP6PrefixDataPacket *>(pos->second);
 	else

@@ -167,7 +167,7 @@ void WP1StylesListener::topMarginSet(unsigned short topMargin)
 	if (!isUndoOn())
 	{
 		if (!topMargin) return;
-		double marginInch = (double)((double)topMargin / 72.0);
+		auto marginInch = (double)((double)topMargin / 72.0);
 		m_currentPage.setMarginTop(marginInch);
 	}
 }
@@ -177,7 +177,7 @@ void WP1StylesListener::bottomMarginSet(unsigned short bottomMargin)
 	if (!isUndoOn())
 	{
 		if (!bottomMargin) return;
-		double marginInch = (double)((double)bottomMargin / 72.0);
+		auto marginInch = (double)((double)bottomMargin / 72.0);
 		m_currentPage.setMarginBottom(marginInch);
 	}
 }
@@ -191,10 +191,10 @@ void WP1StylesListener::headerFooterGroup(unsigned char headerFooterDefinition, 
 	{
 		bool tempCurrentPageHasContent = m_currentPageHasContent;
 
-		unsigned char headerFooterType = (unsigned char)(headerFooterDefinition & 0x03);
+		auto headerFooterType = (unsigned char)(headerFooterDefinition & 0x03);
 		WPXHeaderFooterType wpxType = ((headerFooterType <= WPX_HEADER_B) ? HEADER : FOOTER);
 
-		unsigned char occurrenceBits = (unsigned char)((headerFooterDefinition & 0x1C) >> 2);
+		auto occurrenceBits = (unsigned char)((headerFooterDefinition & 0x1C) >> 2);
 
 		WPD_DEBUG_MSG(("WordPerfect: headerFooterGroup (headerFooterType: %i, occurrenceBits: %i)\n",
 		               headerFooterType, occurrenceBits));

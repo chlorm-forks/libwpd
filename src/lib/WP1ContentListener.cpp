@@ -390,7 +390,7 @@ void WP1ContentListener::marginReset(unsigned short leftMargin, unsigned short r
 	{
 		if (leftMargin)
 		{
-			double leftMarginInch = (double)((double)leftMargin/72.0);
+			auto leftMarginInch = (double)((double)leftMargin/72.0);
 			m_ps->m_leftMarginByPageMarginChange = leftMarginInch - m_ps->m_pageMarginLeft;
 			m_ps->m_paragraphMarginLeft = m_ps->m_leftMarginByPageMarginChange
 			                              + m_ps->m_leftMarginByParagraphMarginChange
@@ -399,7 +399,7 @@ void WP1ContentListener::marginReset(unsigned short leftMargin, unsigned short r
 		}
 		if (rightMargin)
 		{
-			double rightMarginInch = (double)((double)rightMargin/72.0);
+			auto rightMarginInch = (double)((double)rightMargin/72.0);
 			m_ps->m_rightMarginByPageMarginChange = rightMarginInch - m_ps->m_pageMarginRight;
 			m_ps->m_paragraphMarginRight = m_ps->m_rightMarginByPageMarginChange
 			                               + m_ps->m_rightMarginByParagraphMarginChange

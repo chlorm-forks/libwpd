@@ -101,7 +101,7 @@ WP5PrefixData::~WP5PrefixData()
 
 const WP5GeneralPacketData *WP5PrefixData::getGeneralPacketData(const int type) const
 {
-	std::map<int, WP5GeneralPacketData *>::const_iterator Iter = m_generalPacketData.find(type);
+	auto Iter = m_generalPacketData.find(type);
 	if (Iter != m_generalPacketData.end())
 		return static_cast<const WP5GeneralPacketData *>(Iter->second);
 	else

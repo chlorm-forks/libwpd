@@ -44,7 +44,7 @@ void WP5FontNameStringPoolPacket::_readContents(librevenge::RVNGInputStream *inp
 	long tmpInitialOffset = input->tell();
 	while (input->tell() < (long)(tmpInitialOffset + dataSize))
 	{
-		unsigned offset = (unsigned)(input->tell() - tmpInitialOffset);
+		auto offset = (unsigned)(input->tell() - tmpInitialOffset);
 		librevenge::RVNGString fontName = readCString(input, encryption);
 		m_fontNameString[offset] = fontName;
 	}
@@ -55,7 +55,7 @@ void WP5FontNameStringPoolPacket::_readContents(librevenge::RVNGInputStream *inp
 
 librevenge::RVNGString WP5FontNameStringPoolPacket::getFontName(const unsigned int offset) const
 {
-	std::map<unsigned int, librevenge::RVNGString>::const_iterator Iter = m_fontNameString.find(offset);
+	auto Iter = m_fontNameString.find(offset);
 	if (Iter != m_fontNameString.end())
 		return Iter->second;
 	// if the offset is not correct, return the default value

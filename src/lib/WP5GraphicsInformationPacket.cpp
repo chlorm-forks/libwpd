@@ -61,7 +61,7 @@ void WP5GraphicsInformationPacket::_readContents(librevenge::RVNGInputStream *in
 
 	for (unsigned short j = 0; j < tmpImagesCount; j++)
 	{
-		unsigned char *tmpData = new unsigned char[tmpImagesSizes[j]];
+		auto *tmpData = new unsigned char[tmpImagesSizes[j]];
 
 		for (unsigned k = 0; k < tmpImagesSizes[j]; k++)
 			tmpData[k] = readU8(input, encryption);

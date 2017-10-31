@@ -394,7 +394,7 @@ void WP3ContentListener::marginChange(const unsigned char side, const unsigned s
 {
 	if (!isUndoOn())
 	{
-		double marginInch = (double)((double)margin/ (double)WPX_NUM_WPUS_PER_INCH);
+		auto marginInch = (double)((double)margin/ (double)WPX_NUM_WPUS_PER_INCH);
 
 		switch (side)
 		{
@@ -975,7 +975,7 @@ void WP3ContentListener::_handleFrameParameters(librevenge::RVNGPropertyList &pr
 				else
 				{
 					propList.insert("style:vertical-pos", "from-top");
-					double newPosition = (double)((double)verticalOffset/72.0);
+					auto newPosition = (double)((double)verticalOffset/72.0);
 					if (newPosition > (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
 					                           - (double)height/72.0))
 						newPosition = (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
@@ -989,8 +989,8 @@ void WP3ContentListener::_handleFrameParameters(librevenge::RVNGPropertyList &pr
 				else
 				{
 					propList.insert("style:vertical-pos", "from-top");
-					double newPosition = (double)((m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
-					                               - (double)height/72.0)/2.0);
+					auto newPosition = (double)((m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
+					                             - (double)height/72.0)/2.0);
 					if (newPosition > (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
 					                           - (double)height/72.0))
 						newPosition = (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
@@ -1004,8 +1004,8 @@ void WP3ContentListener::_handleFrameParameters(librevenge::RVNGPropertyList &pr
 				else
 				{
 					propList.insert("style:vertical-pos", "from-top");
-					double newPosition = (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
-					                              - (double)height/72.0 + (double)verticalOffset/72.0);
+					auto newPosition = (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
+					                            - (double)height/72.0 + (double)verticalOffset/72.0);
 					if (newPosition > (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
 					                           - (double)height/72.0))
 						newPosition = (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom

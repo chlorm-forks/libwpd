@@ -322,7 +322,7 @@ void WP5ContentListener::insertRow(unsigned short rowHeight, bool isMinimumHeigh
 	if (!isUndoOn())
 	{
 		_flushText();
-		double rowHeightInch = (double)((double) rowHeight / (double)WPX_NUM_WPUS_PER_INCH);
+		auto rowHeightInch = (double)((double) rowHeight / (double)WPX_NUM_WPUS_PER_INCH);
 		_openTableRow(rowHeightInch, isMinimumHeight, isHeaderRow);
 	}
 }
@@ -442,7 +442,7 @@ void WP5ContentListener::marginChange(unsigned char side, unsigned short margin)
 {
 	if (!isUndoOn())
 	{
-		double marginInch = (double)((double)margin/ (double)WPX_NUM_WPUS_PER_INCH);
+		auto marginInch = (double)((double)margin/ (double)WPX_NUM_WPUS_PER_INCH);
 
 		switch (side)
 		{
@@ -697,7 +697,7 @@ void WP5ContentListener::boxOn(unsigned char positionAndType, unsigned char alig
 		else
 		{
 			propList.insert("style:vertical-pos", "from-top");
-			double newPosition = (double)((double)y/(double)WPX_NUM_WPUS_PER_INCH);
+			auto newPosition = (double)((double)y/(double)WPX_NUM_WPUS_PER_INCH);
 			if (newPosition > (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
 			                           - (double)height/(double)WPX_NUM_WPUS_PER_INCH))
 			{
@@ -713,8 +713,8 @@ void WP5ContentListener::boxOn(unsigned char positionAndType, unsigned char alig
 		else
 		{
 			propList.insert("style:vertical-pos", "from-top");
-			double newPosition = (double)((m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
-			                               - (double)height/(double)WPX_NUM_WPUS_PER_INCH)/2.0);
+			auto newPosition = (double)((m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
+			                             - (double)height/(double)WPX_NUM_WPUS_PER_INCH)/2.0);
 			if (newPosition > (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
 			                           - (double)height/(double)WPX_NUM_WPUS_PER_INCH))
 			{
@@ -730,8 +730,8 @@ void WP5ContentListener::boxOn(unsigned char positionAndType, unsigned char alig
 		else
 		{
 			propList.insert("style:vertical-pos", "from-top");
-			double newPosition = (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
-			                              - (double)height/(double)WPX_NUM_WPUS_PER_INCH + (double)y/(double)WPX_NUM_WPUS_PER_INCH);
+			auto newPosition = (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
+			                            - (double)height/(double)WPX_NUM_WPUS_PER_INCH + (double)y/(double)WPX_NUM_WPUS_PER_INCH);
 			if (newPosition > (double)(m_ps->m_pageFormLength - m_ps->m_pageMarginTop - m_ps->m_pageMarginBottom
 			                           - (double)height/(double)WPX_NUM_WPUS_PER_INCH))
 			{

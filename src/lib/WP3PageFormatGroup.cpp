@@ -76,8 +76,8 @@ void WP3PageFormatGroup::_readContents(librevenge::RVNGInputStream *input, WPXEn
 		input->seek(4, librevenge::RVNG_SEEK_CUR);
 		{
 			unsigned lineSpacing = readU32(input, encryption, true);
-			signed short lineSpacingIntegerPart = (signed short)((lineSpacing & 0xFFFF0000) >> 16);
-			double lineSpacingFractionalPart = (double)((double)(lineSpacing & 0xFFFF)/(double)0xFFFF);
+			auto lineSpacingIntegerPart = (signed short)((lineSpacing & 0xFFFF0000) >> 16);
+			auto lineSpacingFractionalPart = (double)((double)(lineSpacing & 0xFFFF)/(double)0xFFFF);
 			WPD_DEBUG_MSG(("WordPerfect: Page format group line spacing - integer part: %i fractional part: %f (original value: %i)\n",
 			               lineSpacingIntegerPart, lineSpacingFractionalPart, lineSpacing));
 			m_lineSpacing = lineSpacingIntegerPart + lineSpacingFractionalPart;

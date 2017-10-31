@@ -318,7 +318,7 @@ void WPXContentListener::_openPageSpan()
 		throw ParseException();
 	}
 
-	std::list<WPXPageSpan>::iterator currentPageSpanIter = m_pageList.begin();
+	auto currentPageSpanIter = m_pageList.begin();
 	for (unsigned i = 0; i < m_ps->m_currentPage; i++)
 		++currentPageSpanIter;
 
@@ -609,7 +609,7 @@ void WPXContentListener::_appendParagraphProperties(librevenge::RVNGPropertyList
 
 	if (!m_ps->m_inSubDocument && m_ps->m_firstParagraphInPageSpan)
 	{
-		std::list<WPXPageSpan>::iterator currentPageSpanIter = m_pageList.begin();
+		auto currentPageSpanIter = m_pageList.begin();
 		for (unsigned i = 0; i < (unsigned)(m_ps->m_currentPage - 1); i+=(unsigned)(*currentPageSpanIter).getPageSpan())
 			++currentPageSpanIter;
 
@@ -1361,7 +1361,7 @@ double WPXContentListener::_getNextTabStop() const
 
 double WPXContentListener::_getPreviousTabStop() const
 {
-	for (std::vector<WPXTabStop>::reverse_iterator riter = m_ps->m_tabStops.rbegin(); riter != (m_ps->m_tabStops.rend() - 1); ++riter)
+	for (auto riter = m_ps->m_tabStops.rbegin(); riter != (m_ps->m_tabStops.rend() - 1); ++riter)
 	{
 		if (riter->m_position
 		        - (m_ps->m_isTabPositionRelative ? 0.0 : (m_ps->m_pageMarginLeft + m_ps->m_sectionMarginLeft + m_ps->m_leftMarginByParagraphMarginChange))
@@ -1383,7 +1383,7 @@ librevenge::RVNGString WPXContentListener::_colorToString(const RGBSColor *color
 
 	if (color)
 	{
-		double fontShading = (double)((double)color->m_s/100.0); //convert the percents to double between 0 and 1
+		auto fontShading = (double)((double)color->m_s/100.0); //convert the percents to double between 0 and 1
 		// Mix fontShading amount of given color with (1-fontShading) of White (#ffffff)
 		int fontRed = (int)0xFF + (int)((double)color->m_r*fontShading) - (int)((double)0xFF*fontShading);
 		int fontGreen = (int)0xFF + (int)((double)color->m_g*fontShading) - (int)((double)0xFF*fontShading);
@@ -1418,9 +1418,9 @@ librevenge::RVNGString WPXContentListener::_mergeColorsToString(const RGBSColor 
 	double fgAmount = (double)tmpFgColor.m_s/100.0;
 	double wtAmount = 255.0*(1.0-fgAmount);
 
-	int bgRed   = (int)(((double)tmpFgColor.m_r*fgAmount)+wtAmount);
-	int bgGreen = (int)(((double)tmpFgColor.m_g*fgAmount)+wtAmount);
-	int bgBlue  = (int)(((double)tmpFgColor.m_b*fgAmount)+wtAmount);
+	auto bgRed   = (int)(((double)tmpFgColor.m_r*fgAmount)+wtAmount);
+	auto bgGreen = (int)(((double)tmpFgColor.m_g*fgAmount)+wtAmount);
+	auto bgBlue  = (int)(((double)tmpFgColor.m_b*fgAmount)+wtAmount);
 
 	tmpColor.sprintf("#%.2x%.2x%.2x", bgRed, bgGreen, bgBlue);
 

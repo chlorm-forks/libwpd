@@ -169,9 +169,7 @@ void WP6Parser::parsePackets(WP6PrefixData *prefixData, int type, WP6Listener *l
 		return;
 
 	std::pair< MPDP_CIter, MPDP_CIter > typeIterPair = prefixData->getPrefixDataPacketsOfType(type);
-	for (MPDP_CIter iter=typeIterPair.first;
-	        iter != typeIterPair.second;
-	        ++iter)
+	for (auto iter=typeIterPair.first; iter != typeIterPair.second; ++iter)
 	{
 		iter->second->parse(listener);
 	}
@@ -196,8 +194,8 @@ void WP6Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 	parse(input, encryption, &stylesListener);
 
 	// postprocess the pageList == remove duplicate page spans due to the page breaks
-	std::list<WPXPageSpan>::iterator previousPage = pageList.begin();
-	for (std::list<WPXPageSpan>::iterator Iter=pageList.begin(); Iter != pageList.end(); /* Iter++ */)
+	auto previousPage = pageList.begin();
+	for (auto Iter=pageList.begin(); Iter != pageList.end(); /* Iter++ */)
 	{
 		if ((Iter != previousPage) && ((*previousPage)==(*Iter)))
 		{

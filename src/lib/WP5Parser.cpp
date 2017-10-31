@@ -134,8 +134,8 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 		parse(input, encryption, &stylesListener);
 
 		// postprocess the pageList == remove duplicate page spans due to the page breaks
-		std::list<WPXPageSpan>::iterator previousPage = pageList.begin();
-		for (std::list<WPXPageSpan>::iterator Iter=pageList.begin(); Iter != pageList.end();)
+		auto previousPage = pageList.begin();
+		for (auto Iter=pageList.begin(); Iter != pageList.end();)
 		{
 			if ((Iter != previousPage) && ((*previousPage)==(*Iter)))
 			{

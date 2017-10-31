@@ -260,7 +260,7 @@ void WP6CharacterGroup_CommentSubGroup::parse(WP6Listener *listener, const unsig
 	unsigned short textPID = 0;
 	for (unsigned char i=0; i<numPrefixIDs; i++)
 	{
-		if (const WP6CommentAnnotationPacket *caPacket = dynamic_cast<const WP6CommentAnnotationPacket *>(listener->getPrefixDataPacket(prefixIDs[i])))
+		if (const auto *caPacket = dynamic_cast<const WP6CommentAnnotationPacket *>(listener->getPrefixDataPacket(prefixIDs[i])))
 		{
 			textPID = caPacket->getTextPID();
 			break;

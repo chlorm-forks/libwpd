@@ -78,7 +78,7 @@ const unsigned char *WPXEncryption::readAndDecrypt(librevenge::RVNGInputStream *
 		else
 		{
 			unsigned long passwordOffset = (readStartPosition + i - m_encryptionStartOffset) % m_password.len();
-			unsigned char encryptionMask = (unsigned char)(m_encryptionMaskBase + readStartPosition + i - m_encryptionStartOffset);
+			auto encryptionMask = (unsigned char)(m_encryptionMaskBase + readStartPosition + i - m_encryptionStartOffset);
 			m_buffer[i] = (unsigned char)(encryptedBuffer[i] ^ (m_password.cstr()[passwordOffset] ^ encryptionMask));
 		}
 	}

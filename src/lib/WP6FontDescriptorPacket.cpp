@@ -102,8 +102,8 @@ void WP6FontDescriptorPacket::_readFontName(librevenge::RVNGInputStream *input, 
 		for (unsigned short i=0; i<(m_fontNameLength/2); i++)
 		{
 			unsigned short charWord = readU16(input, encryption);
-			unsigned char characterSet = (unsigned char)((charWord >> 8) & 0x00FF);
-			unsigned char character = (unsigned char)(charWord & 0xFF);
+			auto characterSet = (unsigned char)((charWord >> 8) & 0x00FF);
+			auto character = (unsigned char)(charWord & 0xFF);
 
 			if (character == 0x00 && characterSet == 0x00)
 				break;

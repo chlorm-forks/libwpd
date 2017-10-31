@@ -71,15 +71,15 @@ void WP6GraphicsBoxStylePacket::_readContents(librevenge::RVNGInputStream *input
 	long tmpBoxNameLibraryDataPosition = input->tell();
 	input->seek(1, librevenge::RVNG_SEEK_CUR);
 	m_isLibraryStyle = ((readU8(input, encryption) & 0x01) != 0x00);
-	signed short tmpBoxNameLength = (signed short)readU16(input, encryption);
+	auto tmpBoxNameLength = (signed short)readU16(input, encryption);
 
 	if (tmpBoxNameLength > 0)
 	{
 		for (signed short i = 0; i < (tmpBoxNameLength/2); i++)
 		{
 			unsigned short charWord = readU16(input, encryption);
-			unsigned char characterSet = (unsigned char)((charWord >> 8) & 0x00FF);
-			unsigned char character = (unsigned char)(charWord & 0xFF);
+			auto characterSet = (unsigned char)((charWord >> 8) & 0x00FF);
+			auto character = (unsigned char)(charWord & 0xFF);
 
 			if (character == 0x00 && characterSet == 0x00)
 				break;

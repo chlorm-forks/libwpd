@@ -253,7 +253,7 @@ void WP6EOLGroup::parse(WP6Listener *listener)
 	{
 		for (int i=0; i<getNumPrefixIDs(); i++)
 		{
-			if (const WP6FillStylePacket *fsPacket = dynamic_cast<const WP6FillStylePacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i])))
+			if (const auto *fsPacket = dynamic_cast<const WP6FillStylePacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i])))
 			{
 
 				cellFgColor = fsPacket->getFgColor();

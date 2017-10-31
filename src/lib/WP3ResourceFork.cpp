@@ -46,7 +46,7 @@ WP3ResourceFork::WP3ResourceFork(librevenge::RVNGInputStream *input, WPXEncrypti
 	unsigned nameListOffset = readU16(input, encryption, true);
 
 	input->seek(16+typeOffset+mapOffset, librevenge::RVNG_SEEK_SET);
-	unsigned short resourceTypesNumber = (unsigned short)(1 + readU16(input, encryption, true));
+	auto resourceTypesNumber = (unsigned short)(1 + readU16(input, encryption, true));
 
 	for (unsigned i=0; i < resourceTypesNumber; i++)
 	{
@@ -68,7 +68,7 @@ WP3ResourceFork::WP3ResourceFork(librevenge::RVNGInputStream *input, WPXEncrypti
 				input->seek(position2, librevenge::RVNG_SEEK_SET);
 			}
 			unsigned char resourceAttributes = readU8(input, encryption);
-			unsigned offsetToData = (unsigned)((unsigned)readU8(input, encryption) << 16);
+			auto offsetToData = (unsigned)((unsigned)readU8(input, encryption) << 16);
 			offsetToData |= readU16(input, encryption, true);
 			offsetToData += 16+dataOffset;
 			long position3 = input->tell();
@@ -100,7 +100,7 @@ WP3ResourceFork::WP3ResourceFork(librevenge::RVNGInputStream *input, WPXEncrypti
 			}
 
 			input->seek(position3, librevenge::RVNG_SEEK_SET);
-			WP3Resource *resource = new WP3Resource(resourceType, resourceReferenceID, resourceName, resourceAttributes, resourceData);
+			auto *resource = new WP3Resource(resourceType, resourceReferenceID, resourceName, resourceAttributes, resourceData);
 			m_resourcesTypeMultimap.insert(std::multimap<unsigned, WP3Resource *>::value_type(resourceType, resource));
 			m_resourcesIDMultimap.insert(std::multimap<unsigned, WP3Resource *>::value_type(resourceReferenceID, resource));
 			WPD_DEBUG_MSG(("WP3Resource: Type 0x%.8x, ID %i, name %s, attributes 0x%.2x\n", resourceType, resourceReferenceID, resourceName.cstr(), resourceAttributes));
@@ -157,7 +157,7 @@ const WP3Resource *WP3ResourceFork::getResource(unsigned type, unsigned ID) cons
 	if (tempPair.first == m_resourcesTypeMultimap.end())
 		return nullptr;
 
-	for (std::multimap<unsigned, WP3Resource *>::const_iterator iter = tempPair.first; iter != tempPair.second; ++iter)
+	for (auto iter = tempPair.first; iter != tempPair.second; ++iter)
 		if (iter->second->getResourceReferenceID() == ID)
 			return iter->second;
 

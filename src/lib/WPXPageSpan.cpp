@@ -181,7 +181,7 @@ void WPXPageSpan::setHeaderFooter(const WPXHeaderFooterType type, const unsigned
 
 void WPXPageSpan::_removeHeaderFooter(WPXHeaderFooterType type, WPXHeaderFooterOccurrence occurrence)
 {
-	for (std::vector<WPXHeaderFooter>::iterator iter = m_headerFooterList.begin(); iter != m_headerFooterList.end(); ++iter)
+	for (auto iter = m_headerFooterList.begin(); iter != m_headerFooterList.end(); ++iter)
 	{
 		if ((*iter).getType() == type && (*iter).getOccurrence() == occurrence)
 		{

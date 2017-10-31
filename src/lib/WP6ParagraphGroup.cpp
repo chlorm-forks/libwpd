@@ -89,7 +89,7 @@ WP6ParagraphGroup_LineSpacingSubGroup::WP6ParagraphGroup_LineSpacingSubGroup(lib
 	m_lineSpacing(0)
 {
 	unsigned lineSpacing = readU32(input, encryption);
-	signed short lineSpacingIntegerPart = (signed short)((lineSpacing & 0xFFFF0000) >> 16);
+	auto lineSpacingIntegerPart = (signed short)((lineSpacing & 0xFFFF0000) >> 16);
 	double lineSpacingFractionalPart = (double)(lineSpacing & 0xFFFF)/(double)0xFFFF;
 	WPD_DEBUG_MSG(("WordPerfect: line spacing integer part: %i fractional part: %f (original value: %i)\n",
 	               lineSpacingIntegerPart, lineSpacingFractionalPart, lineSpacing));
@@ -296,7 +296,7 @@ WP6ParagraphGroup_SpacingAfterParagraphSubGroup::WP6ParagraphGroup_SpacingAfterP
 	m_sizeNonDeletable(sizeNonDeletable)
 {
 	unsigned spacingAfterRelative = readU32(input, encryption);
-	signed short spacingAfterIntegerPart = (signed short)((spacingAfterRelative & 0xFFFF0000) >> 16);
+	auto spacingAfterIntegerPart = (signed short)((spacingAfterRelative & 0xFFFF0000) >> 16);
 	double spacingAfterFractionalPart = (double)(spacingAfterRelative & 0xFFFF)/(double)0xFFFF;
 	WPD_DEBUG_MSG(("WordPerfect: spacing after paragraph relative integer part: %i fractional part: %f (original value: %i)\n",
 	               spacingAfterIntegerPart, spacingAfterFractionalPart, spacingAfterRelative));

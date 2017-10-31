@@ -87,8 +87,8 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 			wpChar = readU16(m_stream.get(), nullptr);
 		for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), nullptr))
 		{
-			unsigned char character = (unsigned char)(wpChar & 0x00FF);
-			unsigned char characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);
+			auto character = (unsigned char)(wpChar & 0x00FF);
+			auto characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);
 			const unsigned *chars;
 			int len = extendedCharacterWP6ToUCS4(character,
 			                                     characterSet, &chars);
@@ -128,8 +128,8 @@ void WP6ExtendedDocumentSummaryPacket::parse(WP6Listener *listener) const
 				wpChar = readU16(m_stream.get(), nullptr);
 			for (; wpChar != 0 && !m_stream->isEnd(); wpChar = readU16(m_stream.get(), nullptr))
 			{
-				unsigned char character = (unsigned char)(wpChar & 0x00FF);
-				unsigned char characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);
+				auto character = (unsigned char)(wpChar & 0x00FF);
+				auto characterSet = (unsigned char)((wpChar >> 8) & 0x00FF);
 				const unsigned *chars;
 				int len = extendedCharacterWP6ToUCS4(character,
 				                                     characterSet, &chars);

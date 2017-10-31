@@ -121,7 +121,7 @@ void WP6StylesListener::pageMarginChange(const unsigned char side, const unsigne
 {
 	if (!isUndoOn())
 	{
-		double marginInch = (double)((double)margin / (double)WPX_NUM_WPUS_PER_INCH);
+		auto marginInch = (double)((double)margin / (double)WPX_NUM_WPUS_PER_INCH);
 		switch (side)
 		{
 		case WPX_TOP:
@@ -140,8 +140,8 @@ void WP6StylesListener::pageFormChange(const unsigned short length, const unsign
 {
 	if (!isUndoOn())
 	{
-		double lengthInch = (double)((double)length / (double)WPX_NUM_WPUS_PER_INCH);
-		double widthInch = (double)((double)width / (double)WPX_NUM_WPUS_PER_INCH);
+		auto lengthInch = (double)((double)length / (double)WPX_NUM_WPUS_PER_INCH);
+		auto widthInch = (double)((double)width / (double)WPX_NUM_WPUS_PER_INCH);
 		if (!m_currentPageHasContent)
 		{
 			m_currentPage.setFormLength(lengthInch);
@@ -159,7 +159,7 @@ void WP6StylesListener::marginChange(const unsigned char side, const unsigned sh
 			return; // do not deal with L/R margins in headers, footer and notes
 
 		std::list<WPXPageSpan>::iterator Iter;
-		double marginInch = (double)((double)margin / (double)WPX_NUM_WPUS_PER_INCH);
+		auto marginInch = (double)((double)margin / (double)WPX_NUM_WPUS_PER_INCH);
 		switch (side)
 		{
 		case WPX_LEFT:

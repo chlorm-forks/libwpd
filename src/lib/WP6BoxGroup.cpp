@@ -314,13 +314,13 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 	for (int i=0; i<getNumPrefixIDs(); i++)
 	{
 		if (tmpContentType == 0x03)
-			if (const WP6GraphicsFilenamePacket *gfPacket = dynamic_cast<const WP6GraphicsFilenamePacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i])))
+			if (const auto *gfPacket = dynamic_cast<const WP6GraphicsFilenamePacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i])))
 			{
 				graphicsDataIds = gfPacket->getChildIds();
 				break;
 			}
 		if (tmpContentType == 0x01)
-			if (const WP6GeneralTextPacket *gtPacket = dynamic_cast<const WP6GeneralTextPacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i])))
+			if (const auto *gtPacket = dynamic_cast<const WP6GeneralTextPacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i])))
 			{
 				subDocument = gtPacket->getSubDocument();
 				break;
@@ -333,7 +333,7 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 	{
 		if (tmpContentType == 0x03)
 		{
-			const WP6HyperlinkPacket *const hlPacket = dynamic_cast<const WP6HyperlinkPacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i]));
+			const auto *const hlPacket = dynamic_cast<const WP6HyperlinkPacket *>(listener->getPrefixDataPacket(getPrefixIDs()[i]));
 			if (hlPacket)
 			{
 				linkTarget = hlPacket->getTarget();
