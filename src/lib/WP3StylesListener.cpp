@@ -31,7 +31,7 @@
 #include "libwpd_internal.h"
 #include "WP3SubDocument.h"
 
-WP3StylesListener::WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<WP3SubDocument *> &subDocuments) :
+WP3StylesListener::WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<std::shared_ptr<WP3SubDocument>> &subDocuments) :
 	WP3Listener(),
 	WPXStylesListener(pageList),
 	m_currentPage(WPXPageSpan()),
@@ -190,7 +190,7 @@ void WP3StylesListener::pageFormChange(const unsigned short length, const unsign
 	}
 }
 
-void WP3StylesListener::headerFooterGroup(const unsigned char headerFooterType, const unsigned char occurrenceBits, WP3SubDocument *subDocument)
+void WP3StylesListener::headerFooterGroup(const unsigned char headerFooterType, const unsigned char occurrenceBits, const std::shared_ptr<WP3SubDocument> &subDocument)
 {
 	if (!isUndoOn())
 	{
@@ -218,8 +218,8 @@ void WP3StylesListener::headerFooterGroup(const unsigned char headerFooterType, 
 
 			if (wpxOccurrence != NEVER)
 			{
-				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
-				_handleSubDocument(subDocument, WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
+				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+				_handleSubDocument(subDocument.get(), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 			}
 			else
 				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);

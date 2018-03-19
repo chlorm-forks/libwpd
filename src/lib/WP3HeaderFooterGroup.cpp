@@ -30,7 +30,7 @@
 WP3HeaderFooterGroup::WP3HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP3VariableLengthGroup(),
 	m_definition(0),
-	m_subDocument(nullptr)
+	m_subDocument()
 {
 	_read(input, encryption);
 }
@@ -52,7 +52,7 @@ void WP3HeaderFooterGroup::_readContents(librevenge::RVNGInputStream *input, WPX
 		input->seek(4, librevenge::RVNG_SEEK_CUR);
 		tmpSubDocumentLength = input->isEnd() ? 0 : readU16(input, encryption, true);
 		if (tmpSubDocumentLength)
-			m_subDocument = new WP3SubDocument(input, encryption, tmpSubDocumentLength);
+			m_subDocument = std::make_shared<WP3SubDocument>(input, encryption, tmpSubDocumentLength);
 	}
 }
 

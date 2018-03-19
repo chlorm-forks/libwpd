@@ -52,7 +52,7 @@ private:
 class WP3ContentListener : public WP3Listener, protected WPXContentListener
 {
 public:
-	WP3ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP3SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
+	WP3ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP3SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
 	~WP3ContentListener() override;
 
 	void startDocument() override
@@ -111,7 +111,7 @@ public:
 	void insertPageNumber(const librevenge::RVNGString &pageNumber) override;
 	void insertNoteReference(const librevenge::RVNGString &noteReference) override;
 	void insertNote(WPXNoteType noteType, const WP3SubDocument *subDocument) override;
-	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP3SubDocument *subDocument) override;
+	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, const std::shared_ptr<WP3SubDocument> &subDocument) override;
 	void suppressPage(unsigned short /* suppressCode */) override {}
 	void backTab() override;
 	void leftIndent() override;
@@ -139,7 +139,7 @@ private:
 	WP3ContentListener(const WP3ContentListener &);
 	WP3ContentListener &operator=(const WP3ContentListener &);
 	std::unique_ptr<WP3ContentParsingState> m_parseState;
-	std::vector<WP3SubDocument *> &m_subDocuments;
+	std::vector<std::shared_ptr<WP3SubDocument>> &m_subDocuments;
 };
 
 #endif /* WP3CONTENTLISTENER_H */

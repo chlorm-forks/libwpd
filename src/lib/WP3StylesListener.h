@@ -37,7 +37,7 @@
 class WP3StylesListener : public WP3Listener, protected WPXStylesListener
 {
 public:
-	WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<WP3SubDocument *> &subDocuments);
+	WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<std::shared_ptr<WP3SubDocument>> &subDocuments);
 
 	void startDocument() override {}
 	void startSubDocument() override {}
@@ -90,7 +90,7 @@ public:
 	{
 		if (!isUndoOn()) m_currentPageHasContent = true;
 	}
-	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP3SubDocument *subDocument) override;
+	void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, const std::shared_ptr<WP3SubDocument> &subDocument) override;
 	void suppressPage(unsigned short suppressCode) override;
 	void backTab() override
 	{
@@ -120,7 +120,7 @@ private:
 	double m_tempMarginLeft, m_tempMarginRight;
 	bool m_currentPageHasContent;
 	bool m_isSubDocument;
-	std::vector<WP3SubDocument *> &m_subDocuments;
+	std::vector<std::shared_ptr<WP3SubDocument>> &m_subDocuments;
 	std::list<WPXPageSpan>::iterator m_pageListHardPageMark;
 };
 

@@ -26,6 +26,8 @@
 #ifndef WP3HEADERFOOTERGROUP_H
 #define WP3HEADERFOOTERGROUP_H
 
+#include <memory>
+
 #include "WP3VariableLengthGroup.h"
 #include "WP3SubDocument.h"
 
@@ -41,7 +43,7 @@ private:
 	WP3HeaderFooterGroup(const WP3HeaderFooterGroup &);
 	WP3HeaderFooterGroup &operator=(const WP3HeaderFooterGroup &);
 	unsigned char m_definition;
-	WP3SubDocument *m_subDocument;
+	std::shared_ptr<WP3SubDocument> m_subDocument;
 };
 
 #endif /* WP3HEADERFOOTERGROUP_H */

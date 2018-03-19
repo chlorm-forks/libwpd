@@ -27,6 +27,7 @@
 #ifndef WP3LISTENER_H
 #define WP3LISTENER_H
 
+#include <memory>
 #include <vector>
 #include <librevenge/librevenge.h>
 #include "libwpd_internal.h"
@@ -76,7 +77,7 @@ public:
 	virtual void insertPageNumber(const librevenge::RVNGString &pageNumber) = 0;
 	virtual void insertNoteReference(const librevenge::RVNGString &noteReference) = 0;
 	virtual void insertNote(WPXNoteType noteType, const WP3SubDocument *subDocument) = 0;
-	virtual void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP3SubDocument *subDocument) = 0;
+	virtual void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, const std::shared_ptr<WP3SubDocument> &subDocument) = 0;
 	virtual void suppressPage(unsigned short suppressCode) = 0;
 	virtual void backTab() = 0;
 	virtual void leftIndent() = 0;
