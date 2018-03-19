@@ -121,12 +121,11 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	WP5PrefixData *prefixData = nullptr;
 	std::vector<WP5SubDocument *> subDocuments;
 
 	try
 	{
-		prefixData = getPrefixData(input, encryption);
+		const std::unique_ptr<WP5PrefixData> prefixData{getPrefixData(input, encryption)};
 
 		// do a "first-pass" parse of the document
 		// gather table border information, page properties (per-page)
@@ -152,7 +151,7 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 		// second pass: here is where we actually send the messages to the target app
 		// that are necessary to emit the body of the target document
 		WP5ContentListener listener(pageList, subDocuments, documentInterface); // FIXME: SHOULD BE PASSED TABLE DATA!
-		listener.setPrefixData(prefixData);
+		listener.setPrefixData(prefixData.get());
 
 
 		// According the documentation, first font in the font list is the default font, so use it as such
@@ -187,7 +186,6 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 		parse(input, encryption, &listener);
 
 		// cleanup section: free the used resources
-		delete prefixData;
 		for (auto &subDocument : subDocuments)
 		{
 			if (subDocument)
@@ -198,7 +196,6 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
 
-		delete prefixData;
 		for (auto &subDocument : subDocuments)
 		{
 			if (subDocument)
