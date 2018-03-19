@@ -30,7 +30,7 @@
 WP1HeaderFooterGroup::WP1HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group) :
 	WP1VariableLengthGroup(group),
 	m_definition(0),
-	m_subDocument(nullptr)
+	m_subDocument()
 {
 	_read(input, encryption);
 }
@@ -47,7 +47,7 @@ void WP1HeaderFooterGroup::_readContents(librevenge::RVNGInputStream *input, WPX
 	input->seek(18, librevenge::RVNG_SEEK_CUR);
 	WPD_DEBUG_MSG(("WP1SubDocument subDocumentSize = %u\n", tmpSubDocumentSize));
 	if (tmpSubDocumentSize)
-		m_subDocument = new WP1SubDocument(input, encryption, tmpSubDocumentSize);
+		m_subDocument = std::make_shared<WP1SubDocument>(input, encryption, tmpSubDocumentSize);
 }
 
 void WP1HeaderFooterGroup::parse(WP1Listener *listener)

@@ -28,6 +28,7 @@
 #ifndef WP1LISTENER_H
 #define WP1LISTENER_H
 
+#include <memory>
 #include <vector>
 #include <librevenge/librevenge.h>
 #include "libwpd_internal.h"
@@ -58,7 +59,7 @@ public:
 	virtual void leftRightIndent(unsigned short leftRightMarginOffset) = 0;
 	virtual void leftMarginRelease(unsigned short release) = 0;
 	virtual void setTabs(const std::vector<WPXTabStop> &tabStops) = 0;
-	virtual void headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument) = 0;
+	virtual void headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP1SubDocument> &subDocument) = 0;
 	virtual void suppressPageCharacteristics(unsigned char suppressCode) = 0;
 	virtual void justificationChange(unsigned char justification) = 0;
 	virtual void lineSpacingChange(unsigned char spacing) = 0;

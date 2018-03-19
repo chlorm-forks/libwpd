@@ -26,6 +26,8 @@
 #ifndef WP1HEADERFOOTERGROUP_H
 #define WP1HEADERFOOTERGROUP_H
 
+#include <memory>
+
 #include "WP1VariableLengthGroup.h"
 
 class WP1SubDocument;
@@ -42,7 +44,7 @@ private:
 	WP1HeaderFooterGroup(const WP1HeaderFooterGroup &);
 	WP1HeaderFooterGroup &operator=(const WP1HeaderFooterGroup &);
 	unsigned char m_definition;
-	WP1SubDocument *m_subDocument;
+	std::shared_ptr<WP1SubDocument> m_subDocument;
 };
 
 #endif /* WP1HEADERFOOTERGROUP_H */

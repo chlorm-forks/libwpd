@@ -45,7 +45,7 @@ WP1ContentParsingState::~WP1ContentParsingState()
 }
 
 
-WP1ContentListener::WP1ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP1SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
+WP1ContentListener::WP1ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
 	WP1Listener(),
 	WPXContentListener(pageList, documentInterface),
 	m_parseState(new WP1ContentParsingState),
@@ -490,7 +490,7 @@ void WP1ContentListener::justificationChange(unsigned char justification)
 	}
 }
 
-void WP1ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, WP1SubDocument *subDocument)
+void WP1ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, const std::shared_ptr<WP1SubDocument> &subDocument)
 {
 	if (subDocument)
 		m_subDocuments.push_back(subDocument);

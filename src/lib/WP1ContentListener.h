@@ -50,7 +50,7 @@ private:
 class WP1ContentListener : public WP1Listener, protected WPXContentListener
 {
 public:
-	WP1ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP1SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
+	WP1ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
 	~WP1ContentListener() override;
 
 	void startDocument() override
@@ -80,7 +80,7 @@ public:
 	void leftRightIndent(unsigned short leftRightMarginOffset) override;
 	void leftMarginRelease(unsigned short release) override;
 	void setTabs(const std::vector<WPXTabStop> &tabStops) override;
-	void headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument) override;
+	void headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP1SubDocument> &subDocument) override;
 	void suppressPageCharacteristics(unsigned char /* suppressCode */) override {}
 	void justificationChange(unsigned char justification) override;
 	void lineSpacingChange(unsigned char spacing) override
@@ -110,7 +110,7 @@ protected:
 
 private:
 	std::unique_ptr<WP1ContentParsingState> m_parseState;
-	std::vector<WP1SubDocument *> &m_subDocuments;
+	std::vector<std::shared_ptr<WP1SubDocument>> &m_subDocuments;
 	WP1ContentListener(const WP1ContentListener &);
 	WP1ContentListener &operator=(WP1ContentListener &);
 };

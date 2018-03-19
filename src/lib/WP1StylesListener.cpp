@@ -30,7 +30,7 @@
 #include "WPXFileStructure.h"
 #include "libwpd_internal.h"
 
-WP1StylesListener::WP1StylesListener(std::list<WPXPageSpan> &pageList, std::vector<WP1SubDocument *> &subDocuments) :
+WP1StylesListener::WP1StylesListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments) :
 	WP1Listener(),
 	WPXStylesListener(pageList),
 	m_currentPage(),
@@ -182,7 +182,7 @@ void WP1StylesListener::bottomMarginSet(unsigned short bottomMargin)
 	}
 }
 
-void WP1StylesListener::headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument)
+void WP1StylesListener::headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP1SubDocument> &subDocument)
 {
 	if (subDocument)
 		m_subDocuments.push_back(subDocument);
@@ -213,13 +213,13 @@ void WP1StylesListener::headerFooterGroup(unsigned char headerFooterDefinition, 
 		WPXTableList tableList;
 
 		if ((wpxType == HEADER) && tempCurrentPageHasContent)
-			m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
+			m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
 		else /* FOOTER || !tempCurrentPageHasContent */
 		{
 			if (wpxOccurrence != NEVER)
 			{
-				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
-				_handleSubDocument(subDocument, WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
+				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+				_handleSubDocument(subDocument.get(), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 			}
 			else
 				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);

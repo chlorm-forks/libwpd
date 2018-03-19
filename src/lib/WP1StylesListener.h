@@ -31,6 +31,7 @@
 #include "WP1Listener.h"
 #include "WP1SubDocument.h"
 #include "WPXStylesListener.h"
+#include <memory>
 #include <vector>
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
@@ -38,7 +39,7 @@
 class WP1StylesListener : public WP1Listener, protected WPXStylesListener
 {
 public:
-	WP1StylesListener(std::list<WPXPageSpan> &pageList, std::vector<WP1SubDocument *> &subDocuments);
+	WP1StylesListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments);
 	~WP1StylesListener() override {}
 
 	void startDocument() override {}
@@ -77,7 +78,7 @@ public:
 	}
 	void leftMarginRelease(unsigned short /* release */) override {}
 	void setTabs(const std::vector<WPXTabStop> & /* tabStops */) override {}
-	void headerFooterGroup(unsigned char headerFooterDefinition, WP1SubDocument *subDocument) override;
+	void headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP1SubDocument> &subDocument) override;
 	void suppressPageCharacteristics(unsigned char suppressCode) override;
 	void justificationChange(unsigned char /* justification */) override {}
 	void lineSpacingChange(unsigned char /* spacing */) override {}
@@ -94,7 +95,7 @@ protected:
 
 private:
 	WPXPageSpan m_currentPage, m_nextPage;
-	std::vector<WP1SubDocument *> &m_subDocuments;
+	std::vector<std::shared_ptr<WP1SubDocument>> &m_subDocuments;
 	double m_tempMarginLeft, m_tempMarginRight;
 	bool m_currentPageHasContent;
 	bool m_isSubDocument;
