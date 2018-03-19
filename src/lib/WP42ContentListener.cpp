@@ -41,7 +41,7 @@ WP42ContentParsingState::~WP42ContentParsingState()
 }
 
 
-WP42ContentListener::WP42ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP42SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
+WP42ContentListener::WP42ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP42SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
 	WP42Listener(),
 	WPXContentListener(pageList, documentInterface),
 	m_parseState(new WP42ContentParsingState),
@@ -157,7 +157,7 @@ void WP42ContentListener::marginReset(unsigned char /* leftMargin */, unsigned c
 #endif
 }
 
-void WP42ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, WP42SubDocument *subDocument)
+void WP42ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, const std::shared_ptr<WP42SubDocument> &subDocument)
 {
 	if (subDocument)
 		m_subDocuments.push_back(subDocument);

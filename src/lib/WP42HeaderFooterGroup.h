@@ -26,6 +26,8 @@
 #ifndef WP42HEADERFOOTERGROUP_H
 #define WP42HEADERFOOTERGROUP_H
 
+#include <memory>
+
 #include "WP42MultiByteFunctionGroup.h"
 #include "WP42SubDocument.h"
 
@@ -41,7 +43,7 @@ private:
 	WP42HeaderFooterGroup(const WP42HeaderFooterGroup &);
 	WP42HeaderFooterGroup &operator=(const WP42HeaderFooterGroup &);
 	unsigned char m_definition;
-	WP42SubDocument *m_subDocument;
+	std::shared_ptr<WP42SubDocument> m_subDocument;
 };
 
 #endif /* WP42HEADERFOOTERGROUP_H */

@@ -45,7 +45,7 @@ struct WP42ContentParsingState
 class WP42ContentListener : public WP42Listener, protected WPXContentListener
 {
 public:
-	WP42ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP42SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
+	WP42ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP42SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
 	~WP42ContentListener() override;
 
 	void startDocument() override
@@ -65,7 +65,7 @@ public:
 	void insertEOL() override;
 	void attributeChange(bool isOn, unsigned char attribute) override;
 	void marginReset(unsigned char leftMargin, unsigned char rightMargin) override;
-	void headerFooterGroup(unsigned char headerFooterDefinition, WP42SubDocument *subDocument) override;
+	void headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP42SubDocument> &subDocument) override;
 	void suppressPageCharacteristics(unsigned char /* suppressCode */) override {}
 	void endDocument() override
 	{
@@ -86,7 +86,7 @@ private:
 	WP42ContentListener(const WP42ContentListener &);
 	WP42ContentListener &operator=(const WP42ContentListener &);
 	std::unique_ptr<WP42ContentParsingState> m_parseState;
-	std::vector<WP42SubDocument *> &m_subDocuments;
+	std::vector<std::shared_ptr<WP42SubDocument>> &m_subDocuments;
 };
 
 #endif /* WP42LISTENER_H */

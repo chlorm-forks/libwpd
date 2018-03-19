@@ -30,7 +30,7 @@
 WP42HeaderFooterGroup::WP42HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned char group) :
 	WP42MultiByteFunctionGroup(group),
 	m_definition(0),
-	m_subDocument(nullptr)
+	m_subDocument()
 {
 	_read(input, encryption);
 }
@@ -55,7 +55,7 @@ void WP42HeaderFooterGroup::_readContents(librevenge::RVNGInputStream *input, WP
 	m_definition = readU8(input, encryption);
 	input->seek(tmpStartPosition, librevenge::RVNG_SEEK_SET);
 	if (tmpSubDocumentSize > 2)
-		m_subDocument = new WP42SubDocument(input, encryption, (unsigned)tmpSubDocumentSize);
+		m_subDocument = std::make_shared<WP42SubDocument>(input, encryption, (unsigned)tmpSubDocumentSize);
 }
 
 void WP42HeaderFooterGroup::parse(WP42Listener *listener)

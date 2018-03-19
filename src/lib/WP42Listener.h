@@ -28,6 +28,7 @@
 #ifndef WP42LISTENER_H
 #define WP42LISTENER_H
 
+#include <memory>
 
 class WP42SubDocument;
 
@@ -45,7 +46,7 @@ public:
 	virtual void insertEOL() = 0;
 	virtual void attributeChange(bool isOn, unsigned char attribute) = 0;
 	virtual void marginReset(unsigned char leftMargin, unsigned char rightMargin) = 0;
-	virtual void headerFooterGroup(unsigned char headerFooterDefinition, WP42SubDocument *subDocument) = 0;
+	virtual void headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP42SubDocument> &subDocument) = 0;
 	virtual void suppressPageCharacteristics(unsigned char suppressCode) = 0;
 	virtual void endDocument() = 0;
 	virtual void endSubDocument() = 0;
