@@ -121,7 +121,7 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	std::vector<WP5SubDocument *> subDocuments;
+	std::vector<std::shared_ptr<WP5SubDocument>> subDocuments;
 
 	try
 	{
@@ -184,24 +184,10 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 
 
 		parse(input, encryption, &listener);
-
-		// cleanup section: free the used resources
-		for (auto &subDocument : subDocuments)
-		{
-			if (subDocument)
-				delete subDocument;
-		}
 	}
 	catch (FileException)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
-
-		for (auto &subDocument : subDocuments)
-		{
-			if (subDocument)
-				delete subDocument;
-		}
-
 		throw FileException();
 	}
 }
@@ -210,7 +196,7 @@ void WP5Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfac
 {
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	std::vector<WP5SubDocument *> subDocuments;
+	std::vector<std::shared_ptr<WP5SubDocument>> subDocuments;
 
 	librevenge::RVNGInputStream *input = getInput();
 
@@ -227,17 +213,10 @@ void WP5Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfac
 		listener.startSubDocument();
 		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
-
-		for (auto &subDocument : subDocuments)
-			if (subDocument)
-				delete subDocument;
 	}
 	catch (FileException)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
-		for (auto &subDocument : subDocuments)
-			if (subDocument)
-				delete subDocument;
 		throw FileException();
 	}
 }

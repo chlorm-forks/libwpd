@@ -29,7 +29,7 @@
 WP5HeaderFooterGroup::WP5HeaderFooterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP5VariableLengthGroup(),
 	m_occurrenceBits(0),
-	m_subDocument(nullptr)
+	m_subDocument()
 {
 	_read(input, encryption);
 }
@@ -48,7 +48,7 @@ void WP5HeaderFooterGroup::_readContents(librevenge::RVNGInputStream *input, WPX
 	{
 		input->seek(10, librevenge::RVNG_SEEK_CUR);
 		if (tmpSubDocumentLength > 0)
-			m_subDocument = new WP5SubDocument(input, encryption, (unsigned)tmpSubDocumentLength);
+			m_subDocument = std::make_shared<WP5SubDocument>(input, encryption, (unsigned)tmpSubDocumentLength);
 	}
 }
 

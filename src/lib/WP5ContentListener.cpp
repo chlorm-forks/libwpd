@@ -43,7 +43,7 @@ WP5ContentParsingState::~WP5ContentParsingState()
 {
 }
 
-WP5ContentListener::WP5ContentListener(std::list<WPXPageSpan> &pageList, std::vector<WP5SubDocument *> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
+WP5ContentListener::WP5ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP5SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
 	WP5Listener(),
 	WPXContentListener(pageList, documentInterface),
 	m_parseState(new WP5ContentParsingState),
@@ -593,7 +593,7 @@ void WP5ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
 }
 
 void WP5ContentListener::headerFooterGroup(unsigned char /* headerFooterType */, unsigned char /* occurrenceBits */,
-                                           WP5SubDocument *subDocument)
+                                           const std::shared_ptr<WP5SubDocument> &subDocument)
 {
 	if (subDocument)
 		m_subDocuments.push_back(subDocument);

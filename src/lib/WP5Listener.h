@@ -28,6 +28,7 @@
 #ifndef WP5LISTENER_H
 #define WP5LISTENER_H
 
+#include <memory>
 #include <vector>
 #include <librevenge/librevenge.h>
 #include "libwpd_internal.h"
@@ -74,7 +75,7 @@ public:
 
 	virtual void insertNoteReference(const librevenge::RVNGString &noteReference) = 0;
 	virtual void insertNote(WPXNoteType noteType, const WP5SubDocument *subDocument) = 0;
-	virtual void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP5SubDocument *subDocument) = 0;
+	virtual void headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, const std::shared_ptr<WP5SubDocument> &subDocument) = 0;
 	virtual void suppressPageCharacteristics(unsigned char suppressCode) = 0;
 
 	virtual void boxOn(unsigned char positionAndType, unsigned char alignment, unsigned short width, unsigned short height, unsigned short x, unsigned short y) = 0;

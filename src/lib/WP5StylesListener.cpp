@@ -32,7 +32,7 @@
 #include "libwpd_internal.h"
 #include "WP5SubDocument.h"
 
-WP5StylesListener::WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<WP5SubDocument *> &subDocuments) :
+WP5StylesListener::WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<std::shared_ptr<WP5SubDocument>> &subDocuments) :
 	WP5Listener(),
 	WPXStylesListener(pageList),
 	m_currentPage(),
@@ -196,7 +196,7 @@ void WP5StylesListener::marginChange(unsigned char side, unsigned short margin)
 
 }
 
-void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, WP5SubDocument *subDocument)
+void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, const std::shared_ptr<WP5SubDocument> &subDocument)
 {
 	if (subDocument)
 		m_subDocuments.push_back(subDocument);
@@ -224,7 +224,7 @@ void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsign
 			if ((wpxType == HEADER) && tempCurrentPageHasContent)
 			{
 				if (wpxOccurrence != NEVER)
-					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
+					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
 				else
 					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);
 			}
@@ -232,8 +232,8 @@ void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsign
 			{
 				if (wpxOccurrence != NEVER)
 				{
-					m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
-					_handleSubDocument(subDocument, WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
+					m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+					_handleSubDocument(subDocument.get(), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 				}
 				else
 					m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);

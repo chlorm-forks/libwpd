@@ -26,6 +26,8 @@
 #ifndef WP5HEADERFOOTERGROUP_H
 #define WP5HEADERFOOTERGROUP_H
 
+#include <memory>
+
 #include "WP5VariableLengthGroup.h"
 #include "WP5SubDocument.h"
 
@@ -41,7 +43,7 @@ private:
 	WP5HeaderFooterGroup(const WP5HeaderFooterGroup &);
 	WP5HeaderFooterGroup &operator=(const WP5HeaderFooterGroup &);
 	unsigned char m_occurrenceBits;
-	WP5SubDocument *m_subDocument;
+	std::shared_ptr<WP5SubDocument> m_subDocument;
 };
 
 #endif /* WP5HEADERFOOTERGROUP_H */
