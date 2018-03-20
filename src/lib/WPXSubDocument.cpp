@@ -34,12 +34,8 @@ WPXSubDocument::WPXSubDocument(librevenge::RVNGInputStream *input, WPXEncryption
 	m_streamData(new unsigned char[dataSize])
 {
 	unsigned i=0;
-	for (; i<dataSize; i++)
-	{
-		if (input->isEnd())
-			break;
+	for (; i<dataSize && !input->isEnd(); i++)
 		m_streamData[i] = readU8(input, encryption);
-	}
 	m_stream.reset(new WPXMemoryInputStream(m_streamData.get(), i));
 }
 
