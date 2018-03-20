@@ -26,6 +26,7 @@
 #ifndef WP3RESOURCEFORK_H
 #define WP3RESOURCEFORK_H
 #include <map>
+#include <memory>
 #include <vector>
 #include <librevenge/librevenge.h>
 #include "WP3Resource.h"
@@ -41,7 +42,7 @@ public:
 	const WP3Resource *getResource(unsigned type, unsigned ID) const;
 
 private:
-	std::multimap<unsigned, WP3Resource *> m_resourcesTypeMultimap, m_resourcesIDMultimap;
+	std::multimap<unsigned, std::shared_ptr<WP3Resource>> m_resourcesTypeMultimap, m_resourcesIDMultimap;
 };
 
 #endif /* WP3RESOURCEFORK_H */

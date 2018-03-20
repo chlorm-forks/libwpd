@@ -100,9 +100,9 @@ WP3ResourceFork::WP3ResourceFork(librevenge::RVNGInputStream *input, WPXEncrypti
 			}
 
 			input->seek(position3, librevenge::RVNG_SEEK_SET);
-			auto *resource = new WP3Resource(resourceType, resourceReferenceID, resourceName, resourceAttributes, resourceData);
-			m_resourcesTypeMultimap.insert(std::multimap<unsigned, WP3Resource *>::value_type(resourceType, resource));
-			m_resourcesIDMultimap.insert(std::multimap<unsigned, WP3Resource *>::value_type(resourceReferenceID, resource));
+			auto resource = std::make_shared<WP3Resource>(resourceType, resourceReferenceID, resourceName, resourceAttributes, resourceData);
+			m_resourcesTypeMultimap.insert(std::make_pair(resourceType, resource));
+			m_resourcesIDMultimap.insert(std::make_pair(resourceReferenceID, resource));
 			WPD_DEBUG_MSG(("WP3Resource: Type 0x%.8x, ID %i, name %s, attributes 0x%.2x\n", resourceType, resourceReferenceID, resourceName.cstr(), resourceAttributes));
 			input->seek(4, librevenge::RVNG_SEEK_CUR);
 #if 0
@@ -144,22 +144,18 @@ WP3ResourceFork::WP3ResourceFork(librevenge::RVNGInputStream *input, WPXEncrypti
 
 WP3ResourceFork::~WP3ResourceFork()
 {
-	// delete the pointers from one of the multimaps.
-	for (auto &iter : m_resourcesTypeMultimap)
-		delete iter.second;
 }
 
 const WP3Resource *WP3ResourceFork::getResource(unsigned type, unsigned ID) const
 {
-	std::pair< std::multimap<unsigned, WP3Resource *>::const_iterator, std::multimap<unsigned, WP3Resource *>::const_iterator > tempPair
-	    = m_resourcesTypeMultimap.equal_range(type);
+	auto tempPair = m_resourcesTypeMultimap.equal_range(type);
 
 	if (tempPair.first == m_resourcesTypeMultimap.end())
 		return nullptr;
 
 	for (auto iter = tempPair.first; iter != tempPair.second; ++iter)
 		if (iter->second->getResourceReferenceID() == ID)
-			return iter->second;
+			return iter->second.get();
 
 	return nullptr;
 }
