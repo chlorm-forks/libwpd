@@ -27,7 +27,6 @@
 #ifndef WP6GRAPHICSCACHEDFILEDATAPACKET_H
 #define WP6GRAPHICSCACHEDFILEDATAPACKET_H
 #include "WP6PrefixDataPacket.h"
-#include "WP6FileStructure.h"
 #include "WP6Listener.h"
 
 class WP6GraphicsCachedFileDataPacket : public WP6PrefixDataPacket
