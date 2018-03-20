@@ -47,72 +47,56 @@ WP6PrefixDataPacket::WP6PrefixDataPacket(librevenge::RVNGInputStream * /* input 
 {
 }
 
-WP6PrefixDataPacket *WP6PrefixDataPacket::constructPrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP6PrefixIndice *prefixIndice)
+std::shared_ptr<WP6PrefixDataPacket> WP6PrefixDataPacket::constructPrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP6PrefixIndice *prefixIndice)
 {
-	WP6PrefixDataPacket *tmpPacket = nullptr;
 	try
 	{
 		switch (prefixIndice->getType())
 		{
 		case WP6_INDEX_HEADER_INITIAL_FONT:
-			tmpPacket = new WP6DefaultInitialFontPacket(input, encryption, prefixIndice->getID(),
-			                                            prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6DefaultInitialFontPacket>(input, encryption, prefixIndice->getID(),
+			                                                     prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_HYPERLINK:
-			tmpPacket = new WP6HyperlinkPacket(input, encryption, prefixIndice->getID(),
-			                                   prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6HyperlinkPacket>(input, encryption, prefixIndice->getID(),
+			                                            prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_GENERAL_WORDPERFECT_TEXT:
-			tmpPacket = new WP6GeneralTextPacket(input, encryption, prefixIndice->getID(),
-			                                     prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6GeneralTextPacket>(input, encryption, prefixIndice->getID(),
+			                                              prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_DESIRED_FONT_DESCRIPTOR_POOL:
-			tmpPacket = new WP6FontDescriptorPacket(input, encryption, prefixIndice->getID(),
-			                                        prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
-		case WP6_INDEX_HEADER_FILL_STYLE:
-			tmpPacket = new WP6FillStylePacket(input, encryption, prefixIndice->getID(),
-			                                   prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
-		case WP6_INDEX_HEADER_EXTENDED_DOCUMENT_SUMMARY:
-			tmpPacket = new WP6ExtendedDocumentSummaryPacket(input, encryption, prefixIndice->getID(),
+			return std::make_shared<WP6FontDescriptorPacket>(input, encryption, prefixIndice->getID(),
 			                                                 prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+		case WP6_INDEX_HEADER_FILL_STYLE:
+			return std::make_shared<WP6FillStylePacket>(input, encryption, prefixIndice->getID(),
+			                                            prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+		case WP6_INDEX_HEADER_EXTENDED_DOCUMENT_SUMMARY:
+			return std::make_shared<WP6ExtendedDocumentSummaryPacket>(input, encryption, prefixIndice->getID(),
+			                                                          prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_OUTLINE_STYLE:
-			tmpPacket = new WP6OutlineStylePacket(input, encryption, prefixIndice->getID(),
-			                                      prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6OutlineStylePacket>(input, encryption, prefixIndice->getID(),
+			                                               prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_GRAPHICS_FILENAME:
-			tmpPacket = new WP6GraphicsFilenamePacket(input, encryption, prefixIndice->getID(), prefixIndice->getFlags(),
-			                                          prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6GraphicsFilenamePacket>(input, encryption, prefixIndice->getID(), prefixIndice->getFlags(),
+			                                                   prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_GRAPHICS_CACHED_FILE_DATA:
-			tmpPacket = new WP6GraphicsCachedFileDataPacket(input, encryption, prefixIndice->getID(),
-			                                                prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6GraphicsCachedFileDataPacket>(input, encryption, prefixIndice->getID(),
+			                                                         prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_GRAPHICS_BOX_STYLE:
-			tmpPacket = new WP6GraphicsBoxStylePacket(input, encryption, prefixIndice->getID(),
-			                                          prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6GraphicsBoxStylePacket>(input, encryption, prefixIndice->getID(),
+			                                                   prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_TABLE_STYLE:
-			tmpPacket = new WP6TableStylePacket(input, encryption, prefixIndice->getID(),
-			                                    prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6TableStylePacket>(input, encryption, prefixIndice->getID(),
+			                                             prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		case WP6_INDEX_HEADER_COMMENT_ANNOTATION:
-			tmpPacket = new WP6CommentAnnotationPacket(input, encryption, prefixIndice->getID(),
-			                                           prefixIndice->getDataOffset(), prefixIndice->getDataSize());
-			break;
+			return std::make_shared<WP6CommentAnnotationPacket>(input, encryption, prefixIndice->getID(),
+			                                                    prefixIndice->getDataOffset(), prefixIndice->getDataSize());
 		default:
-			break;;
+			break;
 		}
 	}
 	catch (FileException)
 	{
-		if (tmpPacket)
-			delete tmpPacket;
-		tmpPacket = nullptr;
 	}
-	return tmpPacket;
+	return nullptr;
 }
 
 void WP6PrefixDataPacket::_read(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned dataOffset, unsigned dataSize)

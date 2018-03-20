@@ -52,12 +52,12 @@ WP6PrefixData::WP6PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 	for (i=1; i<numPrefixIndices; i++)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: constructing prefix packet 0x%x\n", i));
-		WP6PrefixDataPacket *prefixDataPacket = WP6PrefixDataPacket::constructPrefixDataPacket(input, encryption, prefixIndiceArray[(i-1)]);
+		auto prefixDataPacket = WP6PrefixDataPacket::constructPrefixDataPacket(input, encryption, prefixIndiceArray[(i-1)]);
 		if (prefixDataPacket)
 		{
 			m_prefixDataPacketHash[i] = prefixDataPacket;
-			m_prefixDataPacketTypeHash.insert(std::map<int, WP6PrefixDataPacket *>::value_type(prefixIndiceArray[i-1]->getType(), prefixDataPacket));
-			if (dynamic_cast<WP6DefaultInitialFontPacket *>(prefixDataPacket))
+			m_prefixDataPacketTypeHash.insert(std::make_pair(prefixIndiceArray[i-1]->getType(), prefixDataPacket));
+			if (dynamic_cast<WP6DefaultInitialFontPacket *>(prefixDataPacket.get()))
 				m_defaultInitialFontPID = i;
 		}
 	}
@@ -71,18 +71,13 @@ WP6PrefixData::WP6PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 
 WP6PrefixData::~WP6PrefixData()
 {
-	DPH::iterator pos;
-	for (pos = m_prefixDataPacketHash.begin(); pos!=m_prefixDataPacketHash.end(); ++pos)
-	{
-		delete (pos->second);
-	}
 }
 
 const WP6PrefixDataPacket *WP6PrefixData::getPrefixDataPacket(const int prefixID) const
 {
 	auto pos = m_prefixDataPacketHash.find(prefixID);
 	if (pos != m_prefixDataPacketHash.end())
-		return static_cast<const WP6PrefixDataPacket *>(pos->second);
+		return pos->second.get();
 	else
 		return nullptr;
 }

@@ -30,8 +30,8 @@
 #include <map>
 #include <vector>
 
-typedef std::map<int, WP6PrefixDataPacket *> DPH;
-typedef std::multimap<int, WP6PrefixDataPacket *> MPDP;
+typedef std::map<int, std::shared_ptr<WP6PrefixDataPacket>> DPH;
+typedef std::multimap<int, std::shared_ptr<WP6PrefixDataPacket>> MPDP;
 typedef MPDP::const_iterator MPDP_CIter;
 typedef MPDP::iterator MPDP_Iter;
 
