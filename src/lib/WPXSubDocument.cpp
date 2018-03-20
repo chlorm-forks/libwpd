@@ -30,7 +30,7 @@
 #include <string.h>
 
 WPXSubDocument::WPXSubDocument(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const unsigned dataSize) :
-	m_stream(nullptr),
+	m_stream(),
 	m_streamData(new unsigned char[dataSize])
 {
 	unsigned i=0;
@@ -40,21 +40,19 @@ WPXSubDocument::WPXSubDocument(librevenge::RVNGInputStream *input, WPXEncryption
 			break;
 		m_streamData[i] = readU8(input, encryption);
 	}
-	m_stream = new WPXMemoryInputStream(m_streamData, i);
+	m_stream.reset(new WPXMemoryInputStream(m_streamData, i));
 }
 
 WPXSubDocument::WPXSubDocument(unsigned char *streamData, const unsigned dataSize) :
-	m_stream(nullptr),
+	m_stream(),
 	m_streamData(nullptr)
 {
 	if (streamData)
-		m_stream = new WPXMemoryInputStream(streamData, dataSize);
+		m_stream.reset(new WPXMemoryInputStream(streamData, dataSize));
 }
 
 WPXSubDocument::~WPXSubDocument()
 {
-	if (m_stream)
-		delete m_stream;
 	if (m_streamData)
 		delete [] m_streamData;
 }

@@ -26,6 +26,8 @@
 #ifndef WPXSUBDOCUMENT_H
 #define WPXSUBDOCUMENT_H
 
+#include <memory>
+
 #include "WPXMemoryStream.h"
 
 class WPXListener;
@@ -39,11 +41,11 @@ public:
 	virtual ~WPXSubDocument();
 	WPXMemoryInputStream *getStream() const
 	{
-		return m_stream;
+		return m_stream.get();
 	}
 
 private:
-	WPXMemoryInputStream *m_stream;
+	std::unique_ptr<WPXMemoryInputStream> m_stream;
 	unsigned char *m_streamData;
 	WPXSubDocument();
 	WPXSubDocument(const WPXSubDocument &);
