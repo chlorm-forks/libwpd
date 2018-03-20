@@ -106,17 +106,16 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	WP3ResourceFork *resourceFork = nullptr;
 	std::vector<std::shared_ptr<WP3SubDocument>> subDocuments;
 
 	try
 	{
-		resourceFork = getResourceFork(input, encryption);
+		const std::unique_ptr<WP3ResourceFork> resourceFork{getResourceFork(input, encryption)};
 
 		// do a "first-pass" parse of the document
 		// gather table border information, page properties (per-page)
 		WP3StylesListener stylesListener(pageList, tableList, subDocuments);
-		stylesListener.setResourceFork(resourceFork);
+		stylesListener.setResourceFork(resourceFork.get());
 		parse(input, encryption, &stylesListener);
 
 		// postprocess the pageList == remove duplicate page spans due to the page breaks
@@ -138,18 +137,12 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 		// second pass: here is where we actually send the messages to the target app
 		// that are necessary to emit the body of the target document
 		WP3ContentListener listener(pageList, subDocuments, textInterface); // FIXME: SHOULD BE CONTENT_LISTENER, AND SHOULD BE PASSED TABLE DATA!
-		listener.setResourceFork(resourceFork);
+		listener.setResourceFork(resourceFork.get());
 		parse(input, encryption, &listener);
-
-		// cleanup section: free the used resources
-		delete resourceFork;
 	}
 	catch (FileException)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: File Exception. Parse terminated prematurely."));
-
-		delete resourceFork;
-
 		throw FileException();
 	}
 }
