@@ -106,7 +106,6 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	std::vector<std::shared_ptr<WP3SubDocument>> subDocuments;
 
 	try
 	{
@@ -114,7 +113,7 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 
 		// do a "first-pass" parse of the document
 		// gather table border information, page properties (per-page)
-		WP3StylesListener stylesListener(pageList, tableList, subDocuments);
+		WP3StylesListener stylesListener(pageList, tableList);
 		stylesListener.setResourceFork(resourceFork.get());
 		parse(input, encryption, &stylesListener);
 
@@ -136,7 +135,7 @@ void WP3Parser::parse(librevenge::RVNGTextInterface *textInterface)
 
 		// second pass: here is where we actually send the messages to the target app
 		// that are necessary to emit the body of the target document
-		WP3ContentListener listener(pageList, subDocuments, textInterface); // FIXME: SHOULD BE CONTENT_LISTENER, AND SHOULD BE PASSED TABLE DATA!
+		WP3ContentListener listener(pageList, textInterface); // FIXME: SHOULD BE CONTENT_LISTENER, AND SHOULD BE PASSED TABLE DATA!
 		listener.setResourceFork(resourceFork.get());
 		parse(input, encryption, &listener);
 	}
@@ -151,20 +150,19 @@ void WP3Parser::parseSubDocument(librevenge::RVNGTextInterface *textInterface)
 {
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	std::vector<std::shared_ptr<WP3SubDocument>> subDocuments;
 
 	librevenge::RVNGInputStream *input = getInput();
 
 	try
 	{
-		WP3StylesListener stylesListener(pageList, tableList, subDocuments);
+		WP3StylesListener stylesListener(pageList, tableList);
 		stylesListener.startSubDocument();
 		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		input->seek(0, librevenge::RVNG_SEEK_SET);
 
-		WP3ContentListener listener(pageList, subDocuments, textInterface);
+		WP3ContentListener listener(pageList, textInterface);
 		listener.startSubDocument();
 		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();

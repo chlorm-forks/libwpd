@@ -48,11 +48,10 @@ WP3ContentParsingState::~WP3ContentParsingState()
 {
 }
 
-WP3ContentListener::WP3ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP3SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
+WP3ContentListener::WP3ContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface) :
 	WP3Listener(),
 	WPXContentListener(pageList, documentInterface),
-	m_parseState(new WP3ContentParsingState),
-	m_subDocuments(subDocuments)
+	m_parseState(new WP3ContentParsingState)
 {
 }
 
@@ -1153,10 +1152,8 @@ void WP3ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
 	setUndoOn(oldIsUndoOn);
 }
 
-void WP3ContentListener::headerFooterGroup(const unsigned char /* headerFooterType */, const unsigned char /* occurrenceBits */, const std::shared_ptr<WP3SubDocument> &subDocument)
+void WP3ContentListener::headerFooterGroup(const unsigned char /* headerFooterType */, const unsigned char /* occurrenceBits */, const std::shared_ptr<WP3SubDocument> &/*subDocument*/)
 {
-	if (subDocument)
-		m_subDocuments.push_back(subDocument);
 }
 
 void WP3ContentListener::_openParagraph()

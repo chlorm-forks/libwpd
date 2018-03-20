@@ -31,7 +31,7 @@
 #include "libwpd_internal.h"
 #include "WP3SubDocument.h"
 
-WP3StylesListener::WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<std::shared_ptr<WP3SubDocument>> &subDocuments) :
+WP3StylesListener::WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList) :
 	WP3Listener(),
 	WPXStylesListener(pageList),
 	m_currentPage(WPXPageSpan()),
@@ -41,7 +41,6 @@ WP3StylesListener::WP3StylesListener(std::list<WPXPageSpan> &pageList, WPXTableL
 	m_tempMarginRight(1.0),
 	m_currentPageHasContent(false),
 	m_isSubDocument(false),
-	m_subDocuments(subDocuments),
 	m_pageListHardPageMark(m_pageList.end())
 {
 	m_pageListHardPageMark = m_pageList.end();
@@ -194,9 +193,6 @@ void WP3StylesListener::headerFooterGroup(const unsigned char headerFooterType, 
 {
 	if (!isUndoOn())
 	{
-		if (subDocument)
-			m_subDocuments.push_back(subDocument);
-
 		WPD_DEBUG_MSG(("WordPerfect: headerFooterGroup (headerFooterType: %i, occurrenceBits: %i)\n",
 		               headerFooterType, occurrenceBits));
 		bool tempCurrentPageHasContent = m_currentPageHasContent;
