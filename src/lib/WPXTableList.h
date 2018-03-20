@@ -27,6 +27,7 @@
 #ifndef _WPXTABLELIST_H
 #define _WPXTABLELIST_H
 
+#include <memory>
 #include <vector>
 
 class WPXTable;
@@ -35,9 +36,6 @@ class WPXTableList
 {
 public:
 	WPXTableList();
-	WPXTableList(const WPXTableList &);
-	WPXTableList &operator=(const WPXTableList &tableList);
-	virtual ~WPXTableList();
 
 	WPXTable *operator[](unsigned long i)
 	{
@@ -49,19 +47,7 @@ public:
 	}
 
 private:
-	void release();
-	void acquire(int *refCount, std::vector<WPXTable *> *tableList);
-	int *getRef() const
-	{
-		return m_refCount;
-	}
-	std::vector<WPXTable *> *get() const
-	{
-		return m_tableList;
-	}
-
-	std::vector<WPXTable *> *m_tableList;
-	int *m_refCount;
+	std::shared_ptr<std::vector<WPXTable *>> m_tableList;
 };
 
 #endif /* _WPXTABLELIST_H */

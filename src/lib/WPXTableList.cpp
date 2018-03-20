@@ -27,61 +27,9 @@
 
 #include "WPXTableList.h"
 
-#include "WPXTable.h"
-
 WPXTableList::WPXTableList() :
-	m_tableList(new std::vector<WPXTable *>),
-	m_refCount(new int)
+	m_tableList(new std::vector<WPXTable *>)
 {
-	(*m_refCount) = 1;
-}
-
-WPXTableList::WPXTableList(const WPXTableList &tableList) :
-	m_tableList(tableList.get()),
-	m_refCount(tableList.getRef())
-{
-	if (m_refCount)
-		(*m_refCount)++;
-}
-
-WPXTableList &WPXTableList::operator=(const WPXTableList &tableList)
-{
-	if (this != &tableList)
-	{
-		release();
-		acquire(tableList.getRef(), tableList.get());
-	}
-
-	return (*this);
-}
-
-void WPXTableList::acquire(int *refCount, std::vector<WPXTable *> *tableList)
-{
-	m_refCount = refCount;
-	m_tableList = tableList;
-	if (m_refCount)
-		(*m_refCount)++;
-}
-
-void WPXTableList::release()
-{
-	if (m_refCount)
-	{
-		if (--(*m_refCount) == 0)
-		{
-			for (auto &iter : (*m_tableList))
-				delete iter;
-			delete m_tableList;
-			delete m_refCount;
-		}
-		m_refCount = nullptr;
-		m_tableList = nullptr;
-	}
-}
-
-WPXTableList::~WPXTableList()
-{
-	release();
 }
 
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */
