@@ -52,7 +52,7 @@ WP6PrefixData::WP6PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 	for (i=1; i<numPrefixIndices; i++)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: constructing prefix packet 0x%x\n", i));
-		auto prefixDataPacket = WP6PrefixDataPacket::constructPrefixDataPacket(input, encryption, prefixIndiceArray[(i-1)]);
+		auto prefixDataPacket = WP6PrefixDataPacket::constructPrefixDataPacket(input, encryption, *prefixIndiceArray[(i-1)]);
 		if (prefixDataPacket)
 		{
 			m_prefixDataPacketHash[i] = prefixDataPacket;

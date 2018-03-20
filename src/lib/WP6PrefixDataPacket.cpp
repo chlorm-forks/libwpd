@@ -47,48 +47,48 @@ WP6PrefixDataPacket::WP6PrefixDataPacket(librevenge::RVNGInputStream * /* input 
 {
 }
 
-std::shared_ptr<WP6PrefixDataPacket> WP6PrefixDataPacket::constructPrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP6PrefixIndice *prefixIndice)
+std::shared_ptr<WP6PrefixDataPacket> WP6PrefixDataPacket::constructPrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const WP6PrefixIndice &prefixIndice)
 {
 	try
 	{
-		switch (prefixIndice->getType())
+		switch (prefixIndice.getType())
 		{
 		case WP6_INDEX_HEADER_INITIAL_FONT:
-			return std::make_shared<WP6DefaultInitialFontPacket>(input, encryption, prefixIndice->getID(),
-			                                                     prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6DefaultInitialFontPacket>(input, encryption, prefixIndice.getID(),
+			                                                     prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_HYPERLINK:
-			return std::make_shared<WP6HyperlinkPacket>(input, encryption, prefixIndice->getID(),
-			                                            prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6HyperlinkPacket>(input, encryption, prefixIndice.getID(),
+			                                            prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_GENERAL_WORDPERFECT_TEXT:
-			return std::make_shared<WP6GeneralTextPacket>(input, encryption, prefixIndice->getID(),
-			                                              prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6GeneralTextPacket>(input, encryption, prefixIndice.getID(),
+			                                              prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_DESIRED_FONT_DESCRIPTOR_POOL:
-			return std::make_shared<WP6FontDescriptorPacket>(input, encryption, prefixIndice->getID(),
-			                                                 prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6FontDescriptorPacket>(input, encryption, prefixIndice.getID(),
+			                                                 prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_FILL_STYLE:
-			return std::make_shared<WP6FillStylePacket>(input, encryption, prefixIndice->getID(),
-			                                            prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6FillStylePacket>(input, encryption, prefixIndice.getID(),
+			                                            prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_EXTENDED_DOCUMENT_SUMMARY:
-			return std::make_shared<WP6ExtendedDocumentSummaryPacket>(input, encryption, prefixIndice->getID(),
-			                                                          prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6ExtendedDocumentSummaryPacket>(input, encryption, prefixIndice.getID(),
+			                                                          prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_OUTLINE_STYLE:
-			return std::make_shared<WP6OutlineStylePacket>(input, encryption, prefixIndice->getID(),
-			                                               prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6OutlineStylePacket>(input, encryption, prefixIndice.getID(),
+			                                               prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_GRAPHICS_FILENAME:
-			return std::make_shared<WP6GraphicsFilenamePacket>(input, encryption, prefixIndice->getID(), prefixIndice->getFlags(),
-			                                                   prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6GraphicsFilenamePacket>(input, encryption, prefixIndice.getID(), prefixIndice.getFlags(),
+			                                                   prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_GRAPHICS_CACHED_FILE_DATA:
-			return std::make_shared<WP6GraphicsCachedFileDataPacket>(input, encryption, prefixIndice->getID(),
-			                                                         prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6GraphicsCachedFileDataPacket>(input, encryption, prefixIndice.getID(),
+			                                                         prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_GRAPHICS_BOX_STYLE:
-			return std::make_shared<WP6GraphicsBoxStylePacket>(input, encryption, prefixIndice->getID(),
-			                                                   prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6GraphicsBoxStylePacket>(input, encryption, prefixIndice.getID(),
+			                                                   prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_TABLE_STYLE:
-			return std::make_shared<WP6TableStylePacket>(input, encryption, prefixIndice->getID(),
-			                                             prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6TableStylePacket>(input, encryption, prefixIndice.getID(),
+			                                             prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		case WP6_INDEX_HEADER_COMMENT_ANNOTATION:
-			return std::make_shared<WP6CommentAnnotationPacket>(input, encryption, prefixIndice->getID(),
-			                                                    prefixIndice->getDataOffset(), prefixIndice->getDataSize());
+			return std::make_shared<WP6CommentAnnotationPacket>(input, encryption, prefixIndice.getID(),
+			                                                    prefixIndice.getDataOffset(), prefixIndice.getDataSize());
 		default:
 			break;
 		}

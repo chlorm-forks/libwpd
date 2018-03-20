@@ -50,7 +50,7 @@ public:
 		return m_dataSize;
 	}
 
-	static std::shared_ptr<WP6PrefixDataPacket> constructPrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP6PrefixIndice *prefixIndice);
+	static std::shared_ptr<WP6PrefixDataPacket> constructPrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const WP6PrefixIndice &prefixIndice);
 
 protected:
 	virtual void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) = 0;
