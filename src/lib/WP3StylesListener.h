@@ -29,7 +29,6 @@
 
 #include "WP3Listener.h"
 #include "WPXStylesListener.h"
-#include <set>
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
 
