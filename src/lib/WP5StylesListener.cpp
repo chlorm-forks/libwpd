@@ -92,7 +92,7 @@ void WP5StylesListener::insertBreak(unsigned char breakType)
 			{
 				m_currentPage.setHeaderFooter(hf.getType(), hf.getInternalType(),
 				                              hf.getOccurrence(), hf.getSubDocument(), hf.getTableList());
-				_handleSubDocument(hf.getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, hf.getTableList());
+				_handleSubDocument(hf.getSubDocument().get(), WPX_SUBDOCUMENT_HEADER_FOOTER, hf.getTableList());
 			}
 			else
 				m_currentPage.setHeaderFooter(hf.getType(), hf.getInternalType(),
@@ -224,7 +224,7 @@ void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsign
 			if ((wpxType == HEADER) && tempCurrentPageHasContent)
 			{
 				if (wpxOccurrence != NEVER)
-					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
 				else
 					m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, nullptr, tableList);
 			}
@@ -232,7 +232,7 @@ void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsign
 			{
 				if (wpxOccurrence != NEVER)
 				{
-					m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+					m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
 					_handleSubDocument(subDocument.get(), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 				}
 				else

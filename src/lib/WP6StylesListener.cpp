@@ -219,7 +219,7 @@ void WP6StylesListener::headerFooterGroup(const unsigned char headerFooterType, 
 
 			WPXTableList tableList;
 			m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence,
-			                              ((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr), tableList);
+			                              ((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), tableList);
 			_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 		}
 		m_currentPageHasContent = tempCurrentPageHasContent;

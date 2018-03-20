@@ -28,6 +28,7 @@
 #ifndef WPXPAGE_H
 #define WPXPAGE_H
 #include "WPXFileStructure.h"
+#include <memory>
 #include <vector>
 #include "WPXTable.h"
 #include "libwpd_internal.h"
@@ -39,9 +40,9 @@ class WPXHeaderFooter
 {
 public:
 	WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-	                const unsigned char internalType, const WPXSubDocument *subDocument, WPXTableList tableList);
+	                const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList);
 	WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-	                const unsigned char internalType, const WPXSubDocument *subDocument);
+	                const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument);
 	WPXHeaderFooter(const WPXHeaderFooter &headerFooter);
 	~WPXHeaderFooter();
 	WPXHeaderFooter &operator=(const WPXHeaderFooter &headerFooter);
@@ -57,7 +58,7 @@ public:
 	{
 		return m_internalType;
 	}
-	const WPXSubDocument *getSubDocument() const
+	const std::shared_ptr<WPXSubDocument> &getSubDocument() const
 	{
 		return m_subDocument;
 	}
@@ -70,7 +71,7 @@ private:
 	WPXHeaderFooterType m_type;
 	WPXHeaderFooterOccurrence m_occurrence;
 	unsigned char m_internalType; // for suppression
-	const WPXSubDocument *m_subDocument;  // for the actual text
+	std::shared_ptr<WPXSubDocument> m_subDocument;  // for the actual text
 	WPXTableList m_tableList;
 };
 
@@ -152,7 +153,7 @@ public:
 	}
 
 	void setHeaderFooter(const WPXHeaderFooterType type, const unsigned char headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-	                     const WPXSubDocument *subDocument, WPXTableList tableList);
+	                     const std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList);
 	void setPageNumberSuppression(const bool suppress)
 	{
 		m_isPageNumberSuppressed = suppress;

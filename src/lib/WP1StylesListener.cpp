@@ -90,7 +90,7 @@ void WP1StylesListener::insertBreak(unsigned char breakType)
 				{
 					m_currentPage.setHeaderFooter(hf.getType(), hf.getInternalType(),
 					                              hf.getOccurrence(), hf.getSubDocument(), hf.getTableList());
-					_handleSubDocument(hf.getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, hf.getTableList());
+					_handleSubDocument(hf.getSubDocument().get(), WPX_SUBDOCUMENT_HEADER_FOOTER, hf.getTableList());
 				}
 				else
 				{
@@ -213,12 +213,12 @@ void WP1StylesListener::headerFooterGroup(unsigned char headerFooterDefinition, 
 		WPXTableList tableList;
 
 		if ((wpxType == HEADER) && tempCurrentPageHasContent)
-			m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+			m_nextPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
 		else /* FOOTER || !tempCurrentPageHasContent */
 		{
 			if (wpxOccurrence != NEVER)
 			{
-				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
 				_handleSubDocument(subDocument.get(), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 			}
 			else

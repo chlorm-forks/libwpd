@@ -37,7 +37,7 @@ const unsigned char DUMMY_INTERNAL_HEADER_FOOTER = 16;
 
 // precondition: 0 <= headerFooterType <= 3 (i.e.: we don't handle watermarks here)
 WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-                                 const unsigned char internalType, const WPXSubDocument *subDocument, WPXTableList tableList) :
+                                 const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList) :
 	m_type(headerFooterType),
 	m_occurrence(occurrence),
 	m_internalType(internalType),
@@ -47,7 +47,7 @@ WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, con
 }
 
 WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-                                 const unsigned char internalType, const WPXSubDocument *subDocument) :
+                                 const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument) :
 	m_type(headerFooterType),
 	m_occurrence(occurrence),
 	m_internalType(internalType),
@@ -135,7 +135,7 @@ WPXPageSpan::~WPXPageSpan()
 
 
 void WPXPageSpan::setHeaderFooter(const WPXHeaderFooterType type, const unsigned char headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-                                  const  WPXSubDocument *subDocument, WPXTableList tableList)
+                                  const  std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList)
 {
 	WPXHeaderFooter headerFooter(type, occurrence, headerFooterType, subDocument, tableList);
 	switch (occurrence)

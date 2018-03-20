@@ -218,7 +218,7 @@ void WP3StylesListener::headerFooterGroup(const unsigned char headerFooterType, 
 
 			if (wpxOccurrence != NEVER)
 			{
-				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument.get(), tableList);
+				m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence, subDocument, tableList);
 				_handleSubDocument(subDocument.get(), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 			}
 			else

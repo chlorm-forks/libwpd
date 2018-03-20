@@ -412,7 +412,7 @@ void WPXContentListener::_openPageSpan()
 				m_documentInterface->openFooter(propList);
 
 			WPD_DEBUG_MSG(("Header Footer Element: Starting to parse the subDocument\n"));
-			handleSubDocument(hf.getSubDocument(), WPX_SUBDOCUMENT_HEADER_FOOTER, hf.getTableList(), 0);
+			handleSubDocument(hf.getSubDocument().get(), WPX_SUBDOCUMENT_HEADER_FOOTER, hf.getTableList(), 0);
 			WPD_DEBUG_MSG(("Header Footer Element: End of the subDocument parsing\n"));
 			if (hf.getType() == HEADER)
 				m_documentInterface->closeHeader();
