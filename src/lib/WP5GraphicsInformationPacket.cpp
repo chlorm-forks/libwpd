@@ -46,7 +46,7 @@ void WP5GraphicsInformationPacket::_readContents(librevenge::RVNGInputStream *in
 
 	for (unsigned short j = 0; j < tmpImagesCount; j++)
 	{
-		auto *tmpData = new unsigned char[tmpImagesSizes[j]];
+		const std::unique_ptr<unsigned char[]> tmpData{new unsigned char[tmpImagesSizes[j]]};
 
 		for (unsigned k = 0; k < tmpImagesSizes[j]; k++)
 			tmpData[k] = readU8(input, encryption);
@@ -70,7 +70,7 @@ void WP5GraphicsInformationPacket::_readContents(librevenge::RVNGInputStream *in
 			fclose(f);
 		}
 #endif
-		std::unique_ptr<librevenge::RVNGBinaryData> image{new librevenge::RVNGBinaryData(tmpData, tmpImagesSizes[j])};
+		std::unique_ptr<librevenge::RVNGBinaryData> image{new librevenge::RVNGBinaryData(tmpData.get(), tmpImagesSizes[j])};
 		m_images.push_back(std::move(image));
 	}
 }
