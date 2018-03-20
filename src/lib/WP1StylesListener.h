@@ -34,6 +34,7 @@
 #include <memory>
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
+#include "WPXTableList.h"
 
 class WP1StylesListener : public WP1Listener, protected WPXStylesListener
 {

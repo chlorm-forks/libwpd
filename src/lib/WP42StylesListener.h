@@ -34,6 +34,7 @@
 #include <vector>
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
+#include "WPXTableList.h"
 
 class WP42StylesListener : public WP42Listener, protected WPXStylesListener
 {

@@ -191,6 +191,7 @@ libwpd_@WPD_MAJOR_VERSION@_@WPD_MINOR_VERSION@_la_SOURCES = \
 	WPXStylesListener.cpp \
 	WPXSubDocument.cpp \
 	WPXTable.cpp \
+	WPXTableList.cpp \
 	libwpd_internal.h \
 	libwpd_math.h \
 	WP1BottomMarginGroup.h \
@@ -360,7 +361,8 @@ libwpd_@WPD_MAJOR_VERSION@_@WPD_MINOR_VERSION@_la_SOURCES = \
 	WPXParser.h \
 	WPXStylesListener.h \
 	WPXSubDocument.h \
-	WPXTable.h
+	WPXTable.h \
+	WPXTableList.h
 
 if OS_WIN32
 

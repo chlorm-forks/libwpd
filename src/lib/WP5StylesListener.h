@@ -34,6 +34,7 @@
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
 #include "WP5SubDocument.h"
+#include "WPXTableList.h"
 
 class WP5StylesListener : public WP5Listener, protected WPXStylesListener
 {

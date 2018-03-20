@@ -35,6 +35,7 @@
 #include "WP3ResourceFork.h"
 #include "libwpd_internal.h"
 #include "WPXTable.h"
+#include "WPXTableList.h"
 
 WP3Parser::WP3Parser(librevenge::RVNGInputStream *input, WPXHeader *header, WPXEncryption *encryption) :
 	WPXParser(input, header, encryption)

@@ -31,7 +31,7 @@
 #include <memory>
 
 #include "WPXSubDocument.h"
-#include "WPXTable.h"
+#include "WPXTableList.h"
 #include "libwpd_internal.h"
 
 class WPXHeaderFooter

@@ -35,8 +35,8 @@
 
 #ifndef _WPXTABLE_H
 #define _WPXTABLE_H
+
 #include <vector>
-#include <stdio.h>
 
 struct WPXTableCell
 {
@@ -76,37 +76,5 @@ private:
 	std::vector< std::vector<WPXTableCell *> > m_tableRows;
 };
 
-class WPXTableList
-{
-public:
-	WPXTableList();
-	WPXTableList(const WPXTableList &);
-	WPXTableList &operator=(const WPXTableList &tableList);
-	virtual ~WPXTableList();
-
-	WPXTable *operator[](unsigned long i)
-	{
-		return (*m_tableList)[i];
-	}
-	void add(WPXTable *table)
-	{
-		m_tableList->push_back(table);
-	}
-
-private:
-	void release();
-	void acquire(int *refCount, std::vector<WPXTable *> *tableList);
-	int *getRef() const
-	{
-		return m_refCount;
-	}
-	std::vector<WPXTable *> *get() const
-	{
-		return m_tableList;
-	}
-
-	std::vector<WPXTable *> *m_tableList;
-	int *m_refCount;
-};
 #endif /* _WPXTABLE_H */
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

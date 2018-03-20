@@ -31,6 +31,7 @@
 #include "WPXStylesListener.h"
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
+#include "WPXTableList.h"
 
 class WP3StylesListener : public WP3Listener, protected WPXStylesListener
 {
