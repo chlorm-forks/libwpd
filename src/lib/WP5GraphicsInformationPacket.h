@@ -30,7 +30,6 @@
 #include <vector>
 #include <librevenge/librevenge.h>
 #include <librevenge-stream/librevenge-stream.h>
-#include <libwpd/libwpd.h>
 #include "WP5GeneralPacketData.h"
 
 class WP5GraphicsInformationPacket : public WP5GeneralPacketData
