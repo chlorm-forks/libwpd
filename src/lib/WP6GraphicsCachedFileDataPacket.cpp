@@ -33,17 +33,13 @@
 WP6GraphicsCachedFileDataPacket::WP6GraphicsCachedFileDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int  id, unsigned dataOffset, unsigned dataSize):
 	WP6PrefixDataPacket(input, encryption),
 	m_id(id),
-	m_object(nullptr),
-	m_data(nullptr)
+	m_object(nullptr)
 {
 	_read(input, encryption, dataOffset, dataSize);
 }
 
 WP6GraphicsCachedFileDataPacket::~WP6GraphicsCachedFileDataPacket()
 {
-	if (m_data)
-		delete [] m_data;
-	m_data = nullptr;
 	if (m_object)
 		delete m_object;
 	m_object = nullptr;
@@ -52,9 +48,10 @@ WP6GraphicsCachedFileDataPacket::~WP6GraphicsCachedFileDataPacket()
 void WP6GraphicsCachedFileDataPacket::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
 {
 	unsigned tmpDataSize = getDataSize();
-	m_data = new unsigned char[tmpDataSize];
+	std::vector<unsigned char> data;
+	data.reserve(tmpDataSize);
 	for (unsigned i = 0; i < tmpDataSize; i++)
-		m_data[i] = readU8(input, encryption);
+		data.push_back(readU8(input, encryption));
 #if 0
 	librevenge::RVNGString filename;
 	filename.sprintf("binarydump%.4x.wpg", m_id);
@@ -66,6 +63,6 @@ void WP6GraphicsCachedFileDataPacket::_readContents(librevenge::RVNGInputStream 
 		fclose(f);
 	}
 #endif
-	m_object = new librevenge::RVNGBinaryData(m_data, tmpDataSize);
+	m_object = new librevenge::RVNGBinaryData(data.data(), data.size());
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

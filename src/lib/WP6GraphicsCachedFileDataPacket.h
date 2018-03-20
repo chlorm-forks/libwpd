@@ -47,7 +47,6 @@ private:
 	WP6GraphicsCachedFileDataPacket &operator=(const WP6GraphicsCachedFileDataPacket &);
 	int m_id;
 	librevenge::RVNGBinaryData *m_object;
-	unsigned char *m_data;
 
 };
 #endif /* WP6GRAPHICSCACHEDFILEDATAPACKET_H */
