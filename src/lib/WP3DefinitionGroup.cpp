@@ -43,7 +43,6 @@ WP3DefinitionGroup::WP3DefinitionGroup(librevenge::RVNGInputStream *input, WPXEn
 
 WP3DefinitionGroup::~WP3DefinitionGroup()
 {
-	// fixme delete the font name
 }
 
 void WP3DefinitionGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
