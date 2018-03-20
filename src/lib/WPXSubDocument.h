@@ -46,7 +46,7 @@ public:
 
 private:
 	std::unique_ptr<WPXMemoryInputStream> m_stream;
-	unsigned char *m_streamData;
+	std::unique_ptr<unsigned char[]> m_streamData;
 	WPXSubDocument();
 	WPXSubDocument(const WPXSubDocument &);
 	WPXSubDocument &operator=(const WPXSubDocument &);

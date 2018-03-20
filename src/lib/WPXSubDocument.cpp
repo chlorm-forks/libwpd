@@ -40,12 +40,12 @@ WPXSubDocument::WPXSubDocument(librevenge::RVNGInputStream *input, WPXEncryption
 			break;
 		m_streamData[i] = readU8(input, encryption);
 	}
-	m_stream.reset(new WPXMemoryInputStream(m_streamData, i));
+	m_stream.reset(new WPXMemoryInputStream(m_streamData.get(), i));
 }
 
 WPXSubDocument::WPXSubDocument(unsigned char *streamData, const unsigned dataSize) :
 	m_stream(),
-	m_streamData(nullptr)
+	m_streamData()
 {
 	if (streamData)
 		m_stream.reset(new WPXMemoryInputStream(streamData, dataSize));
@@ -53,7 +53,5 @@ WPXSubDocument::WPXSubDocument(unsigned char *streamData, const unsigned dataSiz
 
 WPXSubDocument::~WPXSubDocument()
 {
-	if (m_streamData)
-		delete [] m_streamData;
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */
