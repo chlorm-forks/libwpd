@@ -25,6 +25,9 @@
  */
 
 #include "WP6PrefixData.h"
+
+#include <vector>
+
 #include "WP6PrefixIndice.h"
 #include "WP6PrefixDataPacket.h"
 #include "WP6FontDescriptorPacket.h"
@@ -42,31 +45,26 @@ WP6PrefixData::WP6PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 		return;
 	}
 	unsigned short i;
-	auto **prefixIndiceArray = new WP6PrefixIndice *[std::size_t(numPrefixIndices-1)];
+	std::vector<WP6PrefixIndice> prefixIndiceArray;
+	prefixIndiceArray.reserve(numPrefixIndices - 1);
 	for (i=1; i<numPrefixIndices; i++)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: constructing prefix indice 0x%x\n", i));
-		prefixIndiceArray[(i-1)] = new WP6PrefixIndice(input, encryption, i);
+		prefixIndiceArray.emplace_back(input, encryption, i);
 	}
 
 	for (i=1; i<numPrefixIndices; i++)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: constructing prefix packet 0x%x\n", i));
-		auto prefixDataPacket = WP6PrefixDataPacket::constructPrefixDataPacket(input, encryption, *prefixIndiceArray[(i-1)]);
+		auto prefixDataPacket = WP6PrefixDataPacket::constructPrefixDataPacket(input, encryption, prefixIndiceArray[(i-1)]);
 		if (prefixDataPacket)
 		{
 			m_prefixDataPacketHash[i] = prefixDataPacket;
-			m_prefixDataPacketTypeHash.insert(std::make_pair(prefixIndiceArray[i-1]->getType(), prefixDataPacket));
+			m_prefixDataPacketTypeHash.insert(std::make_pair(prefixIndiceArray[i-1].getType(), prefixDataPacket));
 			if (dynamic_cast<WP6DefaultInitialFontPacket *>(prefixDataPacket.get()))
 				m_defaultInitialFontPID = i;
 		}
 	}
-
-	for (i=1; i<numPrefixIndices; i++)
-		delete (prefixIndiceArray[(i-1)]);
-
-	delete[] prefixIndiceArray;
-
 }
 
 WP6PrefixData::~WP6PrefixData()
