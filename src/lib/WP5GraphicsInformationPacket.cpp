@@ -22,10 +22,8 @@
 /* "This product is not manufactured, approved, or supported by
  * Corel Corporation or Corel Corporation Limited."
  */
-#include <string.h>
 
 #include "WP5GraphicsInformationPacket.h"
-#include "WP5Parser.h"
 #include "libwpd_internal.h"
 
 WP5GraphicsInformationPacket::WP5GraphicsInformationPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int /* id */, unsigned dataOffset, unsigned dataSize) :
