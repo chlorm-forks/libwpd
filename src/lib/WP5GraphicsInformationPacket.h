@@ -46,7 +46,6 @@ public:
 
 private:
 	std::vector<librevenge::RVNGBinaryData *> m_images;
-	std::vector<unsigned char *> m_data;
 };
 #endif /* WP5GRAPHICSINFORMATIONPACKET_H */
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */

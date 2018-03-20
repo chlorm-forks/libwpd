@@ -30,20 +30,13 @@
 
 WP5GraphicsInformationPacket::WP5GraphicsInformationPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int /* id */, unsigned dataOffset, unsigned dataSize) :
 	WP5GeneralPacketData(),
-	m_images(),
-	m_data()
+	m_images()
 {
 	_read(input, encryption, dataOffset, dataSize);
 }
 
 WP5GraphicsInformationPacket::~WP5GraphicsInformationPacket()
 {
-	for (auto &iter1 : m_data)
-	{
-		if (iter1)
-			delete []iter1;
-		iter1 = 0;
-	}
 	for (auto &image : m_images)
 	{
 		if (image)
@@ -86,7 +79,6 @@ void WP5GraphicsInformationPacket::_readContents(librevenge::RVNGInputStream *in
 		}
 #endif
 		m_images.push_back(new librevenge::RVNGBinaryData(tmpData, tmpImagesSizes[j]));
-		m_data.push_back(tmpData);
 	}
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */
