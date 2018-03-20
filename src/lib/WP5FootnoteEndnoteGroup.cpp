@@ -23,7 +23,6 @@
  * Corel Corporation or Corel Corporation Limited."
  */
 
-#include <math.h>
 #include "WP5FootnoteEndnoteGroup.h"
 #include "WP5FileStructure.h"
 #include "WP5Parser.h"
