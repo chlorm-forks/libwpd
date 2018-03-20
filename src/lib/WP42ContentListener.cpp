@@ -41,11 +41,10 @@ WP42ContentParsingState::~WP42ContentParsingState()
 }
 
 
-WP42ContentListener::WP42ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP42SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
+WP42ContentListener::WP42ContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface) :
 	WP42Listener(),
 	WPXContentListener(pageList, documentInterface),
-	m_parseState(new WP42ContentParsingState),
-	m_subDocuments(subDocuments)
+	m_parseState(new WP42ContentParsingState)
 {
 // Default line is 6 lpi, it means that the caracters are of 12 points
 	*(m_ps->m_fontName) = "Courier";
@@ -157,10 +156,8 @@ void WP42ContentListener::marginReset(unsigned char /* leftMargin */, unsigned c
 #endif
 }
 
-void WP42ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, const std::shared_ptr<WP42SubDocument> &subDocument)
+void WP42ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, const std::shared_ptr<WP42SubDocument> &/*subDocument*/)
 {
-	if (subDocument)
-		m_subDocuments.push_back(subDocument);
 }
 
 void WP42ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, WPXSubDocumentType /* subDocumentType */,

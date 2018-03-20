@@ -31,12 +31,11 @@
 #include "WPXFileStructure.h"
 #include "libwpd_internal.h"
 
-WP42StylesListener::WP42StylesListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP42SubDocument>> &subDocuments) :
+WP42StylesListener::WP42StylesListener(std::list<WPXPageSpan> &pageList) :
 	WP42Listener(),
 	WPXStylesListener(pageList),
 	m_currentPage(),
 	m_nextPage(),
-	m_subDocuments(subDocuments),
 	m_tempMarginLeft(1.0),
 	m_tempMarginRight(1.0),
 	m_currentPageHasContent(false),
@@ -118,9 +117,6 @@ void WP42StylesListener::insertBreak(unsigned char breakType)
 
 void WP42StylesListener::headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP42SubDocument> &subDocument)
 {
-	if (subDocument)
-		m_subDocuments.push_back(subDocument);
-
 	if (!isUndoOn())
 	{
 		bool tempCurrentPageHasContent = m_currentPageHasContent;

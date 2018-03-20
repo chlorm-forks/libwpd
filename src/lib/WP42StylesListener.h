@@ -38,7 +38,7 @@
 class WP42StylesListener : public WP42Listener, protected WPXStylesListener
 {
 public:
-	WP42StylesListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP42SubDocument>> &subDocuments);
+	explicit WP42StylesListener(std::list<WPXPageSpan> &pageList);
 
 	void startDocument() override {}
 	void startSubDocument() override {}
@@ -67,7 +67,6 @@ protected:
 
 private:
 	WPXPageSpan m_currentPage, m_nextPage;
-	std::vector<std::shared_ptr<WP42SubDocument>> &m_subDocuments;
 	double m_tempMarginLeft, m_tempMarginRight;
 	bool m_currentPageHasContent;
 	bool m_isSubDocument;

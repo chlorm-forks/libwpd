@@ -45,7 +45,7 @@ struct WP42ContentParsingState
 class WP42ContentListener : public WP42Listener, protected WPXContentListener
 {
 public:
-	WP42ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP42SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
+	WP42ContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface);
 	~WP42ContentListener() override;
 
 	void startDocument() override
@@ -86,7 +86,6 @@ private:
 	WP42ContentListener(const WP42ContentListener &);
 	WP42ContentListener &operator=(const WP42ContentListener &);
 	std::unique_ptr<WP42ContentParsingState> m_parseState;
-	std::vector<std::shared_ptr<WP42SubDocument>> &m_subDocuments;
 };
 
 #endif /* WP42LISTENER_H */
