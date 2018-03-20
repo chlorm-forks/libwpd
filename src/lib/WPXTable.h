@@ -58,10 +58,6 @@ public:
 		return (m_tableRows[i])[j];
 	}
 	void makeBordersConsistent();
-	void _makeCellBordersConsistent(WPXTableCell *cell, std::vector<WPXTableCell *> &adjacentCells,
-	                                int adjacencyBitCell, int adjacencyBitBoundCells);
-	std::vector<WPXTableCell *>  _getCellsBottomAdjacent(int i, int j);
-	std::vector<WPXTableCell *>  _getCellsRightAdjacent(int i, int j);
 
 	unsigned getRowCount() const
 	{
@@ -75,6 +71,12 @@ public:
 	{
 		return m_tableRows.empty();
 	}
+
+private:
+	void _makeCellBordersConsistent(WPXTableCell *cell, std::vector<WPXTableCell *> &adjacentCells,
+	                                int adjacencyBitCell, int adjacencyBitBoundCells);
+	std::vector<WPXTableCell *>  _getCellsBottomAdjacent(int i, int j);
+	std::vector<WPXTableCell *>  _getCellsRightAdjacent(int i, int j);
 
 private:
 	std::vector< std::vector<WPXTableCell *> > m_tableRows;
