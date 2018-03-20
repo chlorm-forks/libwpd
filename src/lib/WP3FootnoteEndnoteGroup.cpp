@@ -30,14 +30,13 @@
 
 WP3FootnoteEndnoteGroup::WP3FootnoteEndnoteGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP3VariableLengthGroup(),
-	m_subDocument(nullptr)
+	m_subDocument()
 {
 	_read(input, encryption);
 }
 
 WP3FootnoteEndnoteGroup::~WP3FootnoteEndnoteGroup()
 {
-	delete m_subDocument;
 }
 
 void WP3FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -59,7 +58,7 @@ void WP3FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, 
 	// subdocument
 
 	if (tmpSizeOfNote > 0)
-		m_subDocument = new WP3SubDocument(input, encryption, (unsigned)tmpSizeOfNote);
+		m_subDocument.reset(new WP3SubDocument(input, encryption, (unsigned)tmpSizeOfNote));
 }
 
 void WP3FootnoteEndnoteGroup::parse(WP3Listener *listener)
@@ -68,10 +67,10 @@ void WP3FootnoteEndnoteGroup::parse(WP3Listener *listener)
 	switch (getSubGroup())
 	{
 	case WP3_FOOTNOTE_ENDNOTE_GROUP_FOOTNOTE_FUNCTION:
-		listener->insertNote(FOOTNOTE, m_subDocument);
+		listener->insertNote(FOOTNOTE, m_subDocument.get());
 		break;
 	case WP3_FOOTNOTE_ENDNOTE_GROUP_ENDNOTE_FUNCTION:
-		listener->insertNote(ENDNOTE, m_subDocument);
+		listener->insertNote(ENDNOTE, m_subDocument.get());
 		break;
 	default: // something else we don't support, since it isn't in the docs
 		break;

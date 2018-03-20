@@ -26,6 +26,8 @@
 #ifndef WP3FOOTNOTEENDNOTEGROUP_H
 #define WP3FOOTNOTEENDNOTEGROUP_H
 
+#include <memory>
+
 #include "WP3VariableLengthGroup.h"
 #include "WPXMemoryStream.h"
 #include "WP3SubDocument.h"
@@ -41,7 +43,7 @@ public:
 private:
 	WP3FootnoteEndnoteGroup(const WP3FootnoteEndnoteGroup &);
 	WP3FootnoteEndnoteGroup &operator=(const WP3FootnoteEndnoteGroup &);
-	WP3SubDocument *m_subDocument;
+	std::unique_ptr<WP3SubDocument> m_subDocument;
 };
 
 #endif /* WP3FOOTNOTEENDNOTEGROUP_H */
