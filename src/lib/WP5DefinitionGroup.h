@@ -26,6 +26,8 @@
 #ifndef WP5DEFINITIONGROUP_H
 #define WP5DEFINITIONGROUP_H
 
+#include <memory>
+
 #include "WP5VariableLengthGroup.h"
 #include "WP5FileStructure.h"
 
@@ -60,7 +62,7 @@ protected:
 private:
 	WP5DefinitionGroup(const WP5DefinitionGroup &);
 	WP5DefinitionGroup &operator=(const WP5DefinitionGroup &);
-	WP5VariableLengthGroup_SubGroup *m_subGroupData;
+	std::unique_ptr<WP5VariableLengthGroup_SubGroup> m_subGroupData;
 };
 
 #endif /* WP5DEFINITIONGROUP_H */

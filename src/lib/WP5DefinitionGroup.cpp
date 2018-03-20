@@ -88,15 +88,13 @@ void WP5DefinitionGroup_DefineTablesSubGroup::parse(WP5Listener *listener)
 
 WP5DefinitionGroup::WP5DefinitionGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP5VariableLengthGroup(),
-	m_subGroupData(nullptr)
+	m_subGroupData()
 {
 	_read(input, encryption);
 }
 
 WP5DefinitionGroup::~WP5DefinitionGroup()
 {
-	if (m_subGroupData)
-		delete m_subGroupData;
 }
 
 void WP5DefinitionGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -104,7 +102,7 @@ void WP5DefinitionGroup::_readContents(librevenge::RVNGInputStream *input, WPXEn
 	switch (getSubGroup())
 	{
 	case WP5_TOP_DEFINITION_GROUP_DEFINE_TABLES:
-		m_subGroupData = new WP5DefinitionGroup_DefineTablesSubGroup(input, encryption, getSize());
+		m_subGroupData.reset(new WP5DefinitionGroup_DefineTablesSubGroup(input, encryption, getSize()));
 		break;
 	default:
 		break;
