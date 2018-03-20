@@ -26,6 +26,9 @@
 
 #ifndef WP6GENERALTEXTPACKET_H
 #define WP6GENERALTEXTPACKET_H
+
+#include <memory>
+
 #include "WP6PrefixDataPacket.h"
 #include "WP6FileStructure.h"
 #include "WPXMemoryStream.h"
@@ -39,7 +42,7 @@ public:
 	~WP6GeneralTextPacket() override;
 	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption) override;
 	void parse(WP6Listener *listener) const override;
-	WP6SubDocument *getSubDocument() const override
+	std::shared_ptr<WP6SubDocument> getSubDocument() const override
 	{
 		return m_subDocument;
 	}
@@ -47,7 +50,7 @@ public:
 private:
 	WP6GeneralTextPacket(const WP6GeneralTextPacket &);
 	WP6GeneralTextPacket &operator=(const WP6GeneralTextPacket &);
-	WP6SubDocument *m_subDocument;
+	std::shared_ptr<WP6SubDocument> m_subDocument;
 	unsigned char *m_streamData;
 
 };

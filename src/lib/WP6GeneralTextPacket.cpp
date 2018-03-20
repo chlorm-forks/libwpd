@@ -32,7 +32,7 @@
 
 WP6GeneralTextPacket::WP6GeneralTextPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int /* id */, unsigned dataOffset, unsigned dataSize):
 	WP6PrefixDataPacket(input, encryption),
-	m_subDocument(nullptr),
+	m_subDocument(),
 	m_streamData(nullptr)
 {
 	_read(input, encryption, dataOffset, dataSize);
@@ -40,8 +40,6 @@ WP6GeneralTextPacket::WP6GeneralTextPacket(librevenge::RVNGInputStream *input, W
 
 WP6GeneralTextPacket::~WP6GeneralTextPacket()
 {
-	if (m_subDocument)
-		delete m_subDocument;
 	if (m_streamData)
 		delete [] m_streamData;
 }
@@ -94,7 +92,7 @@ void WP6GeneralTextPacket::_readContents(librevenge::RVNGInputStream *input, WPX
 	}
 
 	if (totalSize)
-		m_subDocument = new WP6SubDocument(m_streamData, totalSize);
+		m_subDocument = std::make_shared<WP6SubDocument>(m_streamData, totalSize);
 }
 
 void WP6GeneralTextPacket::parse(WP6Listener *listener) const

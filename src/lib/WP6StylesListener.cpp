@@ -219,8 +219,8 @@ void WP6StylesListener::headerFooterGroup(const unsigned char headerFooterType, 
 
 			WPXTableList tableList;
 			m_currentPage.setHeaderFooter(wpxType, headerFooterType, wpxOccurrence,
-			                              ((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), tableList);
-			_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
+			                              ((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr), tableList);
+			_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr), WPX_SUBDOCUMENT_HEADER_FOOTER, tableList);
 		}
 		m_currentPageHasContent = tempCurrentPageHasContent;
 	}
@@ -320,7 +320,7 @@ void WP6StylesListener::noteOn(const unsigned short textPID)
 	if (!isUndoOn())
 	{
 		m_currentPageHasContent = true;
-		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), WPX_SUBDOCUMENT_NOTE, m_tableList);
+		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr), WPX_SUBDOCUMENT_NOTE, m_tableList);
 	}
 }
 
@@ -338,7 +338,7 @@ void WP6StylesListener::commentAnnotation(const unsigned short textPID)
 	if (!isUndoOn())
 	{
 		m_currentPageHasContent = true;
-		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr), WPX_SUBDOCUMENT_COMMENT_ANNOTATION, m_tableList);
+		_handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr), WPX_SUBDOCUMENT_COMMENT_ANNOTATION, m_tableList);
 	}
 }
 

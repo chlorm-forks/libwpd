@@ -26,6 +26,9 @@
 
 #ifndef WP6PREFIXDATAPACKET_H
 #define WP6PREFIXDATAPACKET_H
+
+#include <memory>
+
 #include "WPXParser.h"
 
 class WP6Listener;
@@ -38,7 +41,7 @@ public:
 	WP6PrefixDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
 	virtual ~WP6PrefixDataPacket() {}
 	virtual void parse(WP6Listener * /* listener */) const {}
-	virtual WP6SubDocument *getSubDocument() const
+	virtual std::shared_ptr<WP6SubDocument> getSubDocument() const
 	{
 		return nullptr;
 	}

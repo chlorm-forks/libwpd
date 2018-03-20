@@ -1249,7 +1249,7 @@ void WP6ContentListener::noteOff(const WPXNoteType noteType)
 			m_documentInterface->openEndnote(propList);
 
 		auto textPID = (unsigned short)m_parseState->m_noteTextPID;
-		handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr),
+		handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr),
 		                  WPX_SUBDOCUMENT_NOTE, m_parseState->m_tableList, m_parseState->m_nextTableIndice);
 
 		if (noteType == FOOTNOTE)
@@ -1753,7 +1753,7 @@ void WP6ContentListener::commentAnnotation(const unsigned short textPID)
 
 		m_ps->m_isNote = true;
 
-		handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument() : nullptr),
+		handleSubDocument(((textPID && WP6Listener::getPrefixDataPacket(textPID)) ? WP6Listener::getPrefixDataPacket(textPID)->getSubDocument().get() : nullptr),
 		                  WPX_SUBDOCUMENT_COMMENT_ANNOTATION, m_parseState->m_tableList, m_parseState->m_nextTableIndice);
 
 		m_ps->m_isNote = false;

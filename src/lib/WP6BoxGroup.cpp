@@ -308,7 +308,7 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 
 	std::vector<unsigned> graphicsDataIds;
 	std::vector<unsigned>::iterator gdiIter;
-	WP6SubDocument *subDocument = nullptr;
+	std::shared_ptr<WP6SubDocument> subDocument;
 
 	// Get the box content
 	for (int i=0; i<getNumPrefixIDs(); i++)
@@ -411,7 +411,7 @@ void WP6BoxGroup::parse(WP6Listener *listener)
 	}
 	if ((tmpContentType == 0x01) && (subDocument))
 	{
-		listener->insertTextBox(subDocument);
+		listener->insertTextBox(subDocument.get());
 	}
 
 	// End the box
