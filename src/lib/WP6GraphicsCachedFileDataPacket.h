@@ -38,14 +38,14 @@ public:
 	void parse(WP6Listener * /* listener */) const override {}
 	const librevenge::RVNGBinaryData *getBinaryObject() const
 	{
-		return m_object;
+		return m_object.get();
 	}
 
 private:
 	WP6GraphicsCachedFileDataPacket(const WP6GraphicsCachedFileDataPacket &);
 	WP6GraphicsCachedFileDataPacket &operator=(const WP6GraphicsCachedFileDataPacket &);
 	int m_id;
-	librevenge::RVNGBinaryData *m_object;
+	std::unique_ptr<librevenge::RVNGBinaryData> m_object;
 
 };
 #endif /* WP6GRAPHICSCACHEDFILEDATAPACKET_H */

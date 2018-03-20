@@ -30,16 +30,13 @@
 WP6GraphicsCachedFileDataPacket::WP6GraphicsCachedFileDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int  id, unsigned dataOffset, unsigned dataSize):
 	WP6PrefixDataPacket(input, encryption),
 	m_id(id),
-	m_object(nullptr)
+	m_object()
 {
 	_read(input, encryption, dataOffset, dataSize);
 }
 
 WP6GraphicsCachedFileDataPacket::~WP6GraphicsCachedFileDataPacket()
 {
-	if (m_object)
-		delete m_object;
-	m_object = nullptr;
 }
 
 void WP6GraphicsCachedFileDataPacket::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -60,6 +57,6 @@ void WP6GraphicsCachedFileDataPacket::_readContents(librevenge::RVNGInputStream 
 		fclose(f);
 	}
 #endif
-	m_object = new librevenge::RVNGBinaryData(data.data(), data.size());
+	m_object.reset(new librevenge::RVNGBinaryData(data.data(), data.size()));
 }
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */
