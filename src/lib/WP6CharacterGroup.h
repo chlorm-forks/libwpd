@@ -179,7 +179,7 @@ public:
 private:
 	WP6CharacterGroup(const WP6CharacterGroup &);
 	WP6CharacterGroup &operator=(const WP6CharacterGroup &);
-	WP6VariableLengthGroup_SubGroup *m_subGroupData;
+	std::unique_ptr<WP6VariableLengthGroup_SubGroup> m_subGroupData;
 
 };
 

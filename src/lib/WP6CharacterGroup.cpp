@@ -276,14 +276,13 @@ void WP6CharacterGroup_CommentSubGroup::parse(WP6Listener *listener, const unsig
 
 WP6CharacterGroup::WP6CharacterGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP6VariableLengthGroup(),
-	m_subGroupData(nullptr)
+	m_subGroupData()
 {
 	_read(input, encryption);
 }
 
 WP6CharacterGroup::~WP6CharacterGroup()
 {
-	delete m_subGroupData;
 }
 
 void WP6CharacterGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -293,37 +292,37 @@ void WP6CharacterGroup::_readContents(librevenge::RVNGInputStream *input, WPXEnc
 	switch (getSubGroup())
 	{
 	case WP6_CHARACTER_GROUP_FONT_FACE_CHANGE:
-		m_subGroupData = new WP6CharacterGroup_FontFaceChangeSubGroup(input, encryption, getSizeDeletable());
+		m_subGroupData.reset(new WP6CharacterGroup_FontFaceChangeSubGroup(input, encryption, getSizeDeletable()));
 		break;
 	case WP6_CHARACTER_GROUP_FONT_SIZE_CHANGE:
-		m_subGroupData = new WP6CharacterGroup_FontSizeChangeSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_FontSizeChangeSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_SET_ALIGNMENT_CHARACTER:
-		m_subGroupData = new WP6CharacterGroup_SetAlignmentCharacterSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_SetAlignmentCharacterSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_COLOR:
-		m_subGroupData = new WP6CharacterGroup_ColorSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_ColorSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_CHARACTER_SHADING_CHANGE:
-		m_subGroupData = new WP6CharacterGroup_CharacterShadingChangeSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_CharacterShadingChangeSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_SET_DOT_LEADER_CHARACTERS:
-		m_subGroupData = new WP6CharacterGroup_SetDotLeaderCharactersSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_SetDotLeaderCharactersSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_PARAGRAPH_NUMBER_ON:
-		m_subGroupData = new WP6CharacterGroup_ParagraphNumberOnSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_ParagraphNumberOnSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_TABLE_DEFINITION_ON:
-		m_subGroupData = new WP6CharacterGroup_TableDefinitionOnSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_TableDefinitionOnSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_TABLE_DEFINITION_OFF:
-		m_subGroupData = new WP6CharacterGroup_TableDefinitionOffSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_TableDefinitionOffSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_TABLE_COLUMN:
-		m_subGroupData = new WP6CharacterGroup_TableColumnSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_TableColumnSubGroup(input, encryption));
 		break;
 	case WP6_CHARACTER_GROUP_COMMENT:
-		m_subGroupData = new WP6CharacterGroup_CommentSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6CharacterGroup_CommentSubGroup(input, encryption));
 		break;
 	default:
 		break;
