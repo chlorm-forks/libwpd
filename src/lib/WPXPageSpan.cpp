@@ -25,63 +25,13 @@
  * Corel Corporation or Corel Corporation Limited."
  */
 
-#include <math.h>
 #include <algorithm>
 #include "WPXPageSpan.h"
-#include "libwpd_internal.h"
 
 const double WPX_DEFAULT_PAGE_MARGIN_TOP = 1.0;
 const double WPX_DEFAULT_PAGE_MARGIN_BOTTOM = 1.0;
 
 const unsigned char DUMMY_INTERNAL_HEADER_FOOTER = 16;
-
-// precondition: 0 <= headerFooterType <= 3 (i.e.: we don't handle watermarks here)
-WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-                                 const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList) :
-	m_type(headerFooterType),
-	m_occurrence(occurrence),
-	m_internalType(internalType),
-	m_subDocument(subDocument),
-	m_tableList(tableList)
-{
-}
-
-WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-                                 const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument) :
-	m_type(headerFooterType),
-	m_occurrence(occurrence),
-	m_internalType(internalType),
-	m_subDocument(subDocument),
-	m_tableList()
-{
-}
-
-WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooter &headerFooter) :
-	m_type(headerFooter.getType()),
-	m_occurrence(headerFooter.getOccurrence()),
-	m_internalType(headerFooter.getInternalType()),
-	m_subDocument(headerFooter.getSubDocument()),
-	m_tableList(headerFooter.getTableList())
-{
-}
-
-WPXHeaderFooter &WPXHeaderFooter::operator=(const WPXHeaderFooter &headerFooter)
-{
-	if (this != &headerFooter)
-	{
-		m_type = headerFooter.getType();
-		m_occurrence = headerFooter.getOccurrence();
-		m_internalType = headerFooter.getInternalType();
-		m_subDocument = headerFooter.getSubDocument();
-		m_tableList = headerFooter.getTableList();
-	}
-	return *this;
-}
-
-WPXHeaderFooter::~WPXHeaderFooter()
-{
-//	delete m_subDocument;
-}
 
 WPXPageSpan::WPXPageSpan() :
 	m_isPageNumberSuppressed(false),

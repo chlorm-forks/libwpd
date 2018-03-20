@@ -183,6 +183,7 @@ libwpd_@WPD_MAJOR_VERSION@_@WPD_MINOR_VERSION@_la_SOURCES = \
 	WPXContentListener.cpp \
 	WPXEncryption.cpp \
 	WPXHeader.cpp \
+	WPXHeaderFooter.cpp \
 	WPXListener.cpp \
 	WPXMemoryStream.cpp \
 	WPXPageSpan.cpp \
@@ -351,6 +352,7 @@ libwpd_@WPD_MAJOR_VERSION@_@WPD_MINOR_VERSION@_la_SOURCES = \
 	WPXContentListener.h \
 	WPXEncryption.h \
 	WPXHeader.h \
+	WPXHeaderFooter.h \
 	WPXFileStructure.h \
 	WPXListener.h \
 	WPXMemoryStream.h \

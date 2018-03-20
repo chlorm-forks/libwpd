@@ -27,53 +27,17 @@
 
 #ifndef WPXPAGE_H
 #define WPXPAGE_H
-#include "WPXFileStructure.h"
+
 #include <memory>
 #include <vector>
+
+#include "WPXFileStructure.h"
+#include "WPXHeaderFooter.h"
+#include "WPXSubDocument.h"
 #include "WPXTable.h"
 #include "libwpd_internal.h"
-#include "WPXSubDocument.h"
 
 // intermediate page representation class: for internal use only (by the high-level content/styles listeners). should not be exported.
-
-class WPXHeaderFooter
-{
-public:
-	WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-	                const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList);
-	WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
-	                const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument);
-	WPXHeaderFooter(const WPXHeaderFooter &headerFooter);
-	~WPXHeaderFooter();
-	WPXHeaderFooter &operator=(const WPXHeaderFooter &headerFooter);
-	WPXHeaderFooterType getType() const
-	{
-		return m_type;
-	}
-	WPXHeaderFooterOccurrence getOccurrence() const
-	{
-		return m_occurrence;
-	}
-	unsigned char getInternalType() const
-	{
-		return m_internalType;
-	}
-	const std::shared_ptr<WPXSubDocument> &getSubDocument() const
-	{
-		return m_subDocument;
-	}
-	WPXTableList getTableList() const
-	{
-		return m_tableList;
-	}
-
-private:
-	WPXHeaderFooterType m_type;
-	WPXHeaderFooterOccurrence m_occurrence;
-	unsigned char m_internalType; // for suppression
-	std::shared_ptr<WPXSubDocument> m_subDocument;  // for the actual text
-	WPXTableList m_tableList;
-};
 
 class WPXPageSpan
 {
