@@ -38,10 +38,6 @@ public:
 	WP5GraphicsInformationPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int id, unsigned dataOffset, unsigned dataSize);
 	~WP5GraphicsInformationPacket() override;
 	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned dataSize) override;
-	const std::vector<librevenge::RVNGBinaryData *> &getImages() const
-	{
-		return m_images;
-	}
 	const librevenge::RVNGBinaryData *getImage(unsigned long imageIndex) const
 	{
 		if (imageIndex < m_images.size()) return m_images[imageIndex];
