@@ -26,6 +26,8 @@
 #ifndef WP5FOOTNOTEENDNOTEGROUP_H
 #define WP5FOOTNOTEENDNOTEGROUP_H
 
+#include <memory>
+
 #include <libwpd/libwpd.h>
 #include <librevenge-stream/librevenge-stream.h>
 #include "WP5VariableLengthGroup.h"
@@ -42,7 +44,7 @@ public:
 private:
 	WP5FootnoteEndnoteGroup(const WP5FootnoteEndnoteGroup &);
 	WP5FootnoteEndnoteGroup &operator=(const WP5FootnoteEndnoteGroup &);
-	WP5SubDocument *m_subDocument;
+	std::unique_ptr<WP5SubDocument> m_subDocument;
 	librevenge::RVNGString m_noteReference;
 
 };

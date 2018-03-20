@@ -30,7 +30,7 @@
 
 WP5FootnoteEndnoteGroup::WP5FootnoteEndnoteGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP5VariableLengthGroup(),
-	m_subDocument(nullptr),
+	m_subDocument(),
 	m_noteReference()
 {
 	_read(input, encryption);
@@ -38,7 +38,6 @@ WP5FootnoteEndnoteGroup::WP5FootnoteEndnoteGroup(librevenge::RVNGInputStream *in
 
 WP5FootnoteEndnoteGroup::~WP5FootnoteEndnoteGroup()
 {
-	delete m_subDocument;
 }
 
 void WP5FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -62,7 +61,7 @@ void WP5FootnoteEndnoteGroup::_readContents(librevenge::RVNGInputStream *input, 
 	}
 
 	if (tmpSizeOfNote > 0)
-		m_subDocument = new WP5SubDocument(input, encryption, (unsigned)tmpSizeOfNote);
+		m_subDocument.reset(new WP5SubDocument(input, encryption, (unsigned)tmpSizeOfNote));
 	if (tmpFlags & 0x80)
 		m_noteReference.sprintf("%c", tmpNumOfNote);
 	else
@@ -76,10 +75,10 @@ void WP5FootnoteEndnoteGroup::parse(WP5Listener *listener)
 	switch (getSubGroup())
 	{
 	case WP5_FOOTNOTE_ENDNOTE_GROUP_FOOTNOTE:
-		listener->insertNote(FOOTNOTE, m_subDocument);
+		listener->insertNote(FOOTNOTE, m_subDocument.get());
 		break;
 	case WP5_FOOTNOTE_ENDNOTE_GROUP_ENDNOTE:
-		listener->insertNote(ENDNOTE, m_subDocument);
+		listener->insertNote(ENDNOTE, m_subDocument.get());
 		break;
 	default: // something else we don't support, since it isn't in the docs
 		break;
