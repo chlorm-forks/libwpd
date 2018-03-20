@@ -23,12 +23,9 @@
 /* "This product is not manufactured, approved, or supported by
  * Corel Corporation or Corel Corporation Limited."
  */
-#include <string.h>
 
 #include "WP6GraphicsCachedFileDataPacket.h"
-#include "WP6Parser.h"
 #include "libwpd_internal.h"
-#include "WPXMemoryStream.h"
 
 WP6GraphicsCachedFileDataPacket::WP6GraphicsCachedFileDataPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int  id, unsigned dataOffset, unsigned dataSize):
 	WP6PrefixDataPacket(input, encryption),
