@@ -55,7 +55,7 @@ public:
 	void insertCell(unsigned char colSpan, unsigned char rowSpan, unsigned char borderBits);
 	const WPXTableCell  *getCell(size_t i, size_t j)
 	{
-		return (m_tableRows[i])[j];
+		return &(m_tableRows[i])[j];
 	}
 	void makeBordersConsistent();
 
@@ -73,13 +73,13 @@ public:
 	}
 
 private:
-	void _makeCellBordersConsistent(WPXTableCell *cell, std::vector<WPXTableCell *> &adjacentCells,
+	void _makeCellBordersConsistent(WPXTableCell &cell, std::vector<WPXTableCell *> &adjacentCells,
 	                                int adjacencyBitCell, int adjacencyBitBoundCells);
 	std::vector<WPXTableCell *>  _getCellsBottomAdjacent(int i, int j);
 	std::vector<WPXTableCell *>  _getCellsRightAdjacent(int i, int j);
 
 private:
-	std::vector< std::vector<WPXTableCell *> > m_tableRows;
+	std::vector< std::vector<WPXTableCell> > m_tableRows;
 };
 
 #endif /* _WPXTABLE_H */
