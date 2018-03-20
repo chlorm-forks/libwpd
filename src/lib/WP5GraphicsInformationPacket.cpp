@@ -70,7 +70,7 @@ void WP5GraphicsInformationPacket::_readContents(librevenge::RVNGInputStream *in
 			fclose(f);
 		}
 #endif
-		std::unique_ptr<librevenge::RVNGBinaryData> image{new librevenge::RVNGBinaryData(tmpData.get(), tmpImagesSizes[j])};
+		std::unique_ptr<librevenge::RVNGBinaryData> image {new librevenge::RVNGBinaryData(tmpData.get(), tmpImagesSizes[j])};
 		m_images.push_back(std::move(image));
 	}
 }
