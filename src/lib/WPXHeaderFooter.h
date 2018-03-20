@@ -41,9 +41,6 @@ public:
 	                const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList);
 	WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
 	                const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument);
-	WPXHeaderFooter(const WPXHeaderFooter &headerFooter);
-	~WPXHeaderFooter();
-	WPXHeaderFooter &operator=(const WPXHeaderFooter &headerFooter);
 	WPXHeaderFooterType getType() const
 	{
 		return m_type;

@@ -50,31 +50,4 @@ WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, con
 {
 }
 
-WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooter &headerFooter) :
-	m_type(headerFooter.getType()),
-	m_occurrence(headerFooter.getOccurrence()),
-	m_internalType(headerFooter.getInternalType()),
-	m_subDocument(headerFooter.getSubDocument()),
-	m_tableList(headerFooter.getTableList())
-{
-}
-
-WPXHeaderFooter &WPXHeaderFooter::operator=(const WPXHeaderFooter &headerFooter)
-{
-	if (this != &headerFooter)
-	{
-		m_type = headerFooter.getType();
-		m_occurrence = headerFooter.getOccurrence();
-		m_internalType = headerFooter.getInternalType();
-		m_subDocument = headerFooter.getSubDocument();
-		m_tableList = headerFooter.getTableList();
-	}
-	return *this;
-}
-
-WPXHeaderFooter::~WPXHeaderFooter()
-{
-//	delete m_subDocument;
-}
-
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */
