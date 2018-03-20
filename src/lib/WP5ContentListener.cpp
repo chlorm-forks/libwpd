@@ -43,11 +43,10 @@ WP5ContentParsingState::~WP5ContentParsingState()
 {
 }
 
-WP5ContentListener::WP5ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP5SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
+WP5ContentListener::WP5ContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface) :
 	WP5Listener(),
 	WPXContentListener(pageList, documentInterface),
 	m_parseState(new WP5ContentParsingState),
-	m_subDocuments(subDocuments),
 	m_defaultFontSize(12.0),
 	m_defaultFontName("Times New Roman")
 {
@@ -593,10 +592,8 @@ void WP5ContentListener::_handleSubDocument(const WPXSubDocument *subDocument, W
 }
 
 void WP5ContentListener::headerFooterGroup(unsigned char /* headerFooterType */, unsigned char /* occurrenceBits */,
-                                           const std::shared_ptr<WP5SubDocument> &subDocument)
+                                           const std::shared_ptr<WP5SubDocument> &/*subDocument*/)
 {
-	if (subDocument)
-		m_subDocuments.push_back(subDocument);
 }
 
 void WP5ContentListener::setDefaultFont(const librevenge::RVNGString &fontName, double fontSize)

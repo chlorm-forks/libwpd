@@ -33,7 +33,6 @@
 #include "WP5SubDocument.h"
 #include "libwpd_internal.h"
 #include <memory>
-#include <vector>
 
 struct WP5ContentParsingState
 {
@@ -50,7 +49,7 @@ struct WP5ContentParsingState
 class WP5ContentListener : public WP5Listener, protected WPXContentListener
 {
 public:
-	WP5ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP5SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
+	WP5ContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface);
 	~WP5ContentListener() override;
 
 	void startDocument() override
@@ -126,7 +125,6 @@ private:
 	WP5ContentListener(const WP5ContentListener &);
 	WP5ContentListener &operator=(const WP5ContentListener &);
 	std::unique_ptr<WP5ContentParsingState> m_parseState;
-	std::vector<std::shared_ptr<WP5SubDocument>> &m_subDocuments;
 	double m_defaultFontSize;
 	librevenge::RVNGString m_defaultFontName;
 };

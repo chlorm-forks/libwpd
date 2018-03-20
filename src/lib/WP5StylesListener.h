@@ -30,7 +30,6 @@
 
 #include "WP5Listener.h"
 #include "WPXStylesListener.h"
-#include <vector>
 #include <list>
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
@@ -39,7 +38,7 @@
 class WP5StylesListener : public WP5Listener, protected WPXStylesListener
 {
 public:
-	WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<std::shared_ptr<WP5SubDocument>> &subDocuments);
+	WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList);
 
 	void startDocument() override {}
 	void startSubDocument() override {}
@@ -105,7 +104,6 @@ private:
 	double m_tempMarginLeft, m_tempMarginRight;
 	bool m_currentPageHasContent;
 	bool m_isSubDocument;
-	std::vector<std::shared_ptr<WP5SubDocument>> &m_subDocuments;
 	std::list<WPXPageSpan>::iterator m_pageListHardPageMark;
 };
 

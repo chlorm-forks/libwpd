@@ -32,7 +32,7 @@
 #include "libwpd_internal.h"
 #include "WP5SubDocument.h"
 
-WP5StylesListener::WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList, std::vector<std::shared_ptr<WP5SubDocument>> &subDocuments) :
+WP5StylesListener::WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableList tableList) :
 	WP5Listener(),
 	WPXStylesListener(pageList),
 	m_currentPage(),
@@ -43,7 +43,6 @@ WP5StylesListener::WP5StylesListener(std::list<WPXPageSpan> &pageList, WPXTableL
 	m_tempMarginRight(1.0),
 	m_currentPageHasContent(false),
 	m_isSubDocument(false),
-	m_subDocuments(subDocuments),
 	m_pageListHardPageMark(m_pageList.end())
 {
 }
@@ -198,9 +197,6 @@ void WP5StylesListener::marginChange(unsigned char side, unsigned short margin)
 
 void WP5StylesListener::headerFooterGroup(unsigned char headerFooterType, unsigned char occurrenceBits, const std::shared_ptr<WP5SubDocument> &subDocument)
 {
-	if (subDocument)
-		m_subDocuments.push_back(subDocument);
-
 	if (!isUndoOn())
 	{
 		WPD_DEBUG_MSG(("WordPerfect: headerFooterGroup (headerFooterType: %i, occurrenceBits: %i)\n",

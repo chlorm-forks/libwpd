@@ -121,7 +121,6 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	std::vector<std::shared_ptr<WP5SubDocument>> subDocuments;
 
 	try
 	{
@@ -129,7 +128,7 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 
 		// do a "first-pass" parse of the document
 		// gather table border information, page properties (per-page)
-		WP5StylesListener stylesListener(pageList, tableList, subDocuments);
+		WP5StylesListener stylesListener(pageList, tableList);
 		parse(input, encryption, &stylesListener);
 
 		// postprocess the pageList == remove duplicate page spans due to the page breaks
@@ -150,7 +149,7 @@ void WP5Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 
 		// second pass: here is where we actually send the messages to the target app
 		// that are necessary to emit the body of the target document
-		WP5ContentListener listener(pageList, subDocuments, documentInterface); // FIXME: SHOULD BE PASSED TABLE DATA!
+		WP5ContentListener listener(pageList, documentInterface); // FIXME: SHOULD BE PASSED TABLE DATA!
 		listener.setPrefixData(prefixData.get());
 
 
@@ -196,20 +195,19 @@ void WP5Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterfac
 {
 	std::list<WPXPageSpan> pageList;
 	WPXTableList tableList;
-	std::vector<std::shared_ptr<WP5SubDocument>> subDocuments;
 
 	librevenge::RVNGInputStream *input = getInput();
 
 	try
 	{
-		WP5StylesListener stylesListener(pageList, tableList, subDocuments);
+		WP5StylesListener stylesListener(pageList, tableList);
 		stylesListener.startSubDocument();
 		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		input->seek(0, librevenge::RVNG_SEEK_SET);
 
-		WP5ContentListener listener(pageList, subDocuments, documentInterface);
+		WP5ContentListener listener(pageList, documentInterface);
 		listener.startSubDocument();
 		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();
