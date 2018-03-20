@@ -27,6 +27,8 @@
 #ifndef WP6STYLEGROUP_H
 #define WP6STYLEGROUP_H
 
+#include <memory>
+
 #include "WP6VariableLengthGroup.h"
 
 class WP6StyleGroup_GlobalOnSubGroup : public WP6VariableLengthGroup_SubGroup
@@ -51,7 +53,7 @@ public:
 private:
 	WP6StyleGroup(const WP6StyleGroup &);
 	WP6StyleGroup &operator=(const WP6StyleGroup &);
-	WP6VariableLengthGroup_SubGroup *m_subGroupData;
+	std::unique_ptr<WP6VariableLengthGroup_SubGroup> m_subGroupData;
 };
 
 #endif /* WP6STYLEGROUP_H */

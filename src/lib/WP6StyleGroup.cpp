@@ -43,16 +43,13 @@ void WP6StyleGroup_GlobalOnSubGroup::parse(WP6Listener *listener, const unsigned
 
 WP6StyleGroup::WP6StyleGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP6VariableLengthGroup(),
-	m_subGroupData(nullptr)
+	m_subGroupData()
 {
 	_read(input, encryption);
 }
 
 WP6StyleGroup::~WP6StyleGroup()
 {
-	if (m_subGroupData)
-		delete (m_subGroupData);
-
 }
 
 void WP6StyleGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -62,7 +59,7 @@ void WP6StyleGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncrypt
 	switch (getSubGroup())
 	{
 	case WP6_STYLE_GROUP_GLOBAL_ON:
-		m_subGroupData = new WP6StyleGroup_GlobalOnSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6StyleGroup_GlobalOnSubGroup(input, encryption));
 		break;
 	default:
 		break;
