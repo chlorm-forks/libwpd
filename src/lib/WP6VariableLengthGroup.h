@@ -28,6 +28,8 @@
 #ifndef WP6VARIABLELENGTHGROUP_H
 #define WP6VARIABLELENGTHGROUP_H
 
+#include <vector>
+
 #include "WP6Part.h"
 
 class WP6VariableLengthGroup_SubGroup
@@ -65,11 +67,11 @@ protected:
 	}
 	unsigned char getNumPrefixIDs() const
 	{
-		return m_numPrefixIDs;
+		return m_prefixIDs.size();;
 	}
 	const unsigned short *getPrefixIDs() const
 	{
-		return m_prefixIDs;
+		return m_prefixIDs.data();
 	}
 	unsigned short getSizeNonDeletable() const
 	{
@@ -86,8 +88,7 @@ private:
 	unsigned char m_subGroup;
 	unsigned short m_size;
 	unsigned char m_flags;
-	unsigned char m_numPrefixIDs;
-	unsigned short *m_prefixIDs;
+	std::vector<unsigned short> m_prefixIDs;
 	unsigned short m_sizeNonDeletable;
 	unsigned short m_sizeDeletable;
 };

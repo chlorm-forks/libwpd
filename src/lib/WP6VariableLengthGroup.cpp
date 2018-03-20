@@ -48,8 +48,7 @@ WP6VariableLengthGroup::WP6VariableLengthGroup() :
 	m_subGroup(0),
 	m_size(0),
 	m_flags(0),
-	m_numPrefixIDs(0),
-	m_prefixIDs(nullptr),
+	m_prefixIDs(),
 	m_sizeNonDeletable(0),
 	m_sizeDeletable(0)
 {
@@ -57,8 +56,6 @@ WP6VariableLengthGroup::WP6VariableLengthGroup() :
 
 WP6VariableLengthGroup::~WP6VariableLengthGroup()
 {
-	if (m_numPrefixIDs > 0 && m_prefixIDs)
-		delete [] m_prefixIDs;
 }
 
 WP6VariableLengthGroup *WP6VariableLengthGroup::constructVariableLengthGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption, const unsigned char groupID)
@@ -143,21 +140,15 @@ void WP6VariableLengthGroup::_read(librevenge::RVNGInputStream *input, WPXEncryp
 
 	if (m_flags & WP6_VARIABLE_GROUP_PREFIX_ID_BIT)
 	{
-		m_numPrefixIDs = readU8(input, encryption);
-
-		if (m_numPrefixIDs > 0)
+		const size_t numPrefixIDs = readU8(input, encryption);
+		if (numPrefixIDs > 0)
 		{
-			m_prefixIDs = new unsigned short[m_numPrefixIDs];
-			for (unsigned i = 0; i < m_numPrefixIDs; i++)
+			m_prefixIDs.reserve(numPrefixIDs);
+			for (unsigned i = 0; i < numPrefixIDs; i++)
 			{
-				m_prefixIDs[i] = readU16(input, encryption);
+				m_prefixIDs.push_back(readU16(input, encryption));
 			}
 		}
-	}
-	else
-	{
-		m_numPrefixIDs = 0;
-		m_prefixIDs = nullptr;
 	}
 
 	m_sizeNonDeletable = readU16(input, encryption);
@@ -172,7 +163,7 @@ void WP6VariableLengthGroup::_read(librevenge::RVNGInputStream *input, WPXEncryp
 	m_sizeDeletable = (unsigned short)(startPosition + m_size - 4 - input->tell());
 	input->seek(tmpPosition, librevenge::RVNG_SEEK_SET);
 
-	WPD_DEBUG_MSG(("WordPerfect: Read variable group header (start_position: %li, sub_group: %i, size: %i, flags: %i, num_prefix_ids: %i, size_non_deletable: %i, size_deletable: %i)\n", startPosition, m_subGroup, m_size, m_flags, m_numPrefixIDs, m_sizeNonDeletable, m_sizeDeletable));
+	WPD_DEBUG_MSG(("WordPerfect: Read variable group header (start_position: %li, sub_group: %i, size: %i, flags: %i, num_prefix_ids: %u, size_non_deletable: %i, size_deletable: %i)\n", startPosition, m_subGroup, m_size, m_flags, unsigned(m_prefixIDs), m_sizeNonDeletable, m_sizeDeletable));
 
 	_readContents(input, encryption);
 
