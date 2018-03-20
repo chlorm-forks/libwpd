@@ -1400,13 +1400,13 @@ void WP6ContentListener::insertCell(const unsigned char colSpan, const unsigned 
 			throw ParseException(); // no table opened, invalid
 		}
 
-		if ((int)m_parseState->m_currentTable->getRows().size() <= (int)m_ps->m_currentTableRow)
+		if ((int)m_parseState->m_currentTable->getRowCount() <= (int)m_ps->m_currentTableRow)
 		{
 			WPD_DEBUG_MSG(("Requesting a row larger than the number of rows the table holds\n"));
 			throw ParseException(); // requesting a row larger than the number of rows the table holds
 		}
 
-		if ((int)m_parseState->m_currentTable->getRows()[(unsigned)m_ps->m_currentTableRow].size() <= (int)m_ps->m_currentTableCellNumberInRow)
+		if ((int)m_parseState->m_currentTable->getColumnCount((unsigned)m_ps->m_currentTableRow) <= (int)m_ps->m_currentTableCellNumberInRow)
 		{
 			WPD_DEBUG_MSG(("Requesting a cell smaller than the number of cells in the row\n"));
 			throw ParseException(); // requesting a cell smaller than the number of cells in the row
