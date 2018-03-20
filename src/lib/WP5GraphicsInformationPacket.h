@@ -26,6 +26,7 @@
 #ifndef WP5GRAPHICSINFORMATIONPACKET_H
 #define WP5GRAPHICSINFORMATIONPACKET_H
 
+#include <memory>
 #include <vector>
 #include <librevenge/librevenge.h>
 #include <librevenge-stream/librevenge-stream.h>
@@ -40,12 +41,12 @@ public:
 	void _readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption, unsigned dataSize) override;
 	const librevenge::RVNGBinaryData *getImage(unsigned long imageIndex) const
 	{
-		if (imageIndex < m_images.size()) return m_images[imageIndex];
+		if (imageIndex < m_images.size()) return m_images[imageIndex].get();
 		return nullptr;
 	}
 
 private:
-	std::vector<librevenge::RVNGBinaryData *> m_images;
+	std::vector<std::unique_ptr<librevenge::RVNGBinaryData>> m_images;
 };
 #endif /* WP5GRAPHICSINFORMATIONPACKET_H */
 /* vim:set shiftwidth=4 softtabstop=4 noexpandtab: */
