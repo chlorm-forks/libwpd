@@ -84,26 +84,23 @@ WP5PrefixData::WP5PrefixData(librevenge::RVNGInputStream *input, WPXEncryption *
 	for (gpiIter = prefixIndexVector.begin(); gpiIter != prefixIndexVector.end(); ++gpiIter)
 	{
 		WPD_DEBUG_MSG(("WordPerfect: constructing general packet data %i\n", (*gpiIter).getID()));
-		WP5GeneralPacketData *generalPacketData = WP5GeneralPacketData::constructGeneralPacketData(input, encryption, &(*gpiIter));
+		std::unique_ptr<WP5GeneralPacketData> generalPacketData{WP5GeneralPacketData::constructGeneralPacketData(input, encryption, &(*gpiIter))};
 		if (generalPacketData)
 		{
-			m_generalPacketData[gpiIter->getType()] = generalPacketData;
+			m_generalPacketData[gpiIter->getType()] = std::move(generalPacketData);
 		}
 	}
 }
 
 WP5PrefixData::~WP5PrefixData()
 {
-	std::map<int, WP5GeneralPacketData *>::const_iterator Iter;
-	for (Iter = m_generalPacketData.begin(); Iter != m_generalPacketData.end(); ++Iter)
-		delete (Iter->second);
 }
 
 const WP5GeneralPacketData *WP5PrefixData::getGeneralPacketData(const int type) const
 {
 	auto Iter = m_generalPacketData.find(type);
 	if (Iter != m_generalPacketData.end())
-		return static_cast<const WP5GeneralPacketData *>(Iter->second);
+		return Iter->second.get();
 	else
 		return nullptr;
 }

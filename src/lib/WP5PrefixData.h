@@ -25,7 +25,9 @@
 
 #ifndef WP5PREFIXDATA_H
 #define WP5PREFIXDATA_H
+
 #include <map>
+#include <memory>
 #include <vector>
 #include "WP5GeneralPacketData.h"
 
@@ -36,7 +38,7 @@ public:
 	virtual ~WP5PrefixData();
 	const WP5GeneralPacketData *getGeneralPacketData(const int type) const;
 private:
-	std::map<int, WP5GeneralPacketData *> m_generalPacketData;
+	std::map<int, std::unique_ptr<WP5GeneralPacketData>> m_generalPacketData;
 };
 
 #endif /* WP5PREFIXDATA_H */
