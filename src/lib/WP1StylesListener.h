@@ -32,14 +32,13 @@
 #include "WP1SubDocument.h"
 #include "WPXStylesListener.h"
 #include <memory>
-#include <vector>
 #include "WPXPageSpan.h"
 #include "WPXTable.h"
 
 class WP1StylesListener : public WP1Listener, protected WPXStylesListener
 {
 public:
-	WP1StylesListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments);
+	explicit WP1StylesListener(std::list<WPXPageSpan> &pageList);
 	~WP1StylesListener() override {}
 
 	void startDocument() override {}
@@ -95,7 +94,6 @@ protected:
 
 private:
 	WPXPageSpan m_currentPage, m_nextPage;
-	std::vector<std::shared_ptr<WP1SubDocument>> &m_subDocuments;
 	double m_tempMarginLeft, m_tempMarginRight;
 	bool m_currentPageHasContent;
 	bool m_isSubDocument;

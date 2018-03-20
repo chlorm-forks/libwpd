@@ -190,13 +190,12 @@ void WP1Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 	librevenge::RVNGInputStream *input = getInput();
 	WPXEncryption *encryption = getEncryption();
 	std::list<WPXPageSpan> pageList;
-	std::vector<std::shared_ptr<WP1SubDocument>> subDocuments;
 
 	try
 	{
 		// do a "first-pass" parse of the document
 		// gather table border information, page properties (per-page)
-		WP1StylesListener stylesListener(pageList, subDocuments);
+		WP1StylesListener stylesListener(pageList);
 		parse(input, encryption, &stylesListener);
 
 		// postprocess the pageList == remove duplicate page spans due to the page breaks
@@ -217,7 +216,7 @@ void WP1Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 
 		// second pass: here is where we actually send the messages to the target app
 		// that are necessary to emit the body of the target document
-		WP1ContentListener listener(pageList, subDocuments, documentInterface);
+		WP1ContentListener listener(pageList, documentInterface);
 		parse(input, encryption, &listener);
 	}
 	catch (FileException)
@@ -231,20 +230,19 @@ void WP1Parser::parse(librevenge::RVNGTextInterface *documentInterface)
 void WP1Parser::parseSubDocument(librevenge::RVNGTextInterface *documentInterface)
 {
 	std::list<WPXPageSpan> pageList;
-	std::vector<std::shared_ptr<WP1SubDocument>> subDocuments;
 
 	librevenge::RVNGInputStream *input = getInput();
 
 	try
 	{
-		WP1StylesListener stylesListener(pageList, subDocuments);
+		WP1StylesListener stylesListener(pageList);
 		stylesListener.startSubDocument();
 		parseDocument(input, nullptr, &stylesListener);
 		stylesListener.endSubDocument();
 
 		input->seek(0, librevenge::RVNG_SEEK_SET);
 
-		WP1ContentListener listener(pageList, subDocuments, documentInterface);
+		WP1ContentListener listener(pageList, documentInterface);
 		listener.startSubDocument();
 		parseDocument(input, nullptr, &listener);
 		listener.endSubDocument();

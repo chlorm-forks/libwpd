@@ -50,7 +50,7 @@ private:
 class WP1ContentListener : public WP1Listener, protected WPXContentListener
 {
 public:
-	WP1ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface);
+	WP1ContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface);
 	~WP1ContentListener() override;
 
 	void startDocument() override
@@ -110,7 +110,6 @@ protected:
 
 private:
 	std::unique_ptr<WP1ContentParsingState> m_parseState;
-	std::vector<std::shared_ptr<WP1SubDocument>> &m_subDocuments;
 	WP1ContentListener(const WP1ContentListener &);
 	WP1ContentListener &operator=(WP1ContentListener &);
 };

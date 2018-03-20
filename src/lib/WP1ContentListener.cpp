@@ -45,11 +45,10 @@ WP1ContentParsingState::~WP1ContentParsingState()
 }
 
 
-WP1ContentListener::WP1ContentListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments, librevenge::RVNGTextInterface *documentInterface) :
+WP1ContentListener::WP1ContentListener(std::list<WPXPageSpan> &pageList, librevenge::RVNGTextInterface *documentInterface) :
 	WP1Listener(),
 	WPXContentListener(pageList, documentInterface),
-	m_parseState(new WP1ContentParsingState),
-	m_subDocuments(subDocuments)
+	m_parseState(new WP1ContentParsingState)
 {
 	*(m_ps->m_fontName) = "Geneva";
 	m_ps->m_fontSize = 12.0;
@@ -490,10 +489,8 @@ void WP1ContentListener::justificationChange(unsigned char justification)
 	}
 }
 
-void WP1ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, const std::shared_ptr<WP1SubDocument> &subDocument)
+void WP1ContentListener::headerFooterGroup(unsigned char /* headerFooterDefinition */, const std::shared_ptr<WP1SubDocument> &/*subDocument*/)
 {
-	if (subDocument)
-		m_subDocuments.push_back(subDocument);
 }
 
 void WP1ContentListener::setTabs(const std::vector<WPXTabStop> &tabStops)

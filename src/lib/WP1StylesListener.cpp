@@ -30,12 +30,11 @@
 #include "WPXFileStructure.h"
 #include "libwpd_internal.h"
 
-WP1StylesListener::WP1StylesListener(std::list<WPXPageSpan> &pageList, std::vector<std::shared_ptr<WP1SubDocument>> &subDocuments) :
+WP1StylesListener::WP1StylesListener(std::list<WPXPageSpan> &pageList) :
 	WP1Listener(),
 	WPXStylesListener(pageList),
 	m_currentPage(),
 	m_nextPage(),
-	m_subDocuments(subDocuments),
 	m_tempMarginLeft(1.0),
 	m_tempMarginRight(1.0),
 	m_currentPageHasContent(false),
@@ -184,9 +183,6 @@ void WP1StylesListener::bottomMarginSet(unsigned short bottomMargin)
 
 void WP1StylesListener::headerFooterGroup(unsigned char headerFooterDefinition, const std::shared_ptr<WP1SubDocument> &subDocument)
 {
-	if (subDocument)
-		m_subDocuments.push_back(subDocument);
-
 	if (!isUndoOn())
 	{
 		bool tempCurrentPageHasContent = m_currentPageHasContent;
