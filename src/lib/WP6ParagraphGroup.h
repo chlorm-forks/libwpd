@@ -27,6 +27,8 @@
 #ifndef WP6PARAGRAPHGROUP_H
 #define WP6PARAGRAPHGROUP_H
 
+#include <memory>
+
 #include "WP6VariableLengthGroup.h"
 #include "WP6FileStructure.h"
 #include <vector>
@@ -129,7 +131,7 @@ public:
 private:
 	WP6ParagraphGroup(const WP6ParagraphGroup &);
 	WP6ParagraphGroup &operator=(const WP6ParagraphGroup &);
-	WP6VariableLengthGroup_SubGroup *m_subGroupData;
+	std::unique_ptr<WP6VariableLengthGroup_SubGroup> m_subGroupData;
 };
 
 #endif /* WP6PARAGRAPHGROUP_H */

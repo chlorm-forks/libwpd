@@ -33,15 +33,13 @@
 
 WP6ParagraphGroup::WP6ParagraphGroup(librevenge::RVNGInputStream *input, WPXEncryption *encryption) :
 	WP6VariableLengthGroup(),
-	m_subGroupData(nullptr)
+	m_subGroupData()
 {
 	_read(input, encryption);
 }
 
 WP6ParagraphGroup::~WP6ParagraphGroup()
 {
-	if (m_subGroupData)
-		delete (m_subGroupData);
 }
 
 void WP6ParagraphGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -49,28 +47,28 @@ void WP6ParagraphGroup::_readContents(librevenge::RVNGInputStream *input, WPXEnc
 	switch (getSubGroup())
 	{
 	case WP6_PARAGRAPH_GROUP_LINE_SPACING:
-		m_subGroupData = new WP6ParagraphGroup_LineSpacingSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6ParagraphGroup_LineSpacingSubGroup(input, encryption));
 		break;
 	case WP6_PARAGRAPH_GROUP_TAB_SET:
-		m_subGroupData = new WP6ParagraphGroup_TabSetSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6ParagraphGroup_TabSetSubGroup(input, encryption));
 		break;
 	case WP6_PARAGRAPH_GROUP_JUSTIFICATION:
-		m_subGroupData = new WP6ParagraphGroup_JustificationModeSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6ParagraphGroup_JustificationModeSubGroup(input, encryption));
 		break;
 	case WP6_PARAGRAPH_GROUP_SPACING_AFTER_PARAGRAPH:
-		m_subGroupData = new WP6ParagraphGroup_SpacingAfterParagraphSubGroup(input, encryption, getSizeNonDeletable());
+		m_subGroupData.reset(new WP6ParagraphGroup_SpacingAfterParagraphSubGroup(input, encryption, getSizeNonDeletable()));
 		break;
 	case WP6_PARAGRAPH_GROUP_INDENT_FIRST_LINE_OF_PARAGRAPH:
-		m_subGroupData = new WP6ParagraphGroup_IndentFirstLineSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6ParagraphGroup_IndentFirstLineSubGroup(input, encryption));
 		break;
 	case WP6_PARAGRAPH_GROUP_LEFT_MARGIN_ADJUSTMENT:
-		m_subGroupData = new WP6ParagraphGroup_LeftMarginAdjustmentSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6ParagraphGroup_LeftMarginAdjustmentSubGroup(input, encryption));
 		break;
 	case WP6_PARAGRAPH_GROUP_RIGHT_MARGIN_ADJUSTMENT:
-		m_subGroupData = new WP6ParagraphGroup_RightMarginAdjustmentSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6ParagraphGroup_RightMarginAdjustmentSubGroup(input, encryption));
 		break;
 	case WP6_PARAGRAPH_GROUP_OUTLINE_DEFINE:
-		m_subGroupData = new WP6ParagraphGroup_OutlineDefineSubGroup(input, encryption);
+		m_subGroupData.reset(new WP6ParagraphGroup_OutlineDefineSubGroup(input, encryption));
 		break;
 	default:
 		break;
