@@ -33,15 +33,13 @@
 WP6GeneralTextPacket::WP6GeneralTextPacket(librevenge::RVNGInputStream *input, WPXEncryption *encryption, int /* id */, unsigned dataOffset, unsigned dataSize):
 	WP6PrefixDataPacket(input, encryption),
 	m_subDocument(),
-	m_streamData(nullptr)
+	m_streamData()
 {
 	_read(input, encryption, dataOffset, dataSize);
 }
 
 WP6GeneralTextPacket::~WP6GeneralTextPacket()
 {
-	if (m_streamData)
-		delete [] m_streamData;
 }
 
 void WP6GeneralTextPacket::_readContents(librevenge::RVNGInputStream *input, WPXEncryption *encryption)
@@ -78,7 +76,7 @@ void WP6GeneralTextPacket::_readContents(librevenge::RVNGInputStream *input, WPX
 		WPD_DEBUG_MSG(("WordPerfect: The total size of the text is %ui\n", totalSize));
 		return; // m_subDocument will be 0
 	}
-	m_streamData = new unsigned char[totalSize];
+	m_streamData.reserve(totalSize);
 	unsigned streamPos = 0;
 	for (i=0; i<numTextBlocks; i++)
 	{
@@ -86,13 +84,13 @@ void WP6GeneralTextPacket::_readContents(librevenge::RVNGInputStream *input, WPX
 			throw FileException();
 		for (unsigned int j=0; j<blockSizes[i]; j++)
 		{
-			m_streamData[streamPos] = readU8(input, encryption);
+			m_streamData.push_back(readU8(input, encryption));
 			streamPos++;
 		}
 	}
 
-	if (totalSize)
-		m_subDocument = std::make_shared<WP6SubDocument>(m_streamData, totalSize);
+	if (!m_streamData.empty())
+		m_subDocument = std::make_shared<WP6SubDocument>(m_streamData.data(), m_streamData.size());
 }
 
 void WP6GeneralTextPacket::parse(WP6Listener *listener) const

@@ -28,6 +28,7 @@
 #define WP6GENERALTEXTPACKET_H
 
 #include <memory>
+#include <vector>
 
 #include "WP6PrefixDataPacket.h"
 #include "WP6FileStructure.h"
@@ -51,7 +52,7 @@ private:
 	WP6GeneralTextPacket(const WP6GeneralTextPacket &);
 	WP6GeneralTextPacket &operator=(const WP6GeneralTextPacket &);
 	std::shared_ptr<WP6SubDocument> m_subDocument;
-	unsigned char *m_streamData;
+	std::vector<unsigned char> m_streamData;
 
 };
 #endif /* WP6GENERALTEXTPACKET_H */
