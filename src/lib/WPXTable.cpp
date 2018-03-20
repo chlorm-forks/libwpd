@@ -105,7 +105,7 @@ void WPXTable::_makeCellBordersConsistent(WPXTableCell &cell, std::vector<WPXTab
 std::vector<WPXTableCell *> WPXTable::_getCellsBottomAdjacent(int i, int j)
 {
 	int bottomAdjacentRow = i + (m_tableRows[i])[j].m_rowSpan;
-	std::vector<WPXTableCell *>  cellsBottomAdjacent = std::vector<WPXTableCell *>();
+	std::vector<WPXTableCell *>  cellsBottomAdjacent;
 
 	if ((long)bottomAdjacentRow >= (long)m_tableRows.size())
 		return cellsBottomAdjacent;
@@ -125,7 +125,7 @@ std::vector<WPXTableCell *> WPXTable::_getCellsBottomAdjacent(int i, int j)
 std::vector<WPXTableCell *> WPXTable::_getCellsRightAdjacent(int i, int j)
 {
 	int rightAdjacentCol = j + 1;
-	std::vector<WPXTableCell *> cellsRightAdjacent = std::vector<WPXTableCell *>();
+	std::vector<WPXTableCell *> cellsRightAdjacent;
 
 	if ((long)rightAdjacentCol >= (long)m_tableRows[i].size()) // num cols is uniform across table: this comparison is valid
 		return cellsRightAdjacent;
