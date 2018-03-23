@@ -37,17 +37,17 @@ class WPXTableList
 public:
 	WPXTableList();
 
-	WPXTable *operator[](unsigned long i)
+	std::shared_ptr<WPXTable> &operator[](unsigned long i) const
 	{
 		return (*m_tableList)[i];
 	}
-	void add(WPXTable *table)
+	void add(const std::shared_ptr<WPXTable> &table)
 	{
 		m_tableList->push_back(table);
 	}
 
 private:
-	std::shared_ptr<std::vector<WPXTable *>> m_tableList;
+	std::shared_ptr<std::vector<std::shared_ptr<WPXTable>>> m_tableList;
 };
 
 #endif /* _WPXTABLELIST_H */

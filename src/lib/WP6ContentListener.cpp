@@ -118,7 +118,7 @@ WP6ContentParsingState::WP6ContentParsingState(WPXTableList tableList, unsigned 
 	m_isListReference(false),
 
 	m_tableList(tableList),
-	m_currentTable(nullptr),
+	m_currentTable(),
 
 	m_nextTableIndice(nextTableIndice),
 

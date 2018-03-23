@@ -246,7 +246,7 @@ void WP3StylesListener::startTable()
 	if (!isUndoOn())
 	{
 		m_currentPageHasContent = true;
-		m_currentTable = new WPXTable();
+		m_currentTable = std::make_shared<WPXTable>();
 		m_tableList.add(m_currentTable);
 	}
 }
@@ -260,7 +260,7 @@ void WP3StylesListener::_handleSubDocument(const WPXSubDocument *subDocument, WP
 	if (subDocumentType == WPX_SUBDOCUMENT_HEADER_FOOTER)
 	{
 		bool oldCurrentPageHasContent = m_currentPageHasContent;
-		WPXTable *oldCurrentTable = m_currentTable;
+		auto oldCurrentTable = m_currentTable;
 		WPXTableList oldTableList = m_tableList;
 		m_tableList = tableList;
 

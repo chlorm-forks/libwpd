@@ -101,7 +101,7 @@ private:
 	WPXPageSpan m_currentPage, m_nextPage;
 
 	WPXTableList m_tableList;
-	WPXTable *m_currentTable;
+	std::shared_ptr<WPXTable> m_currentTable;
 	double m_tempMarginLeft, m_tempMarginRight;
 	bool m_currentPageHasContent;
 	bool m_isSubDocument;

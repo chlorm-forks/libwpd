@@ -28,7 +28,7 @@
 #include "WPXTableList.h"
 
 WPXTableList::WPXTableList() :
-	m_tableList(new std::vector<WPXTable *>)
+	m_tableList(new std::vector<std::shared_ptr<WPXTable>>)
 {
 }
 

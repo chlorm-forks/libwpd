@@ -267,7 +267,7 @@ void WP6StylesListener::defineTable(const unsigned char /* position */, const un
 	if (!isUndoOn())
 	{
 		m_currentPageHasContent = true;
-		m_currentTable = new WPXTable();
+		m_currentTable = std::make_shared<WPXTable>();
 		m_tableList.add(m_currentTable);
 		m_isTableDefined = true;
 	}
@@ -278,7 +278,7 @@ void WP6StylesListener::startTable()
 	if (!isUndoOn() && !m_isTableDefined)
 	{
 		m_currentPageHasContent = true;
-		m_currentTable = new WPXTable();
+		m_currentTable = std::make_shared<WPXTable>();
 		m_tableList.add(m_currentTable);
 		m_isTableDefined = false;
 	}
@@ -355,7 +355,7 @@ void WP6StylesListener::_handleSubDocument(const WPXSubDocument *subDocument, WP
 		m_subDocuments.insert(subDocument);
 		bool oldIsSubDocument = m_isSubDocument;
 		m_isSubDocument = true;
-		WPXTable *oldCurrentTable = m_currentTable;
+		auto oldCurrentTable = m_currentTable;
 		if (subDocumentType == WPX_SUBDOCUMENT_HEADER_FOOTER)
 		{
 			bool oldCurrentPageHasContent = m_currentPageHasContent;

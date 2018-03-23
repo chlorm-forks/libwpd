@@ -101,7 +101,7 @@ struct WP6ContentParsingState
 	bool m_isListReference;
 
 	WPXTableList m_tableList;
-	WPXTable *m_currentTable;
+	std::shared_ptr<WPXTable> m_currentTable;
 	unsigned m_nextTableIndice;
 
 	std::stack<unsigned> m_listLevelStack;
