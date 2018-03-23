@@ -27,8 +27,6 @@
 
 #include "WPXHeaderFooter.h"
 
-const unsigned char DUMMY_INTERNAL_HEADER_FOOTER = 16;
-
 // precondition: 0 <= headerFooterType <= 3 (i.e.: we don't handle watermarks here)
 WPXHeaderFooter::WPXHeaderFooter(const WPXHeaderFooterType headerFooterType, const WPXHeaderFooterOccurrence occurrence,
                                  const unsigned char internalType, const std::shared_ptr<WPXSubDocument> &subDocument, WPXTableList tableList) :
