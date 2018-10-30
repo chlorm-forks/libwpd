@@ -1311,7 +1311,10 @@ void WP6ContentListener::defineTable(const unsigned char position, const unsigne
 		m_ps->m_tableDefinition.m_columnsProperties.clear();
 
 		// pull a table definition off of our stack
-		m_parseState->m_currentTable = m_parseState->m_tableList[m_parseState->m_nextTableIndice++];
+		auto index = m_parseState->m_nextTableIndice++;
+		if (index >= m_parseState->m_tableList.size())
+			throw ParseException();
+		m_parseState->m_currentTable = m_parseState->m_tableList[index];
 		if (!m_parseState->m_currentTable)
 			throw ParseException();
 		m_parseState->m_currentTable->makeBordersConsistent();

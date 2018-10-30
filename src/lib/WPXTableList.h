@@ -45,6 +45,10 @@ public:
 	{
 		m_tableList->push_back(table);
 	}
+	size_t size() const
+	{
+		return m_tableList->size();
+	}
 
 private:
 	std::shared_ptr<std::vector<std::shared_ptr<WPXTable>>> m_tableList;
