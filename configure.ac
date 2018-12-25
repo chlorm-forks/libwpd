@@ -92,16 +92,12 @@ AS_IF([test "x$platform_win32" = "xyes"],
         AC_MSG_CHECKING([for -fvisibility=hidden compiler flag])
         saved_CXXFLAGS="$CXXFLAGS"
         CXXFLAGS="$CXXFLAGS -fvisibility=hidden"
-        AC_TRY_COMPILE([], [],
-            [
-                AC_MSG_RESULT([yes])
-                CXXFLAGS="$CXXFLAGS -DLIBWPD_VISIBILITY"
-            ],
-            [
-                AC_MSG_RESULT([no])
-                CXXFLAGS="$saved_CXXFLAGS"
-            ]
-        )
+        AC_TRY_COMPILE([], [], [have_visibility=yes], [have_visibility=no])
+        AC_MSG_RESULT([$have_visibility])
+        AX_GCC_FUNC_ATTRIBUTE([visibility])
+        CXXFLAGS="$saved_CXXFLAGS"
+        AM_CONDITIONAL([HAVE_VISIBILITY], [
+            test "$have_visibility" = "yes" && test "$ax_cv_gcc_func_attribute_visibility" = "yes"])
     ]
 )
 
