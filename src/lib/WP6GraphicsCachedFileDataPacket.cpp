@@ -53,7 +53,7 @@ void WP6GraphicsCachedFileDataPacket::_readContents(librevenge::RVNGInputStream 
 	if (f) // don't crash when current directory is on read-only file-system
 	{
 		for (unsigned j = 0; j < tmpDataSize; j++)
-			fprintf(f, "%c", m_data[j]);
+			fprintf(f, "%c", data[j]);
 		fclose(f);
 	}
 #endif
