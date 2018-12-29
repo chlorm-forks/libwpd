@@ -1,4 +1,12 @@
 CHANGES:
+0.10.2 - 0.10.3
+- Drop outdated MSVC project files.
+- Fix a couple of issues found by oss-fuzz.
+- Fix some potential memory leaks.
+- Use a bit less memory when parsing WP5/WP6 documents with images.
+- Switch from --enable-werror to --disable-werror as configure default.
+- Fix a potential out-of-bounds data access. (rhbz#1643752)
+
 0.10.1 - 0.10.2
 - Require C++11 for build.
 - Fix various crashes, leaks and hangs when reading damaged files found
