@@ -53,7 +53,7 @@ public:
 	~WPXTable();
 	void insertRow();
 	void insertCell(unsigned char colSpan, unsigned char rowSpan, unsigned char borderBits);
-	const WPXTableCell  *getCell(size_t i, size_t j)
+	const WPXTableCell  *getCell(std::size_t i, std::size_t j)
 	{
 		return &(m_tableRows[i])[j];
 	}
