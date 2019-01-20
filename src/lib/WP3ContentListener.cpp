@@ -509,7 +509,7 @@ void WP3ContentListener::columnChange(const WPXTextColumnType /* columnType */, 
 		tmpColumnDefinition.clear();
 		if (numColumns > 1)
 		{
-			unsigned i;
+			size_t i;
 			for (i=0; i<columnWidth.size(); i++)
 			{
 				if (isFixedWidth[i])

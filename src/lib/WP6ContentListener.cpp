@@ -398,7 +398,7 @@ void WP6ContentListener::setLeaderCharacter(const unsigned character, const unsi
 	{
 		m_parseState->m_leaderCharacter = character;
 		m_parseState->m_leaderNumSpaces = numSpaces;
-		for (unsigned int i=0; i<m_ps->m_tabStops.size(); i++)
+		for (size_t i=0; i<m_ps->m_tabStops.size(); i++)
 		{
 			// change the leader information for those tab stops that use pre-WP9 leader method
 			if (m_parseState->m_tempUsePreWP9LeaderMethod[i])
@@ -939,7 +939,7 @@ void WP6ContentListener::columnChange(const WPXTextColumnType /* columnType */, 
 		tmpColumnDefinition.clear();
 		if (numColumns > 1)
 		{
-			unsigned i;
+			size_t i;
 			for (i=0; i<columnWidth.size(); i++)
 			{
 				if (isFixedWidth[i])

@@ -58,9 +58,9 @@ void WPXTable::insertCell(unsigned char colSpan, unsigned char rowSpan, unsigned
 void WPXTable::makeBordersConsistent()
 {
 	// make the top/bottom table borders consistent
-	for (unsigned i=0; i<m_tableRows.size(); i++)
+	for (size_t i=0; i<m_tableRows.size(); i++)
 	{
-		for (unsigned j=0; j<m_tableRows[i].size(); j++)
+		for (size_t j=0; j<m_tableRows[i].size(); j++)
 		{
 			if (i < (m_tableRows.size()-1))
 			{

@@ -243,7 +243,7 @@ static int findComplexMap(unsigned short character, const unsigned **chars, cons
 
 	*chars = complexMap[i].unicodeChars;
 
-	for (unsigned j = 0; j<WPD_NUM_ELEMENTS(complexMap[i].unicodeChars); j++)
+	for (size_t j = 0; j<WPD_NUM_ELEMENTS(complexMap[i].unicodeChars); j++)
 	{
 		if (!(complexMap[i].unicodeChars[j]))
 			return (int)j;

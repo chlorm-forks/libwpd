@@ -672,7 +672,7 @@ void WPXContentListener::_insertBreakIfNecessary(librevenge::RVNGPropertyList &p
 
 void WPXContentListener::_getTabStops(librevenge::RVNGPropertyListVector &tabStops)
 {
-	for (unsigned i=0; i<m_ps->m_tabStops.size(); i++)
+	for (size_t i=0; i<m_ps->m_tabStops.size(); i++)
 	{
 		librevenge::RVNGPropertyList tmpTabStop;
 
