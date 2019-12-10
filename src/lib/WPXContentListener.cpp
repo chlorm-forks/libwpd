@@ -210,14 +210,13 @@ void WPXContentListener::_openSection()
 			propList.insert("librevenge:margin-bottom", 0.0);
 
 		librevenge::RVNGPropertyListVector columns;
-		typedef std::vector<WPXColumnDefinition>::const_iterator CDVIter;
-		for (CDVIter iter = m_ps->m_textColumns.begin(); iter != m_ps->m_textColumns.end(); ++iter)
+		for (const auto &textColumn : m_ps->m_textColumns)
 		{
 			librevenge::RVNGPropertyList column;
 			// The "style:rel-width" is expressed in twips (1440 twips per inch) and includes the left and right Gutter
-			column.insert("style:rel-width", (*iter).m_width * 1440.0, librevenge::RVNG_TWIP);
-			column.insert("fo:start-indent", (*iter).m_leftGutter);
-			column.insert("fo:end-indent", (*iter).m_rightGutter);
+			column.insert("style:rel-width", textColumn.m_width * 1440.0, librevenge::RVNG_TWIP);
+			column.insert("fo:start-indent", textColumn.m_leftGutter);
+			column.insert("fo:end-indent", textColumn.m_rightGutter);
 			columns.append(column);
 		}
 		if (columns.count())
@@ -946,15 +945,14 @@ void WPXContentListener::_openTable()
 
 	double tableWidth = 0.0;
 	librevenge::RVNGPropertyListVector columns;
-	typedef std::vector<WPXColumnDefinition>::const_iterator CDVIter;
-	for (CDVIter iter = m_ps->m_tableDefinition.m_columns.begin(); iter != m_ps->m_tableDefinition.m_columns.end(); ++iter)
+	for (const auto &column : m_ps->m_tableDefinition.m_columns)
 	{
-		librevenge::RVNGPropertyList column;
+		librevenge::RVNGPropertyList columnProps;
 		// The "style:rel-width" is expressed in twips (1440 twips per inch) and includes the left and right Gutter
-		column.insert("style:column-width", (*iter).m_width);
-		columns.append(column);
+		columnProps.insert("style:column-width", column.m_width);
+		columns.append(columnProps);
 
-		tableWidth += (*iter).m_width;
+		tableWidth += column.m_width;
 	}
 	propList.insert("style:width", tableWidth);
 	propList.insert("librevenge:table-columns", columns);

@@ -1,0 +1,13 @@
+---
+Checks: "-*,\
+bugprone-too-small-loop-variable,\
+clang-analyzer-deadcode.DeadStores,\
+misc-unused-using-decls,\
+modernize-loop-convert,\
+modernize-use-auto,\
+modernize-use-noexcept,\
+modernize-use-nullptr,\
+modernize-use-override,\
+"
+WarningsAsErrors: '*'
+
