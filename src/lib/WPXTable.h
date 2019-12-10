@@ -73,8 +73,8 @@ public:
 	}
 
 private:
-	void _makeCellBordersConsistent(WPXTableCell &cell, std::vector<WPXTableCell *> &adjacentCells,
-	                                int adjacencyBitCell, int adjacencyBitBoundCells);
+	static void _makeCellBordersConsistent(WPXTableCell &cell, std::vector<WPXTableCell *> &adjacentCells,
+	                                       int adjacencyBitCell, int adjacencyBitBoundCells);
 	std::vector<WPXTableCell *>  _getCellsBottomAdjacent(int i, int j);
 	std::vector<WPXTableCell *>  _getCellsRightAdjacent(int i, int j);
 

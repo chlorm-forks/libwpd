@@ -42,7 +42,7 @@ public:
 	static void parseDocument(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP42Listener *listener);
 
 private:
-	void parse(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP42Listener *listener);
+	static void parse(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP42Listener *listener);
 };
 
 #endif /* WP42PARSER_H */

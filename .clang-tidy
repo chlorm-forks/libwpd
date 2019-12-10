@@ -8,6 +8,8 @@ modernize-use-auto,\
 modernize-use-noexcept,\
 modernize-use-nullptr,\
 modernize-use-override,\
+readability-convert-member-functions-to-static,\
+readability-make-member-function-const,\
 "
 WarningsAsErrors: '*'
 

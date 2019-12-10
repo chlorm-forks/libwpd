@@ -44,7 +44,7 @@ public:
 	static void parseDocument(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP5Listener *listener);
 
 private:
-	WP5PrefixData *getPrefixData(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
+	static WP5PrefixData *getPrefixData(librevenge::RVNGInputStream *input, WPXEncryption *encryption);
 
 	void parse(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP5Listener *listener);
 };

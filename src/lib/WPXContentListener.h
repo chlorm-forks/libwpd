@@ -175,7 +175,7 @@ protected:
 
 	void _appendParagraphProperties(librevenge::RVNGPropertyList &propList, const bool isListElement=false);
 	void _getTabStops(librevenge::RVNGPropertyListVector &tabStops);
-	void _appendJustification(librevenge::RVNGPropertyList &propList, int justification);
+	static void _appendJustification(librevenge::RVNGPropertyList &propList, int justification);
 	void _resetParagraphState(const bool isListElement=false);
 	virtual void _openParagraph();
 	void _closeParagraph();
@@ -212,10 +212,10 @@ protected:
 private:
 	WPXContentListener(const WPXContentListener &);
 	WPXContentListener &operator=(const WPXContentListener &);
-	librevenge::RVNGString _colorToString(const RGBSColor *color);
-	librevenge::RVNGString _mergeColorsToString(const RGBSColor *fgColor, const RGBSColor *bgColor);
-	unsigned _mapSymbolFontCharacter(unsigned character);
-	unsigned _mapDingbatsFontCharacter(unsigned character);
+	static librevenge::RVNGString _colorToString(const RGBSColor *color);
+	static librevenge::RVNGString _mergeColorsToString(const RGBSColor *fgColor, const RGBSColor *bgColor);
+	static unsigned _mapSymbolFontCharacter(unsigned character);
+	static unsigned _mapDingbatsFontCharacter(unsigned character);
 };
 
 #endif /* WPXCONTENTLISTENER_H */

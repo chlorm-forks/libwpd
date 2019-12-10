@@ -49,8 +49,8 @@ private:
 
 	void parse(librevenge::RVNGInputStream *input, WPXEncryption *encryption, WP6Listener *listener);
 
-	void parsePacket(WP6PrefixData *prefixData, int type, WP6Listener *listener);
-	void parsePackets(WP6PrefixData *prefixData, int type, WP6Listener *listener);
+	static void parsePacket(WP6PrefixData *prefixData, int type, WP6Listener *listener);
+	static void parsePackets(WP6PrefixData *prefixData, int type, WP6Listener *listener);
 };
 
 #endif /* WP6PARSER_H */
