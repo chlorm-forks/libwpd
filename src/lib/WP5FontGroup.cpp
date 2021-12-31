@@ -63,6 +63,21 @@ void WP5FontGroup::_readContents(librevenge::RVNGInputStream *input, WPXEncrypti
 		}
 		break;
 	default:
+		/* Note: WPG1 uses two additional subgroups:
+		 * - 2 - color, 2 bytes:
+		 *   + text color - used if fill pattern is not set
+		 *   + fill color
+		 * - 3 - fill pattern, 6 bytes:
+		 *   + ???
+		 *   + ???
+		 *   + text color
+		 *   + fill color
+		 *   + ???
+		 *   + fill style
+		 *
+		 * Unfortunately the colors are indexes into color palette,
+		 * which we don't have access to...
+		 */
 		break;
 	}
 }
